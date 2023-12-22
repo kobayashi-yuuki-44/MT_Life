@@ -47,3 +47,7 @@ Ruby,Ruby on Rails,javascript,WebSocket,ImageMagick,LINE Messaging API
 
 ## 画面遷移図
 https://www.figma.com/file/GkRWICtFuyueClJ7Dw649p/%E7%84%A1%E9%A1%8C?type=design&node-id=0%3A1&mode=design&t=kgifrIIJp1DhDZ6x-1
+
+
+## ER図
+https://drive.google.com/file/d/1CdORMdySG7NI42xqdyvhvMSSP15ImOzd/view?usp=sharing
