@@ -5,6 +5,14 @@ module.exports = {
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js'
   ],
+  theme: {
+    extend: {
+      fontFamily: {
+        'caveat': ['Caveat', 'cursive'], // 'cursive' はフォールバックフォント
+        'm-plus-rounded-1c': ['M PLUS Rounded 1c', 'sans-serif']
+      }
+    },
+  },
   plugins: [
     require('daisyui'),
     // ... 他のプラグイン ...
