@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'caveat': ['Caveat', 'cursive'], // 'cursive' はフォールバックフォント
-        'm-plus-rounded-1c': ['M PLUS Rounded 1c', 'sans-serif']
+        caveat: ['Caveat', 'cursive'], // 'cursive' はフォールバックフォント
+        mplusrounded1c: ['RocknRoll One', 'sans-serif']
       }
     },
   },
