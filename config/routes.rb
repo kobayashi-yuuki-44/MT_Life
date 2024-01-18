@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
 
-  get 'home', to: 'action_selection#index', as: 'home'
-
+  resources :users, only: %i[new create]
+  
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
+
+  get 'home', to: 'action_selection#index', as: 'home'
 
   get 'questions', to: 'questions#index'
   get 'notebooks', to: 'notebooks#index'
