@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'static_pages#top'
 
   resources :users, only: %i[new create]
+  resources :password_resets, only: %i[new create edit update]
   
+
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
@@ -14,4 +16,8 @@ Rails.application.routes.draw do
   get 'words', to: 'words#index'
   get 'messages', to: 'messages#index'
   get 'diaries', to: 'diaries#index'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
