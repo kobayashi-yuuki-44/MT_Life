@@ -1,11 +1,8 @@
 <% if object.errors.any? %>
-  <div id="error_explanation">
-    <div class="alert alert-danger">
-      次のエラーが発生しました：
-    </div>
-    <ul>
-      <% object.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
     </ul>
   </div>
