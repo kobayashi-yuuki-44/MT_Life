@@ -9,9 +9,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       auto_login(@user)
+      flash[:success] = 'アカウントが作成されました'
       redirect_to home_path
     else
-      render :new
+      flash.now[:danger] = 'アカウントを作成できませんでした'
+      render :new, status: :unprocessable_entity
     end
   end
 
