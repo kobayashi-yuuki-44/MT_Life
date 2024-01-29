@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
-  delete 'logout', to: 'user_sessions#destroy'
+  delete 'logout', to: 'user_sessions#destroy', as: :logout
 
-  get 'home', to: 'action_selection#index', as: 'home'
+  get 'home', to: 'action_selection#index', as: :home
 
   get 'questions', to: 'questions#index'
   get 'notebooks', to: 'notebooks#index'

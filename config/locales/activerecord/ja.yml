@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        image: "画像"
+  users:
+    create:
+      success: "アカウントが作成されました"
+      danger: "アカウントを作成できませんでした"
+  user_sessions:
+    create:
+      success: "ログインしました"
+      alert: "ログインに失敗しました"
+    destroy:
+      success: "ログアウトしました"
