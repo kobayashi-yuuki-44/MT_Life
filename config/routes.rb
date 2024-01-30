@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   get 'messages', to: 'messages#index'
   get 'diaries', to: 'diaries#index'
 
+  get 'terms', to: 'static_pages#terms'
+  get 'privacy', to: 'static_pages#privacy'
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
