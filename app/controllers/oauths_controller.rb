@@ -8,11 +8,11 @@ class OauthsController < ApplicationController
   def callback
     provider = auth_params[:provider]
     if (@user = login_from(provider))
-      redirect_to root_path, notice:"#{provider.titleize}アカウントでログインしました"
+      redirect_to home_path, notice:"#{provider.titleize}アカウントでログインしました"
     else
       begin
         signup_and_login(provider)
-        redirect_to root_path, notice:"#{provider.titleize}アカウントでログインしました"
+        redirect_to home_path, notice:"#{provider.titleize}アカウントでログインしました"
       rescue
         redirect_to root_path, alert:"#{provider.titleize}アカウントでのログインに失敗しました"
       end
