@@ -63,6 +63,19 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "MT_Life_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { protcol: 'https', host: 'mt-life.fly.dev' }
+  config.action_mailer.delivery_method = :smtp
+  if Rails.application.credentials.gmail
+    config.action_mailer.smtp_settings = {
+      address: 'smtp.gmail.com',
+      domain: 'gmail.com',
+      port: 587,
+      user_name: Rails.application.credentials.gmail[:user_name],
+      password: Rails.application.credentials.gmail[:password],
+      authentication: :login,
+      enable_starttls_auto: true
+    }
+  end
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
