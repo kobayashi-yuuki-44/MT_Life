@@ -35,6 +35,8 @@ gem "rails-i18n"
 
 gem "config"
 
+gem "carrierwave"
+
 
 
 # Use Redis adapter to run Action Cable in production
