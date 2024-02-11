@@ -12,4 +12,11 @@ class User < ApplicationRecord
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validates :reset_password_token, uniqueness: true, allow_nil: true
+  validate :avatar_size_validation
+
+  private
+
+  def avatar_size_validation
+    errors.add(:avatar, "should be less than 5MB") if avatar.size > 5.megabytes
+  end
 end
