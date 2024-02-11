@@ -4,9 +4,9 @@
       <div class="flex justify-start">
         <a href="/" class="text-xl font-semibold text-gray-700">MTLife</a>
         <% if current_user %>
-          <%= image_tag current_user.avatar_url, class: 'rounded-circle mr15', size: '40x40' %>
+          <%= image_tag current_user.avatar.url, class: 'rounded-circle mr15', size: '40x40' %>
         <% else %>
-          <%= image_tag 'default_avatar.png', class: 'rounded-circle mr15', size: '40x40' %>
+          <%= image_tag 'sample.webp', class: 'rounded-circle mr15', size: '40x40' %>
           <%= link_to 'Login', login_path, class: 'text-sm font-medium text-gray-700 px-4 hover:text-gray-900' %>
         <% end %>
       </div>

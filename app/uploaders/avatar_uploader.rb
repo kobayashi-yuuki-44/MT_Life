@@ -1,21 +1,23 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+  if Rails.env.production?
+    storage :fog
+  else
+    storage :file
+  end
 
   # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url
-    'sample.webp'
+  def default_url(*args)
+    ActionController::Base.helpers.asset_path("sample.webp")
   end
   #   # For Rails 3.1+ asset pipeline compatibility:
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
@@ -34,6 +36,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process resize_to_fit: [50, 50]
   # end
+  before :store, :validate_image_size
 
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -46,4 +49,14 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg"
   # end
+
+  private
+
+  def validate_image_size(file)
+    if file.size > 5.megabytes
+      raise "Image should be less than 5MB"
+    end
+  end
+
+  process resize_to_limit: [400, 400]
 end
