@@ -41,6 +41,8 @@ gem "mini_magick"
 
 gem "fog-aws"
 
+gem "stimulus-rails"
+
 
 
 # Use Redis adapter to run Action Cable in production

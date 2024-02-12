@@ -19,9 +19,10 @@
     <%= f.label :password_confirmation, class: 'block text-gray-700 text-sm font-bold mb-2' %>
     <%= f.password_field :password_confirmation, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
   </div>
-  <div class="mb-4">
-    <%= f.label :image, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-    <%= f.text_field :image, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+  <div class="mb-4" data-controller="avatar-preview">
+    <%= f.label :avatar, class: 'block text-gray-700 text-sm font-bold mb-2' %>
+    <%= f.file_field :avatar, data: { controller: "avatar-preview", action: "change->avatar-preview#preview", avatar_preview_target: "image" }, class: "form-control", accept: 'image/*' %>
+    <img id="preview" src="<%= asset_path('sample.webp') %>" class="rounded-circle" style="width: 100px; height: 100px;">
   </div>
 
   <div class="flex items-center justify-between">
