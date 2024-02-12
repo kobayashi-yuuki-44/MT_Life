@@ -41,7 +41,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w[jpg jpeg gif png]
+    %w[jpg jpeg gif png webp]
   end
 
   # Override the filename of the uploaded files:
@@ -53,7 +53,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   private
 
   def validate_image_size(file)
-    if file.size > 5.megabytes
+    if file && file.size > 5.megabytes
       raise "Image should be less than 5MB"
     end
   end

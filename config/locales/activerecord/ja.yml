@@ -19,3 +19,4 @@ ja:
       alert: "ログインに失敗しました"
     destroy:
       success: "ログアウトしました"
+  
