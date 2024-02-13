@@ -63,7 +63,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "MT_Life_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { protcol: 'https', host: 'mt-life.fly.dev' }
+  config.action_mailer.default_url_options = { protocol: 'https', host: 'mt-life.fly.dev' }
   config.action_mailer.delivery_method = :smtp
   if Rails.application.credentials.gmail
     config.action_mailer.smtp_settings = {
