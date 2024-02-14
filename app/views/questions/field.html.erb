@@ -1,1 +1,6 @@
-<h1>分野</h1>
+<div class="flex flex-col items-center justify-center h-screen space-y-4">
+  <h1 class="text-2xl font-bold">分野選択</h1>
+  <% @fields.each do |field| %>
+    <%= link_to field, "#", class: "btn btn-primary" %>
+  <% end %>
+</div>
