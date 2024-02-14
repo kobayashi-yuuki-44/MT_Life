@@ -16,7 +16,14 @@ Rails.application.routes.draw do
 
   get 'home', to: 'action_selection#index', as: :home
 
-  get 'questions', to: 'questions#index'
+  resources :questions, only: [:index] do
+    collection do
+      get 'field'
+      get 'year'
+      get 'random'
+    end
+  end
+  
   get 'notebooks', to: 'notebooks#index'
   get 'words', to: 'words#index'
   get 'messages', to: 'messages#index'
