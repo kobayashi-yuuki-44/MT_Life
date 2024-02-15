@@ -2,19 +2,16 @@ class QuestionsController < ApplicationController
   def index
   end
 
-  def field
-    @fields = [
-      '臨床検査総論',
-      '臨床検査医学総論',
-      '臨床生理学',
-      '臨床化学',
-      '病理組織細胞学',
-      '臨床血液学',
-      '臨床微生物学',
-      '臨床免疫学',
-      '公衆衛生学',
-      '医用工学概論'
-    ]
+  def subject
+    @subjects = SUBJECTS
+  end
+
+  def show_subject
+    @subject = params[:subject]
+    unless SUBJECTS.include?(@subject)
+      redirect_to(root_path, alert: '無効な分野が指定されました。') and return
+    end
+    @questions = Question.where(subject: @subject)
   end
 
   def year
