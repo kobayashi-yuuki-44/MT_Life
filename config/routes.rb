@@ -18,11 +18,13 @@ Rails.application.routes.draw do
 
   resources :questions, only: [:index] do
     collection do
-      get 'field'
+      get 'subject'
       get 'year'
       get 'random'
     end
   end
+
+  get 'show_subject/:subject', to: 'questions#show_subject', as: :show_subject_questions
   
   get 'notebooks', to: 'notebooks#index'
   get 'words', to: 'words#index'
