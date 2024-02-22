@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_15_034716) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_22_034852) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "question_id", null: false
+    t.bigint "selected_option_id", null: false
+    t.boolean "is_correct", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["selected_option_id"], name: "index_answers_on_selected_option_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
+  end
 
   create_table "authentications", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -23,9 +35,32 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_15_034716) do
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
   end
 
+  create_table "image_questions", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.string "picture", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_image_questions_on_question_id"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.text "option_text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_options_on_question_id"
+  end
+
+  create_table "question_correct_answers", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.integer "correct_answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_correct_answers_on_question_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "question_text", null: false
-    t.integer "correct_answer", null: false
     t.integer "year", null: false
     t.string "subject", null: false
     t.datetime "created_at", null: false
@@ -48,4 +83,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_15_034716) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
+  add_foreign_key "answers", "options", column: "selected_option_id"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
+  add_foreign_key "image_questions", "questions"
+  add_foreign_key "options", "questions"
+  add_foreign_key "question_correct_answers", "questions"
 end
