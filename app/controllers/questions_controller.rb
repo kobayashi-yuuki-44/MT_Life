@@ -2,6 +2,11 @@ class QuestionsController < ApplicationController
   def index
   end
 
+  def show
+    @question = Question.includes(:options).find(params[:id])
+    @answer = Answer.new
+  end
+
   def subject
     @subjects = SUBJECTS
   end

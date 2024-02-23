@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'answers/create'
   
   root 'static_pages#top'
 
@@ -16,12 +17,13 @@ Rails.application.routes.draw do
 
   get 'home', to: 'action_selection#index', as: :home
 
-  resources :questions, only: [:index] do
+  resources :questions, only: [:index, :show] do
     collection do
       get 'subject'
       get 'year'
       get 'random'
     end
+    resources :answers, only: [:create]
   end
 
   get 'show_subject/:subject', to: 'questions#show_subject', as: :show_subject_questions

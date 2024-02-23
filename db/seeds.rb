@@ -8,9 +8,23 @@
 require 'csv'
 
 CSV.foreach(Rails.root.join('db', 'questions.csv'), headers: true) do |row|
-  Question.create!(
+  Question.find_or_create_by(
     question_text: row['question_text'],
     year: row['year'],
     subject: row['subject'],
+  )
+end
+
+CSV.foreach(Rails.root.join('db', 'options.csv'), headers: true) do |row|
+  Option.find_or_create_by(
+    question_id: row['question_id'],
+    option_text: row['option_text'],
+  )
+end
+
+CSV.foreach(Rails.root.join('db', 'question_correct_answers.csv'), headers: true) do |row|
+  QuestionCorrectAnswer.find_or_create_by(
+    question_id: row['question_id'],
+    correct_answer: row['correct_answer'],
   )
 end
