@@ -1,8 +1,10 @@
 <div class="flex flex-col items-center justify-center h-screen space-y-4">
-  <h1 class="text-2xl font-bold">選択された分野: <%= @subject %></h1>
-  <% @questions.each do |question| %>
-    <div class="question">
-      <p><%= question.question_text %></p>
-    </div>
-  <% end %>
+  <h1 class="text-2xl font-bold"><%= @subject %>の問題</h1>
+  <div class="questions-list">
+    <% @questions.each do |question| %>
+      <div class="question-summary">
+        <%= link_to question.question_text, question_path(question) %>
+      </div>
+    <% end %>
+  </div>
 </div>
