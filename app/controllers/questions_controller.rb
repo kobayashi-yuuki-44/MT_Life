@@ -19,6 +19,25 @@ class QuestionsController < ApplicationController
     @questions = Question.where(subject: @subject)
   end
 
+  def answer
+    @question = Question.find(params[:id])
+    selected_option_ids = params[:answer].try(:[], :selected_option_ids) || []
+    selected_options = selected_option_ids.map(&:to_i)
+    
+    if selected_options.empty?
+      flash[:alert] = "選択肢を選んでください。"
+      redirect_to question_path(@question) and return
+    end
+
+    is_correct = @question.correct_answer?(selected_options)
+    if is_correct
+      flash[:notice] = "正解です！"
+    else
+      flash[:alert] = "不正解です。"
+    end
+    redirect_to question_path(@question)
+  end
+
   def year
   end
 

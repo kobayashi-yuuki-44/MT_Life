@@ -3,11 +3,11 @@
   <% if @question.image_question.present? %>
     <%= image_tag(@question.image_question.picture.url) %>
   <% end %>
-  <%= form_with model: @answer, url: question_answers_path(@question), local: true do |form| %>
-    <% @question.options.each do |option| %>
+  <%= form_with model: @answer, url: answer_question_path(@question), local: true do |form| %>
+    <% @question.options.order(:position).each do |option| %>
       <div class="field">
-        <%= form.radio_button :selected_option_id, option.id %>
-        <%= form.label :selected_option_id, option.option_text, value: option.id %>
+        <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>
+        <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
       </div>
     <% end %>
     <%= form.submit "Answer!", class: "btn btn-primary" %>

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'answers/create'
-  
+
   root 'static_pages#top'
 
   resources :users, only: %i[new create]
@@ -23,7 +22,9 @@ Rails.application.routes.draw do
       get 'year'
       get 'random'
     end
-    resources :answers, only: [:create]
+    member do
+      post 'answer'
+    end
   end
 
   get 'show_subject/:subject', to: 'questions#show_subject', as: :show_subject_questions

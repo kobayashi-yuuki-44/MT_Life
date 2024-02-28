@@ -16,10 +16,13 @@ CSV.foreach(Rails.root.join('db', 'questions.csv'), headers: true) do |row|
 end
 
 CSV.foreach(Rails.root.join('db', 'options.csv'), headers: true) do |row|
-  Option.find_or_create_by(
+  option = Option.find_or_create_by(
     question_id: row['question_id'],
-    option_text: row['option_text'],
-  )
+    option_text: row['option_text']
+  ) do |option|
+    option.position = row['position']
+  end
+  option.update(position: row['position']) unless option.new_record?
 end
 
 CSV.foreach(Rails.root.join('db', 'question_correct_answers.csv'), headers: true) do |row|
