@@ -28,7 +28,8 @@ Rails.application.routes.draw do
   end
 
   get 'show_subject/:subject', to: 'questions#show_subject', as: :show_subject_questions
-  
+  get 'show_year/:year', to: 'questions#show_year', as: :show_year_questions
+
   get 'notebooks', to: 'notebooks#index'
   get 'words', to: 'words#index'
   get 'messages', to: 'messages#index'

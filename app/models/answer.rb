@@ -1,6 +1,7 @@
 class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :user
+  belongs_to :selected_option, class_name: 'Option', foreign_key: 'selected_option_id'
 
   before_save :set_is_correct
 

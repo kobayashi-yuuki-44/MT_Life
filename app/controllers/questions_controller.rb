@@ -39,6 +39,15 @@ class QuestionsController < ApplicationController
   end
 
   def year
+    @years = YEARS
+  end
+
+  def show_year
+    @year = params[:year]
+    unless YEARS.include?(@year)
+      redirect_to(root_path, alert: '無効な分野が指定されました。') and return
+    end
+    @questions = Question.where(year: @year)
   end
 
   def random
