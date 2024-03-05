@@ -13,10 +13,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="flex flex-col min-h-screen">
     <%= render 'shared/header' %>
-    <%= render 'shared/flash_message' %>
-    <%= yield %>
+    <main class="flex-grow"> <!-- コンテンツ領域の拡張として追加 -->
+      <%= render 'shared/flash_message' %>
+      <%= yield %>
+    </main>
     <%= render 'shared/footer' %>
   </body>
 </html>

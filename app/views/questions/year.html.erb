@@ -1,1 +1,6 @@
-<h1>年度</h1>
+<div class="flex flex-col items-center justify-center h-screen space-y-4">
+  <h1 class="text-2xl font-bold">年代選択</h1>
+  <% @years.each do |year| %>
+    <%= link_to year, show_year_questions_path(year: year), class: "btn btn-primary" %>
+  <% end %>
+</div>
