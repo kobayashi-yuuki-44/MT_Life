@@ -1,1 +1,3 @@
-<h1>ランダム</h1>
+<%= render 'questions/question_detail', question: @question, answer: @answer %>
+
+<%= link_to '次の問題', next_random_questions_path, class: "btn btn-secondary" %>

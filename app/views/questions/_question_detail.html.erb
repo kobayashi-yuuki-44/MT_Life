@@ -1,0 +1,15 @@
+<div class="question-detail">
+  <h2><%= @question.question_text %></h2>
+  <% if @question.image_question.present? %>
+    <%= image_tag(@question.image_question.picture.url) %>
+  <% end %>
+  <%= form_with model: @answer, url: answer_question_path(@question), local: true do |form| %>
+    <% @question.options.order(:position).each do |option| %>
+      <div class="field">
+        <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>
+        <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
+      </div>
+    <% end %>
+    <%= form.submit "Answer!", class: "btn btn-primary" %>
+  <% end %>
+</div>
