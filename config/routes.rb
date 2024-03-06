@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get 'subject'
       get 'year'
       get 'random'
+      get 'next_random'
     end
     member do
       post 'answer'

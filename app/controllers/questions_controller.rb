@@ -51,5 +51,16 @@ class QuestionsController < ApplicationController
   end
 
   def random
+    if session[:last_random_question_id]
+      @question = Question.find(session[:last_random_question_id])
+    else
+      @question = Question.order(Arel.sql('RANDOM()')).first
+      session[:last_random_question_id] = @question.id
+    end
+  end
+
+  def next_random
+    session[:last_random_question_id] = nil
+    redirect_to action: :random
   end
 end
