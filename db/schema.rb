@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_28_004805) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_08_082837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_28_004805) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_image_questions_on_question_id"
+  end
+
+  create_table "memos", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "question_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_memos_on_question_id"
+    t.index ["user_id"], name: "index_memos_on_user_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -86,6 +96,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_28_004805) do
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "image_questions", "questions"
+  add_foreign_key "memos", "questions"
+  add_foreign_key "memos", "users"
   add_foreign_key "options", "questions"
   add_foreign_key "question_correct_answers", "questions"
 end

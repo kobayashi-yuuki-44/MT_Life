@@ -4,6 +4,7 @@ class Question < ApplicationRecord
   has_many :answers
   has_many :question_correct_answers
   has_many :correct_answers, through: :question_correct_answers, source: :option
+  has_many :memos, dependent: :destroy
 
   def correct_option_positions
     options.where(id: question_correct_answers.pluck(:correct_answer)).pluck(:position)
