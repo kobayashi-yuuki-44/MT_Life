@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     member do
       post 'answer'
     end
+    resources :memos, only: [:create, :update]
   end
 
   get 'show_subject/:subject', to: 'questions#show_subject', as: :show_subject_questions

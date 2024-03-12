@@ -4,6 +4,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   
   has_many :authentications, dependent: :destroy
+  has_many :memos, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }
