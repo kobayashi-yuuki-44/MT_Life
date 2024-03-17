@@ -1,8 +1,13 @@
+<% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
+  <%= javascript_import_module_tag "toggle_memo" %>
+<% end %>
+
 <%= render 'questions/question_detail', question: @question, answer: @answer %>
 
 <% if @question.memos.any? %>
-  <button id="toggle-memo" data-turbo="false" class="btn btn-info">メモを見る</button>
-  <div id="memo-content" style="display:none;">
+  <button id="toggle-memo" class="btn btn-info">メモを見る</button>
+  <div id="content" style="display:none;">
     <% @question.memos.each do |memo| %>
       <div class="memo">
         <%= memo.content %>
@@ -14,7 +19,7 @@
 <%= form_with(model: [@question, @question.memos.build], local: true) do |form| %>
   <div class="field">
     <%= form.label :content, "メモ" %>
-    <%= form.text_area :content, id: :content %>
+    <%= form.text_area :content %>
   </div>
   <%= form.submit "メモを保存", class: "btn btn-primary" %>
 <% end %>

@@ -11,26 +11,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <script>
-      document.addEventListener("turbo:load", function() {
-        console.log("turbo:load fired");
-        const toggleButton = document.getElementById("toggle-memo");
-        console.log("toggleButton:", toggleButton);
-        const memoContent = document.getElementById("memo-content");
-        console.log("memoContent:", memoContent);
-
-        if (toggleButton && memoContent) {
-          console.log("Both elements found, adding event listener");
-          toggleButton.addEventListener("click", function() {
-            console.log("Button clicked.");
-            memoContent.style.display = memoContent.style.display === "none" ? "block" : "none";
-            toggleButton.textContent = memoContent.style.display === "block" ? "メモを隠す" : "メモを見る";
-          });
-        } else {
-          console.log("Could not find the toggle button and/or memo content");
-        }
-      });
-    </script>
+    <%= yield(:head) %>
   </head>
 
   <body class="flex flex-col min-h-screen">
