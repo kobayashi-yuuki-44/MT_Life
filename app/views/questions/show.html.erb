@@ -5,21 +5,20 @@
 
 <%= render 'questions/question_detail', question: @question, answer: @answer %>
 
-<% if @question.memos.any? %>
+<% if @question.memo.present? %>
   <button id="toggle-memo" class="btn btn-info">メモを見る</button>
   <div id="content" style="display:none;">
-    <% @question.memos.each do |memo| %>
-      <div class="memo">
-        <%= memo.content %>
-      </div>
-    <% end %>
+    <div class="memo" style="white-space: pre-wrap;">
+      <%= @question.memo.content %>
+    </div>
   </div>
 <% end %>
 
-<%= form_with(model: [@question, @question.memos.build], local: true) do |form| %>
+<% memo = @question.memo || @question.build_memo %>
+<%= form_with(model: [ @question, memo ], local: true) do |form| %>
   <div class="field">
     <%= form.label :content, "メモ" %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, rows: 3 %>
   </div>
-  <%= form.submit "メモを保存", class: "btn btn-primary" %>
+  <%= form.submit memo.persisted? ? "メモを更新" : "メモを保存", class: "btn btn-primary" %>
 <% end %>

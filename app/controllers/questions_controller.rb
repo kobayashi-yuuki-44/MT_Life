@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.includes(:options).find(params[:id])
     @answer = Answer.new
-    @memo = @question.memos.find_by(user: current_user)
+    @memo = @question.memo
   end
 
   def subject
