@@ -14,12 +14,13 @@ class MemosController < ApplicationController
   def update
     @question = Question.find(params[:question_id])
     @memo = @question.memo
+    
     if @memo.update(memo_params)
-      redirect_to question_path(@question), notice: 'メモを更新しました。'
+      render json: { status: 'success', content: @memo.content }
     else
-      redirect_to question_path(@question), alert: 'メモの更新に失敗しました。'
+      render json: { status: 'error', message: @memo.errors.full_messages.join(', ') }, status: :unprocessable_entity
     end
-  end
+  end  
 
   private
 
