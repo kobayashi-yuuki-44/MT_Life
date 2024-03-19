@@ -8,18 +8,14 @@
 <% if @question.memo.present? %>
   <button id="toggle-memo" class="btn btn-info">メモを見る</button>
   <div id="content" style="display:none;">
-    <div class="memo" style="white-space: pre-wrap;">
+    <div id="editable-memo"
+         contenteditable="true"
+         class="memo"
+          style="white-space: pre-wrap; cursor: text;"
+          data-question-id="<%= @question.id %>" 
+          data-memo-id="<%= @question.memo.id %>">
       <%= @question.memo.content %>
     </div>
-
-    <% memo = @question.memo %>
-    <%= form_with(model: [ @question, memo ], local: true) do |form| %>
-      <div class="field">
-        <%= form.label :content, "メモ" %>
-        <%= form.text_area :content, rows: 3 %>
-      </div>
-      <%= form.submit "メモを更新", class: "btn btn-primary" %>
-    <% end %>
   </div>
 <% else %>
   <%= form_with(model: [ @question, @question.build_memo ], local: true) do |form| %>
