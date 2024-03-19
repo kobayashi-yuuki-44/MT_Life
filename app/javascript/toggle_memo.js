@@ -3,6 +3,7 @@ document.addEventListener("turbo:load", function() {
   console.log("turbo:load event triggered");
   const toggleButton = document.getElementById("toggle-memo");
   const memoContent = document.getElementById("content");
+
   console.log({ toggleButton, memoContent });
 
   if (toggleButton && memoContent) {

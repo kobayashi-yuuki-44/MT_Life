@@ -11,14 +11,22 @@
     <div class="memo" style="white-space: pre-wrap;">
       <%= @question.memo.content %>
     </div>
-  </div>
-<% end %>
 
-<% memo = @question.memo || @question.build_memo %>
-<%= form_with(model: [ @question, memo ], local: true) do |form| %>
-  <div class="field">
-    <%= form.label :content, "メモ" %>
-    <%= form.text_area :content, rows: 3 %>
+    <% memo = @question.memo %>
+    <%= form_with(model: [ @question, memo ], local: true) do |form| %>
+      <div class="field">
+        <%= form.label :content, "メモ" %>
+        <%= form.text_area :content, rows: 3 %>
+      </div>
+      <%= form.submit "メモを更新", class: "btn btn-primary" %>
+    <% end %>
   </div>
-  <%= form.submit memo.persisted? ? "メモを更新" : "メモを保存", class: "btn btn-primary" %>
+<% else %>
+  <%= form_with(model: [ @question, @question.build_memo ], local: true) do |form| %>
+    <div class="field">
+      <%= form.label :content, "メモ" %>
+      <%= form.text_area :content, rows: 3 %>
+    </div>
+    <%= form.submit "メモを保存", class: "btn btn-primary" %>
+  <% end %>
 <% end %>
