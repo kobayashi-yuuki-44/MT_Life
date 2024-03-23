@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   get 'show_year/:year', to: 'questions#show_year', as: :show_year_questions
 
   get 'notebooks', to: 'notebooks#index'
+  post 'notebooks/create', to: 'notebooks#create'
+
   get 'words', to: 'words#index'
   get 'messages', to: 'messages#index'
   get 'diaries', to: 'diaries#index'
