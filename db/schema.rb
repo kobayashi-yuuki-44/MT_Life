@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_08_082837) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_23_090147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,6 +93,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_082837) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
+  create_table "wordbooks", force: :cascade do |t|
+    t.string "collection"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wordbooks_on_user_id"
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.bigint "wordbook_id", null: false
+    t.text "term"
+    t.text "definition"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wordbook_id"], name: "index_words_on_wordbook_id"
+  end
+
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "image_questions", "questions"
@@ -100,4 +117,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_082837) do
   add_foreign_key "memos", "users"
   add_foreign_key "options", "questions"
   add_foreign_key "question_correct_answers", "questions"
+  add_foreign_key "wordbooks", "users"
+  add_foreign_key "words", "wordbooks"
 end

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'wordbooks/new'
+  get 'wordbooks/create'
+  get 'wordbooks/edit'
+  get 'wordbooks/update'
+  get 'wordbooks/show'
 
   root 'static_pages#top'
 
@@ -35,7 +40,10 @@ Rails.application.routes.draw do
   get 'notebooks', to: 'notebooks#index'
   post 'notebooks/create', to: 'notebooks#create'
 
-  get 'words', to: 'words#index'
+  resources :wordbooks do
+    resources :words
+  end
+  
   get 'messages', to: 'messages#index'
   get 'diaries', to: 'diaries#index'
 

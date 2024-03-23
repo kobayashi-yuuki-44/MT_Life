@@ -1,0 +1,19 @@
+<div class="container mx-auto mt-8">
+  <h1 class="text-2xl font-bold text-center mb-6">単語帳一覧</h1>
+    <div class="flex justify-end">
+    <%= link_to '新しい単語帳を作成', new_wordbook_path, class: 'btn btn-primary' %>
+    </div>
+  <div>
+
+  <div class="flex flex-wrap justify-center gap-4">
+    <% @wordbooks.each do |wordbook| %>
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">
+            <%= link_to wordbook.collection, wordbook_words_path(wordbook), class: "text-lg" %>
+          </h2>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

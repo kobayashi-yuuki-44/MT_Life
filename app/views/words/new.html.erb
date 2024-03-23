@@ -1,0 +1,13 @@
+<%= form_with(model: [@wordbook, @word], local: true, data: { turbo: false }) do |form| %>
+  <div>
+    <%= form.label :term, "単語" %>
+    <%= form.text_field :term %>
+  </div>
+  <div>
+    <%= form.label :definition, "意味" %>
+    <%= form.text_area :definition %>
+  </div>
+  <div>
+    <%= form.submit "保存", class: "btn btn-primary" %>
+  </div>
+<% end %>
