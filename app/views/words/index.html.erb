@@ -1,2 +1,23 @@
-<h1>Words#index</h1>
-<p>Find me in app/views/words/index.html.erb</p>
+<div class="container mx-auto mt-10">
+  <h1 class="text-xl font-semibold text-center mb-6"><%= @wordbook.collection %>の単語一覧</h1>
+
+  <div class="flex justify-end mb-4">
+    <%= link_to '新しい単語を作成する', new_wordbook_word_path(@wordbook), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+  </div>
+  <% if @words.empty? %>
+    <div class="text-center mt-10">
+      <p>単語帳がまだ作成されていません。</p>
+    </div>
+  <% else %>
+    <div class="container mx-auto mt-10">
+      <% @words.each do |word| %>
+        <div class="mb-4">
+          <div class="bg-gray-100 p-4 rounded shadow">
+            <h2 class="text-lg font-semibold"><%= word.term %></h2>
+            <p class="text-gray-700"><%= word.definition %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

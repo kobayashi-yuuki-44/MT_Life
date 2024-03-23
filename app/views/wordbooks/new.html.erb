@@ -1,0 +1,17 @@
+<%= form_with(model: @wordbook, local: true, data: { turbo: false }) do |form| %>
+  <div class="container mx-auto mt-8">
+    <h1 class="text-xl font-bold text-center mb-6">新しい単語帳の作成</h1>
+    
+  <div class="mb-4">
+    <%= form.label :collection, "単語帳のタイトル・科目", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :collection, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    <% if @wordbook.errors[:collection].any? %>
+      <p class="text-red-500 text-xs italic"><%= @wordbook.errors[:collection].first %></p>
+    <% end %>
+  </div>
+
+  <div class="flex justify-center">
+    <%= form.submit "作成", class: "btn btn-primary" %>
+  </div>
+</div>
+<% end %>
