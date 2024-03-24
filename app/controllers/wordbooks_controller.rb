@@ -1,5 +1,5 @@
 class WordbooksController < ApplicationController
-  before_action :set_wordbook, only: [:show, :edit, :update]
+  before_action :set_wordbook, only: [:show, :edit, :update, :card]
 
   def index
     @wordbooks = Wordbook.all
@@ -35,10 +35,17 @@ class WordbooksController < ApplicationController
     @words = @wordbook.words
   end
 
+  def card
+    @words = @wordbook.words
+  end
+
   private
 
     def set_wordbook
-      @wordbook = Wordbook.find(params[:id])
+      @wordbook = Wordbook.find_by(id: params[:id])
+      if @wordbook.nil?
+        redirect_to wordbooks_path, alert: '指定された単語帳が見つかりません。'
+      end
     end
 
     def wordbook_params

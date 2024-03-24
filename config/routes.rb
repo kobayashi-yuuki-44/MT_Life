@@ -41,6 +41,9 @@ Rails.application.routes.draw do
   post 'notebooks/create', to: 'notebooks#create'
 
   resources :wordbooks do
+    member do
+      get 'card'
+    end
     resources :words
   end
   
