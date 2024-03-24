@@ -1,8 +1,9 @@
 <div class="container mx-auto mt-10">
   <h1 class="text-xl font-semibold text-center mb-6"><%= @wordbook.collection %>の単語一覧</h1>
 
-  <div class="flex justify-end mb-4">
+  <div class="flex justify-end mb-4 space-x-2">
     <%= link_to '新しい単語を作成する', new_wordbook_word_path(@wordbook), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+    <%= link_to '単語帳演習スタート', exercise_wordbook_path(@wordbook), class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' %>
   </div>
   <% if @words.empty? %>
     <div class="text-center mt-10">
