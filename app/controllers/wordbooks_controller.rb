@@ -1,5 +1,5 @@
 class WordbooksController < ApplicationController
-  before_action :set_wordbook, only: [:show, :edit, :update, :exercise]
+  before_action :set_wordbook, only: [:show, :edit, :update, :card]
 
   def index
     @wordbooks = Wordbook.all
@@ -35,7 +35,7 @@ class WordbooksController < ApplicationController
     @words = @wordbook.words
   end
 
-  def exercise
+  def card
     @words = @wordbook.words
   end
 

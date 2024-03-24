@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   resources :wordbooks do
     member do
-      get 'exercise'
+      get 'card'
     end
     resources :words
   end
