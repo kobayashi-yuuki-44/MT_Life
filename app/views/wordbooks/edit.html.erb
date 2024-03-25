@@ -1,2 +1,14 @@
-<h1>Wordbooks#edit</h1>
-<p>Find me in app/views/wordbooks/edit.html.erb</p>
+<div class="container mx-auto mt-10">
+  <h1 class="text-3xl font-bold text-center mb-8">単語帳を編集</h1>
+
+  <%= form_with(model: @wordbook, local: true, class: "max-w-4xl mx-auto shadow-lg p-8 rounded-lg") do |form| %>
+    <div class="field mb-6">
+      <%= form.label :collection, "単語帳のタイトル", class: "block text-lg font-medium text-gray-700 mb-2" %>
+      <%= form.text_field :collection, class: "input input-bordered input-primary w-full" %>
+    </div>
+
+    <div class="actions text-right">
+      <%= form.submit "更新", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

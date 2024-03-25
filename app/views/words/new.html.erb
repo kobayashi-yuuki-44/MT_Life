@@ -1,13 +1,18 @@
-<%= form_with(model: [@wordbook, @word], local: true, data: { turbo: false }) do |form| %>
-  <div>
-    <%= form.label :term, "単語" %>
-    <%= form.text_field :term %>
-  </div>
-  <div>
-    <%= form.label :definition, "意味" %>
-    <%= form.text_area :definition %>
-  </div>
-  <div>
-    <%= form.submit "保存", class: "btn btn-primary" %>
-  </div>
-<% end %>
+<div class="container mx-auto mt-8">
+  <h1 class="text-2xl font-bold text-center mb-6">新しい単語の追加</h1>
+  <%= form_with(model: [@wordbook, @word], local: true, data: { turbo: false }) do |form| %>
+    <div class="max-w-xl mx-auto shadow-lg rounded-lg p-6 bg-white">
+      <div class="mb-4">
+        <%= form.label :term, "単語", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= form.text_field :term, class: "input input-bordered w-full" %>
+      </div>
+      <div class="mb-4">
+        <%= form.label :definition, "意味", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= form.text_area :definition, class: "textarea textarea-bordered w-full", rows: 4 %>
+      </div>
+      <div class="flex justify-end mt-4">
+        <%= form.submit "保存", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

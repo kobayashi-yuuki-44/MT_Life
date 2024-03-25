@@ -1,8 +1,8 @@
 class WordbooksController < ApplicationController
-  before_action :set_wordbook, only: [:show, :edit, :update, :card]
+  before_action :set_wordbook, only: [:show, :edit, :update, :destroy, :card]
 
   def index
-    @wordbooks = Wordbook.all
+    @wordbooks = Wordbook.all.order(created_at: :asc)
   end
 
   def new
@@ -24,7 +24,7 @@ class WordbooksController < ApplicationController
 
   def update
     if @wordbook.update(wordbook_params)
-      redirect_to @wordbook, notice: '単語帳が更新されました。'
+      redirect_to wordbooks_path, notice: '単語帳が更新されました。'
     else
       render :edit
     end
@@ -33,6 +33,11 @@ class WordbooksController < ApplicationController
   def show
     @wordbook = Wordbook.find(params[:id])
     @words = @wordbook.words
+  end
+
+  def destroy
+    @wordbook.destroy
+    redirect_to wordbooks_path, notice: '単語帳が削除されました。'
   end
 
   def card

@@ -1,21 +1,24 @@
 <div class="container mx-auto mt-10">
-  <h1 class="text-xl font-semibold text-center mb-6"><%= @wordbook.collection %>の単語一覧</h1>
+  <h1 class="text-2xl font-bold text-center mb-8"><%= @wordbook.collection %>の単語一覧</h1>
 
-  <div class="flex justify-end mb-4 space-x-2">
-    <%= link_to '新しい単語を作成する', new_wordbook_word_path(@wordbook), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-    <%= link_to '単語帳演習スタート', card_wordbook_path(@wordbook), class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' %>
+  <div class="flex justify-end mb-6 gap-4">
+    <%= link_to '新しい単語を作成する', new_wordbook_word_path(@wordbook), class: 'btn btn-primary' %>
+    <%= link_to '単語帳演習スタート', card_wordbook_path(@wordbook), class: 'btn btn-success' %>
   </div>
+
   <% if @words.empty? %>
     <div class="text-center mt-10">
-      <p>単語帳がまだ作成されていません。</p>
+      <p class="text-lg">単語帳がまだ作成されていません。</p>
     </div>
   <% else %>
-    <div class="container mx-auto mt-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <% @words.each do |word| %>
-        <div class="mb-4">
-          <div class="bg-gray-100 p-4 rounded shadow">
-            <h2 class="text-lg font-semibold"><%= word.term %></h2>
-            <p class="text-gray-700"><%= word.definition %></p>
+        <div class="bg-base-100 shadow-xl rounded-lg p-6">
+          <h2 class="text-xl font-semibold mb-2"><%= word.term %></h2>
+          <p class="text-gray-600 mb-4"><%= word.definition %></p>
+          <div class="flex justify-end gap-2">
+            <%= link_to '編集', edit_wordbook_word_path(@wordbook, word), class: "btn btn-primary" %>
+            <%= link_to '削除', wordbook_word_path(@wordbook, word), method: :delete, data: { turbo_method: :delete, turbo_confirm: "この単語を削除してもよろしいですか？" }, class: "btn btn-error" %>
           </div>
         </div>
       <% end %>

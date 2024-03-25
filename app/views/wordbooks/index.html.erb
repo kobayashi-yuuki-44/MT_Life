@@ -8,10 +8,14 @@
   <div class="flex flex-wrap justify-center gap-4">
     <% @wordbooks.each do |wordbook| %>
       <div class="card w-96 bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">
-            <%= link_to wordbook.collection, wordbook_words_path(wordbook), class: "text-lg" %>
+        <div class="card-body flex justify-between items-center">
+          <h2 class="card-title text-lg flex-grow">
+            <%= link_to wordbook.collection, wordbook_words_path(wordbook) %>
           </h2>
+          <div class="flex-none">
+            <%= link_to '編集', edit_wordbook_path(wordbook), class: 'btn btn-secondary ml-2' %>
+            <%= link_to '削除', wordbook_path(wordbook), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'この単語帳を削除してもよろしいですか？' }, class: 'btn btn-error ml-2' %>
+          </div>
         </div>
       </div>
     <% end %>
