@@ -4,7 +4,7 @@ class WordsController < ApplicationController
 
   def index
     @wordbook = Wordbook.find(params[:wordbook_id])
-    @words = @wordbook.words
+    @words = @wordbook.words.order(created_at: :asc)
   end
 
   def new

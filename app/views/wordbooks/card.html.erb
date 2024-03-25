@@ -1,20 +1,18 @@
 <div class="container mx-auto mt-10">
-  <h1 class="text-xl font-semibold text-center mb-6">単語帳演習: <%= @wordbook.collection %></h1>
+  <h1 class="text-2xl font-bold text-center mb-6">単語帳演習: <%= @wordbook.collection %></h1>
 
   <% @words.each do |word| %>
-    <div class="flex justify-between items-center mb-4">
-      <div class="word-card bg-gray-100 p-4 rounded shadow flex-grow">
-        <div class="flex justify-between items-center">
-          <div class="word-term text-lg font-semibold">
-            <%= word.term %>
-          </div>
-          <button class="show-definition bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">意味を表示</button>
-          <div class="word-definition text-gray-700 hidden">
-            <%= word.definition %>
-          </div>
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 bg-base-100 rounded-lg shadow p-4">
+      <div class="flex-grow">
+        <div class="font-semibold text-lg mb-2"><%= word.term %></div>
+        <div class="word-definition text-gray-600 hidden">
+          <%= word.definition %>
         </div>
       </div>
-      <button class="hide-definition bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded hidden">隠す</button>
+      <div class="flex flex-col md:flex-row gap-2 mt-4 md:mt-0">
+        <button class="show-definition btn btn-primary">意味を表示</button>
+        <button class="hide-definition btn btn-error hidden">隠す</button>
+      </div>
     </div>
   <% end %>
 </div>
