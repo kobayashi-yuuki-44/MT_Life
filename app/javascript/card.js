@@ -8,16 +8,18 @@ function setupCard() {
     const hideDefinitionButton = card.querySelector('.hide-definition'); // 直接選択
     const definition = card.querySelector('.word-definition');
 
-    showDefinitionButton.addEventListener('click', () => {
-      definition.classList.remove('hidden');
-      showDefinitionButton.classList.add('hidden');
-      hideDefinitionButton.classList.remove('hidden');
-    });
+    if (showDefinitionButton && hideDefinitionButton && definition) {
+      showDefinitionButton.addEventListener('click', () => {
+        definition.classList.remove('hidden');
+        showDefinitionButton.classList.add('hidden');
+        hideDefinitionButton.classList.remove('hidden');
+      });
 
-    hideDefinitionButton.addEventListener('click', () => {
-      definition.classList.add('hidden'); // 意味を非表示
-      showDefinitionButton.classList.remove('hidden'); // 「意味を表示」ボタンを表示
-      hideDefinitionButton.classList.add('hidden'); // 「隠す」ボタンを非表示
-    });
+      hideDefinitionButton.addEventListener('click', () => {
+        definition.classList.add('hidden');
+        showDefinitionButton.classList.remove('hidden');
+        hideDefinitionButton.classList.add('hidden');
+      });
+    }
   });
 }
