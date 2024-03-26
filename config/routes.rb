@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get 'wordbooks/new'
-  get 'wordbooks/create'
-  get 'wordbooks/edit'
-  get 'wordbooks/update'
-  get 'wordbooks/show'
 
   root 'static_pages#top'
 
@@ -37,8 +32,11 @@ Rails.application.routes.draw do
   get 'show_subject/:subject', to: 'questions#show_subject', as: :show_subject_questions
   get 'show_year/:year', to: 'questions#show_year', as: :show_year_questions
 
-  get 'notebooks', to: 'notebooks#index'
-  post 'notebooks/create', to: 'notebooks#create'
+  resources :notebooks do
+    resources :pages do
+      patch 'save_content', on: :member
+    end
+  end
 
   resources :wordbooks do
     member do

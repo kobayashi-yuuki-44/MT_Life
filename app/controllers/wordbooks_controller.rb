@@ -46,14 +46,14 @@ class WordbooksController < ApplicationController
 
   private
 
-    def set_wordbook
-      @wordbook = Wordbook.find_by(id: params[:id])
-      if @wordbook.nil?
-        redirect_to wordbooks_path, alert: '指定された単語帳が見つかりません。'
-      end
+  def set_wordbook
+    @wordbook = Wordbook.find_by(id: params[:id])
+    if @wordbook.nil?
+      redirect_to wordbooks_path, alert: '指定された単語帳が見つかりません。'
     end
+  end
 
-    def wordbook_params
-      params.require(:wordbook).permit(:collection)
-    end
+  def wordbook_params
+    params.require(:wordbook).permit(:collection)
+  end
 end

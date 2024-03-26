@@ -1,0 +1,15 @@
+<div class="notebook-wrapper bg-[#fff8dc] p-20 min-h-screen shadow">
+<%= button_to '新しいページを追加', new_notebook_page_path(@notebook), method: :get, remote: true, class: 'btn btn-primary' %>
+  <% if @first_page %>
+    <div class="note-page bg-white p-20 min-h-[80vh] mx-auto w-[60%] overflow-y-auto shadow-inner focus:shadow-outline" 
+         data-notebook-id="<%= @notebook.id %>" 
+         data-page-id="<%= @first_page.id %>" 
+         contenteditable="true">
+      <%= simple_format(@first_page.page_content) %>
+    </div>
+  <% else %>
+    <div class="bg-white p-20 min-h-[80vh] mx-auto w-[60%] overflow-y-auto shadow-inner">
+      最初のページが存在しません。ノートを開始するにはページを追加してください。
+    </div>
+  <% end %>
+</div>
