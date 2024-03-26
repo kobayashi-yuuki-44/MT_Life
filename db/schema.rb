@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_23_090147) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_25_043736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_090147) do
     t.index ["user_id"], name: "index_memos_on_user_id"
   end
 
+  create_table "notebooks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notebooks_on_user_id"
+  end
+
   create_table "options", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.text "option_text", null: false
@@ -59,6 +67,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_090147) do
     t.datetime "updated_at", null: false
     t.integer "position", default: 0, null: false
     t.index ["question_id"], name: "index_options_on_question_id"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.bigint "notebook_id", null: false
+    t.text "page_content"
+    t.integer "page_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notebook_id"], name: "index_pages_on_notebook_id"
   end
 
   create_table "question_correct_answers", force: :cascade do |t|
@@ -115,7 +132,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_090147) do
   add_foreign_key "image_questions", "questions"
   add_foreign_key "memos", "questions"
   add_foreign_key "memos", "users"
+  add_foreign_key "notebooks", "users"
   add_foreign_key "options", "questions"
+  add_foreign_key "pages", "notebooks"
   add_foreign_key "question_correct_answers", "questions"
   add_foreign_key "wordbooks", "users"
   add_foreign_key "words", "wordbooks"
