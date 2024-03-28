@@ -20,7 +20,7 @@ class NotebooksController < ApplicationController
     @notebook = current_user.notebooks.find(params[:id])
     @first_page = @notebook.pages.find_by(page_number: 1)
     unless @first_page
-      redirect_to notebooks_path, alert: '最初のページが見つかりません。'
+      @first_page = @notebook.pages.create(page_number: 1, page_content: 'ここに最初のページの内容を記入')
     end
   end
 

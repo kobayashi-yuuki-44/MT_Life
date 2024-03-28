@@ -1,0 +1,6 @@
+<div class="note-page bg-white p-20 min-h-[80vh] mx-auto w-[60%] overflow-y-auto shadow-inner focus:shadow-outline" 
+     data-notebook-id="<%= @notebook.id %>" 
+     data-page-id="<%= page.id %>" 
+     contenteditable="true">
+  <%= simple_format(page.page_content) %>
+</div>

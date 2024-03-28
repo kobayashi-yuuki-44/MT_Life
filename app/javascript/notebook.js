@@ -3,8 +3,8 @@ document.addEventListener('turbo:load', () => {
   if (!notePage) return;
 
   notePage.addEventListener('input', function() {
-    const notebookId = notePage.dataset.notebookId; // HTML要素にdata-notebook-idが設定されていることを確認
-    const pageId = notePage.dataset.pageId; // HTML要素にdata-page-idが設定されていることを確認
+    const notebookId = notePage.dataset.notebookId;
+    const pageId = notePage.dataset.pageId;
     const content = notePage.innerHTML;
 
     const postUrl = `/notebooks/${notebookId}/pages/${pageId}/save_content`;
