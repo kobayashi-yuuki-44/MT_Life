@@ -1,10 +1,3 @@
 <div class="notebook-wrapper bg-[#fff8dc] p-20 min-h-screen shadow">
-<%= button_to '新しいページを追加', notebook_pages_path(@notebook), method: :post, class: 'add-page-btn', data: { notebook_id: @notebook.id } %>
-  <% if @first_page %>
-    <%= render 'pages/page_content', page: @first_page %>
-  <% else %>
-    <div class="bg-white p-20 min-h-[80vh] mx-auto w-[60%] overflow-y-auto shadow-inner">
-      最初のページが存在しません。ノートを開始するにはページを追加してください。
-    </div>
-  <% end %>
+  <%= render 'pages/page_content', page: @first_page %>
 </div>
