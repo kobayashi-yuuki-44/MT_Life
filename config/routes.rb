@@ -33,8 +33,10 @@ Rails.application.routes.draw do
   get 'show_year/:year', to: 'questions#show_year', as: :show_year_questions
 
   resources :notebooks do
-    resources :pages do
-      patch 'save_content', on: :member
+    resources :pages, param: :page_number do
+      member do
+        patch 'save_content'
+      end
     end
   end
 
