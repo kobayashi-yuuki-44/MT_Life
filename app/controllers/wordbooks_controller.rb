@@ -30,11 +30,6 @@ class WordbooksController < ApplicationController
     end
   end
 
-  def show
-    @wordbook = Wordbook.find(params[:id])
-    @words = @wordbook.words
-  end
-
   def destroy
     @wordbook.destroy
     redirect_to wordbooks_path, notice: '単語帳が削除されました。'

@@ -5,8 +5,12 @@
         <a href="/" class="text-xl font-semibold text-gray-700">MTLife</a>
       </div>
       <div class="flex items-center">
-        <%= link_to 'Profile', profile_path, class: 'text-sm font-medium text-gray-700 px-4 hover:text-gray-900' %> 
-      </div>
+      <% if logged_in? %>
+        <div class="flex items-center">
+          <%= link_to 'Profile', profile_path, class: 'text-sm font-medium text-gray-700 px-4 hover:text-gray-900' %>
+          <%= link_to 'Logout', logout_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" }, class: 'text-sm font-medium text-gray-700 px-4 hover:text-gray-900' %>
+          <% end %>
+        </div>
     </div>
   </div>
 </header>

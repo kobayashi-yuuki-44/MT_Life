@@ -1,9 +1,10 @@
+<%= content_for :title, t('.title') %>
 <div class="container mx-auto mt-10">
   <h1 class="text-2xl font-bold text-center mb-8"><%= @wordbook.collection %>の単語一覧</h1>
 
   <div class="flex justify-end mb-6 gap-4">
     <%= link_to '新しい単語を作成する', new_wordbook_word_path(@wordbook), class: 'btn btn-primary' %>
-    <%= link_to '単語帳演習スタート', card_wordbook_path(@wordbook), class: 'btn btn-success' %>
+    <%= link_to '単語演習スタート', card_wordbook_path(@wordbook), class: 'btn btn-success' %>
   </div>
 
   <% if @words.empty? %>

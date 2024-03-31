@@ -1,3 +1,4 @@
+<%= content_for :title, t('.title') %>
 <h1 class="text-3xl font-semibold text-center my-6">単語を編集する</h1>
 
 <%= form_with(model: [@wordbook, @word], local: true, class: "max-w-xl mx-auto") do |form| %>
