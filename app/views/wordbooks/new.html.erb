@@ -1,3 +1,4 @@
+<%= content_for :title, t('.title') %>
 <%= form_with(model: @wordbook, local: true, data: { turbo: false }) do |form| %>
   <div class="container mx-auto mt-8">
     <h1 class="text-2xl font-bold text-center mb-6">新しい単語帳の作成</h1>

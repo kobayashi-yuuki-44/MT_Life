@@ -3,7 +3,7 @@
   <% if @question.image_question.present? %>
     <%= image_tag(@question.image_question.picture.url) %>
   <% end %>
-  <%= form_with model: @answer, url: answer_question_path(@question), local: true do |form| %>
+  <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
     <% @question.options.order(:position).each do |option| %>
       <div class="field">
         <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>

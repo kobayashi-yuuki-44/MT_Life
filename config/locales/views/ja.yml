@@ -14,5 +14,68 @@ ja:
   user_sessions:
     new:
       password_forget: "パスワードを忘れた方はこちら"
+  action_selection:
+    index:
+      title: "マイページ"
+  notebooks:
+    index:
+      title: "ノート一覧"
+    new:
+      title: "ノート作成"
+    show:
+      title: "ノート記録"
+  pages:
+    show:
+      title: "ページ"
+  password_resets:
+    edit:
+      title: "パスワードリセット"
+    new:
+      title: "パスワードリセット申請"
+  questions:
+    index:
+      title: "問題形式選択"
+    random:
+      title: "ランダム問題"
+    show_subject:
+      title: "分野別問題一覧"
+    show_year:
+      title: "年代別問題一覧"
+    show:
+      title: "問題"
+    subject:
+      title: "分野選択"
+    year:
+      title: "年代選択"
+  static_pages:
+    privacy:
+      title: "プライバシーポリシー"
+    terms:
+      title: "利用規約"
+    top:
+      title: "臨床検査技師国家試験対策学習サービス"
+  wordbooks:
+    card:
+      title: "単語演習"
+    edit:
+      title: "単語帳編集"
+    index:
+      title: "単語帳一覧"
+    new:
+      title: "単語帳作成"
+    show:
+      title: "単語帳"
+  words:
+    edit:
+      title: "単語編集"
+    index:
+      title: "単語一覧"
+    new:
+      title: "単語作成"
+
+
+
+  
+      
 
       
