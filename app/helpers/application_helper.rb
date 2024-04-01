@@ -38,7 +38,6 @@ module ApplicationHelper
       },
       # Twitter用の設定を個別で設定する
       twitter: {
-        title: 'MTLife',
         card: 'summary_large_image',
         site: '@',
         image: image_url('ogp.png')
