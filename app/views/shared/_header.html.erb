@@ -1,8 +1,8 @@
-<header class="bg-white shadow">
-  <div class="container mx-auto px-4">
-    <div class="flex justify-between items-center py-6">
-      <div class="flex justify-start">
-        <a href="/" class="text-xl font-semibold text-gray-700">MTLife</a>
+<header class="bg-custom-header-footer text-custom-color">
+  <div class="container mx-auto">
+    <div class="flex justify-between items-center py-2">
+      <div class="flex justify-start items-center">
+        <%= link_to image_tag('logo.png', alt: 'MTLife', class: 'h-16 w-auto'), root_path %>
       </div>
       <div class="flex items-center">
       <% if logged_in? %>
