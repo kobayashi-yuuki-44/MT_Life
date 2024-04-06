@@ -1,4 +1,4 @@
-<div class="question-detail">
+<div class="question-detail mt-32 text-xl font-yuji-syuku">
   <h2><%= @question.question_text %></h2>
   <% if @question.image_question.present? %>
     <%= image_tag(@question.image_question.picture.url) %>
@@ -10,6 +10,6 @@
         <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
       </div>
     <% end %>
-    <%= form.submit "Answer!", class: "btn btn-primary" %>
+    <%= form.submit "Answer!", class: "mt-16 bg-custom-button-3 hover:bg-hover-button-1 text-custom-text btn text-xl" %>
   <% end %>
 </div>

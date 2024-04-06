@@ -10,9 +10,10 @@ module.exports = {
       colors:{
         'custom-main': '#F4E8E8',
         'custom-header-footer' : '#998391',
-        'custom-color' : '#01141A',
+        'custom-color' : '#131F1F',
         'custom-button-1' : '#E49F6C',
         'custom-button-2' : '#749387',
+        'custom-button-3' : '#7CB69D',
         'hover-button-1': '#C58B60',
         'hover-button-2': '#667E74',
         'custom-text': '#492801',
@@ -20,6 +21,9 @@ module.exports = {
       fontFamily: {
         caveat: ['Caveat', 'cursive'],
         'yuji-syuku': ['"Yuji Syuku"', 'serif'],
+        'potta-one': ['"Potta One"', 'system-ui'],
+        'yuji-boku': ['"Yuji Boku"', 'serif'],
+        'kaisei-opti': ['"Kaisei Opti"', 'serif'],
       },
       fontSize: {
         '2.5xl': '1.6875rem',

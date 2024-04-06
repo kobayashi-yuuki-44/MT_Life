@@ -1,5 +1,5 @@
 <%= content_for :title, t('.title') %>
-<div class="container mx-auto mt-10">
+<div class="container mx-auto mt-10 font-yuji-syuku">
   <h1 class="text-2xl font-bold text-center mb-6">単語帳演習: <%= @wordbook.collection %></h1>
 
   <% @words.each do |word| %>
@@ -11,8 +11,8 @@
         </div>
       </div>
       <div class="flex flex-col md:flex-row gap-2 mt-4 md:mt-0">
-        <button class="show-definition btn btn-primary">意味を表示</button>
-        <button class="hide-definition btn btn-error hidden">隠す</button>
+        <button class="show-definition bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl">意味を表示</button>
+        <button class="hide-definition bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl hidden">隠す</button>
       </div>
     </div>
   <% end %>

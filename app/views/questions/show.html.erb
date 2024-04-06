@@ -1,29 +1,31 @@
 <% content_for(:title, t('.title')) %>
-<% content_for :head do %>
-  <meta name="turbo-visit-control" content="reload">
-  <%= javascript_import_module_tag "toggle_memo" %>
-<% end %>
-
-<%= render 'questions/question_detail', question: @question, answer: @answer %>
-
-<% if @question.memo.present? %>
-  <button id="toggle-memo" class="btn btn-info">メモを見る</button>
-  <div id="content" style="display:none;">
-    <div id="editable-memo"
-         contenteditable="true"
-         class="memo"
-         style="white-space: pre-wrap; cursor: text;"
-         data-question-id="<%= @question.id %>" 
-         data-memo-id="<%= @question.memo.id %>">
-      <%= @question.memo.content %>
-    </div>
-  </div>
-<% else %>
-  <%= form_with(model: [ @question, @question.build_memo ], local: true) do |form| %>
-    <div class="field">
-      <%= form.label :content, "メモ" %>
-      <%= form.text_area :content, rows: 3 %>
-    </div>
-    <%= form.submit "メモを保存", class: "btn btn-primary" %>
+<div class="flex flex-col items-center justify-center min-h-screen transform -translate-y-1/4 font-yuji-syuku">
+  <% content_for :head do %>
+    <meta name="turbo-visit-control" content="reload">
+    <%= javascript_import_module_tag "toggle_memo" %>
   <% end %>
-<% end %>
+
+  <%= render 'questions/question_detail', question: @question, answer: @answer %>
+
+  <% if @question.memo.present? %>
+    <button id="toggle-memo" class="bg-custom-button-3 hover:bg-hover-button-1 text-custom-text btn text-xl">メモを見る</button>
+    <div id="content" style="display:none;">
+      <div id="editable-memo"
+          contenteditable="true"
+          class="memo"
+          style="white-space: pre-wrap; cursor: text;"
+          data-question-id="<%= @question.id %>" 
+          data-memo-id="<%= @question.memo.id %>">
+        <%= @question.memo.content %>
+      </div>
+    </div>
+  <% else %>
+    <%= form_with(model: [ @question, @question.build_memo ], local: true) do |form| %>
+      <div class="field">
+        <%= form.label :content, "メモ" %>
+        <%= form.text_area :content, rows: 3 %>
+      </div>
+      <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-1 text-custom-text btn text-xl" %>
+    <% end %>
+  <% end %>
+</div>

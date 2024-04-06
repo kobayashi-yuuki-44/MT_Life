@@ -1,5 +1,5 @@
 <%= content_for :title, t('.title') %>
-<div class="container mx-auto mt-8">
+<div class="container mx-auto mt-8 font-yuji-syuku">
   <h1 class="text-2xl font-bold text-center mb-6">新しい単語の追加</h1>
   <%= form_with(model: [@wordbook, @word], local: true, data: { turbo: false }) do |form| %>
     <div class="max-w-xl mx-auto shadow-lg rounded-lg p-6 bg-white">
@@ -12,7 +12,7 @@
         <%= form.text_area :definition, class: "textarea textarea-bordered w-full", rows: 4 %>
       </div>
       <div class="flex justify-end mt-4">
-        <%= form.submit "保存", class: "btn btn-primary" %>
+        <%= form.submit "保存", class: "bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
       </div>
     </div>
   <% end %>

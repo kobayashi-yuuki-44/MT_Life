@@ -1,13 +1,15 @@
 <% content_for(:title, t('.title')) %>
-<%= form_with(model: [@notebook], local: true) do |form| %>
-  <div class="mb-4">
-    <%= form.label :title, "タイトル", class: "label" %>
-    <div class="control">
-      <%= form.text_field :title, class: "input input-bordered w-full" %>
+<div class="font-yuji-syuku p-8 max-w-lg mx-auto bg-white shadow-xl rounded-2xl">
+  <%= form_with(model: [@notebook], local: true) do |form| %>
+    <div class="mb-6">
+      <%= form.label :title, "タイトル", class: "block text-lg font-medium text-gray-800" %>
+      <div class="mt-2">
+        <%= form.text_field :title, class: "input input-bordered w-full h-12 px-4 mt-1 block w-full shadow-sm text-lg border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
     </div>
-  </div>
-  
-  <div class="flex justify-end">
-    <%= form.submit "作成", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    
+    <div class="flex justify-end mt-8">
+      <%= form.submit "作成", class: "bg-custom-button-3 hover:bg-hover-button-1 text-custom-text btn text-xl" %>
+    </div>
+  <% end %>
+</div>

@@ -1,16 +1,18 @@
 module ApplicationHelper
 
   def flash_class(type)
-    case type
-    when 'notice' then 'alert alert-info'
-    when 'success' then 'alert alert-success'
-    when 'error' then 'alert alert-error'
-    when 'warning' then 'alert alert-warning'
-    when 'danger' then 'alert alert-danger'
-    else 'alert'
-    end
+    base_classes = "font-yuji-syuku p-4 mb-6 text-white text-lg"
+    color_class = case type
+                  when 'notice' then 'bg-blue-500'
+                  when 'success' then 'bg-green-500'
+                  when 'error' then 'bg-red-500'
+                  when 'warning' then 'bg-yellow-500'
+                  when 'danger' then 'bg-red-700'
+                  else 'bg-gray-500'
+                  end
+    "#{base_classes} #{color_class}"
   end
-
+    
   def page_title(title)
     base_title = 'MTLife'
 

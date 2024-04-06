@@ -1,7 +1,7 @@
 <%= content_for :title, t('defaults.user_register') %>
-<h1 class="text-center text-gray-700 text-xl font-bold mb-6"><%= t('.heading') %></h1>
+<h1 class="font-yuji-syuku text-center text-gray-700 text-xl font-bold mb-6"><%= t('.heading') %></h1>
 
-<%= form_with model: @user, local: true, html: { class: 'space-y-4' } do |f| %>
+<%= form_with model: @user, local: true, html: { class: 'font-yuji-syuku space-y-4' } do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="mb-4">
     <%= f.label :name, class: 'block text-gray-700 text-sm font-bold mb-2' %>
@@ -22,13 +22,13 @@
   <div class="mb-4" data-controller="avatar-preview">
     <%= f.label :avatar, class: 'block text-gray-700 text-sm font-bold mb-2' %>
     <%= f.file_field :avatar, data: { controller: "avatar-preview", action: "change->avatar-preview#preview", avatar_preview_target: "image" }, class: "form-control", accept: 'image/*' %>
-    <img id="preview" src="<%= asset_path('sample.webp') %>" class="rounded-circle" style="width: 100px; height: 100px;">
+    <img id="preview" src="<%= asset_path('avatar.png') %>" class="rounded-circle" style="width: 100px; height: 100px;">
   </div>
 
   <div class="flex items-center justify-between">
-    <%= f.submit t('.register'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+    <%= f.submit t('.register'), class: 'bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
   </div>
 <% end %>
 
-<%= link_to 'Google登録', auth_at_provider_path(provider: :google) %>
+<%= link_to 'Google登録', auth_at_provider_path(provider: :google), class: 'font-yuji-syuku bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
 
