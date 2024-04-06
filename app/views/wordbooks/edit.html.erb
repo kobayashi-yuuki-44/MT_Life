@@ -1,5 +1,5 @@
 <%= content_for :title, t('.title') %>
-<div class="container mx-auto mt-10">
+<div class="container mx-auto mt-10 font-yuji-syuku">
   <h1 class="text-3xl font-bold text-center mb-8">単語帳を編集</h1>
 
   <%= form_with(model: @wordbook, local: true, class: "max-w-4xl mx-auto shadow-lg p-8 rounded-lg") do |form| %>
@@ -9,7 +9,7 @@
     </div>
 
     <div class="actions text-right">
-      <%= form.submit "更新", class: "btn btn-primary" %>
+      <%= form.submit "更新", class: "bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
     </div>
   <% end %>
 </div>

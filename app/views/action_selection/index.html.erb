@@ -1,6 +1,6 @@
 <% content_for(:title, t('.title')) %>
-<div class="flex flex-col items-center justify-center h-screen space-y-4">
-  <%= link_to '過去問を解く', questions_path, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-  <%= link_to 'ノート作成', notebooks_path, class: 'btn btn-primary' %>
-  <%= link_to '単語帳', wordbooks_path, class: 'btn btn-primary' %>
+<div class="flex flex-col items-center justify-center h-screen space-y-4 font-yuji-syuku">
+  <%= link_to '過去問を解く', questions_path, class: 'bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
+  <%= link_to 'ノート作成', notebooks_path, class: 'bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
+  <%= link_to '単語帳', wordbooks_path, class: 'bg-custom-button-3 hover:bg-hover-button-1 text-custom-text btn text-xl' %>
 </div>

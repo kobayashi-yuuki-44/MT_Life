@@ -1,7 +1,7 @@
 <% content_for(:title, t('.title')) %>
-<div class="flex flex-col items-center justify-center h-screen space-y-4">
+<div class="flex flex-col items-center justify-center h-screen space-y-4 font-yuji-syuku">
   <h1 class="text-2xl font-bold">年代選択</h1>
   <% @years.each do |year| %>
-    <%= link_to year, show_year_questions_path(year: year), class: "btn btn-primary" %>
+    <%= link_to year, show_year_questions_path(year: year), class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
   <% end %>
 </div>

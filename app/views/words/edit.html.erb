@@ -1,5 +1,5 @@
 <%= content_for :title, t('.title') %>
-<h1 class="text-3xl font-semibold text-center my-6">単語を編集する</h1>
+<h1 class="text-3xl font-semibold text-center my-6 font-yuji-syuku">単語を編集する</h1>
 
 <%= form_with(model: [@wordbook, @word], local: true, class: "max-w-xl mx-auto") do |form| %>
   <div class="field mb-6">
@@ -13,6 +13,6 @@
   </div>
 
   <div class="actions text-right">
-    <%= form.submit "更新", class: "btn btn-primary" %>
+    <%= form.submit "更新", class: "bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
   </div>
 <% end %>

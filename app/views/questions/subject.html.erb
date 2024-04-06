@@ -1,7 +1,7 @@
 <% content_for(:title, t('.title')) %>
-<div class="flex flex-col items-center justify-center h-screen space-y-4">
+<div class="flex flex-col items-center justify-center h-screen space-y-4 font-yuji-syuku">
   <h1 class="text-2xl font-bold">分野選択</h1>
   <% @subjects.each do |subject| %>
-    <%= link_to subject, show_subject_questions_path(subject: subject), class: "btn btn-primary" %>
+    <%= link_to subject, show_subject_questions_path(subject: subject), class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
   <% end %>
 </div>
