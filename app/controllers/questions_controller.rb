@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.includes(:options).find(params[:id])
+    @image_questions = ImageQuestion.where(question_id: @question.id)
     @answer = Answer.new
     @memo = @question.memo
   end
@@ -58,6 +59,7 @@ class QuestionsController < ApplicationController
       @question = Question.order(Arel.sql('RANDOM()')).first
       session[:last_random_question_id] = @question.id
     end
+    @image_questions = ImageQuestion.where(question_id: @question.id)
   end
 
   def next_random

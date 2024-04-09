@@ -31,3 +31,10 @@ CSV.foreach(Rails.root.join('db', 'question_correct_answers.csv'), headers: true
     correct_answer: row['correct_answer'],
   )
 end
+
+CSV.foreach(Rails.root.join('db', 'image_questions.csv'), headers: true) do |row|
+  ImageQuestion.find_or_create_by(
+    question_id: row['question_id'],
+    image_url: row['image_url']
+  )
+end
