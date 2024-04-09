@@ -17,9 +17,9 @@
           <%= f.label :avatar %>
           <%= f.file_field :avatar, data: { controller: "avatar-preview", action: "change->avatar-preview#preview", avatar_preview_target: "image" }, class: "form-control", accept: 'image/*' %>
           <%= f.hidden_field :avatar_cache %>
-          <img id="preview" src="<%= asset_path('sample.webp') %>" class="rounded-circle" style="width: 100px; height: 100px;">
+          <img id="preview" src="<%= asset_path('avatar.png') %>" class="rounded-circle" style="width: 100px; height: 100px;">
         </div>
-        <%= f.submit  class: "btn btn-primary" %>
+        <%= f.submit  class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
       <% end %>
     </div>
   </div>
