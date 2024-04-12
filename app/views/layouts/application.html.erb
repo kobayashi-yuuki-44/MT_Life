@@ -28,10 +28,10 @@
 
   <body class="flex flex-col min-h-screen bg-custom-main">
     <%= render 'shared/header' %>
-    <main class="flex-grow">
-      <%= render 'shared/flash_message' %>
+    <%= render 'shared/flash_message' %>
+    <div class="flex-grow">
       <%= yield %>
-    </main>
+    </div>
     <%= render 'shared/footer' %>
   </body>
 </html>

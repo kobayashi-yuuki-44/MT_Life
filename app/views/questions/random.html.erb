@@ -1,5 +1,5 @@
 <% content_for(:title, t('.title')) %>
-<div class="<%= @image_questions.any? { |iq| iq.image_url.present? } ? 'flex items-center justify-center' : 'flex items-center justify-center' %> min-h-screen transform -translate-y-1/4 font-yuji-syuku">
+<div class="<%= @image_questions.any? { |iq| iq.image_url.present? } ? 'flex items-center justify-center min-h-screen font-yuji-syuku' : 'flex justify-center items-center min-h-screen mx-auto px-4' %>">
   <% content_for :head do %>
     <meta name="turbo-visit-control" content="reload">
     <%= javascript_import_module_tag "toggle_memo" %>
@@ -11,50 +11,87 @@
       <% @image_questions.each do |image_question| %>
         <% if image_question.image_url.present? %>
           <div class="bg-contain bg-center" style="background-image: url('<%= image_question.image_url %>'); background-repeat: no-repeat; width: 400px; height: 400px;">
-              <!-- 背景画像がここに表示されます -->
+              <!-- 背景画像がここに表示 -->
           </div>
-        <% else %>
-          <!-- 画像が存在しない場合の代替テキストや画像をここに表示 -->
         <% end %>
       <% end %>
     </div>
-  <% end %>
 
-  <!-- 質問の詳細とメモを含むコンテナ -->
-  <div class="question-detail flex flex-col justify-center items-start text-xl font-yuji-syuku mt-32 text-left" style="<%= 'width: 50%;' if @image_questions.any? { |iq| iq.image_url.present? } %>">
-    <h2><%= @question.question_text %></h2>
-    <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
-      <% @question.options.order(:position).each do |option| %>
-        <div class="field">
-          <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>
-          <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
-        </div>
+    <!-- 質問の詳細とメモを含むコンテナ -->
+    <div class="question-detail flex flex-col justify-center items-start text-xl mt-32 text-left" style="width: 50%;">
+      <h2 class="mb-6"><%= @question.question_text %></h2>
+      <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
+        <% @question.options.order(:position).each do |option| %>
+          <div class="field">
+            <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>
+            <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
+          </div>
+        <% end %>
+        <%= form.submit "Answer!", class: "mt-16 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
       <% end %>
-      <%= form.submit "Answer!", class: "mt-16 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-    <% end %>
 
-    <!-- メモの表示部分をここに移動 -->
-    <% if @question.memo.present? %>
-      <button id="toggle-memo" class="mt-4 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl">メモを見る</button>
-      <div id="content" style="display:none;">
-        <div id="editable-memo"
-            contenteditable="true"
-            class="memo mt-2"
-            style="white-space: pre-wrap; cursor: text;"
-            data-question-id="<%= @question.id %>" 
-            data-memo-id="<%= @question.memo.id %>">
-          <%= @question.memo.content %>
+      <!-- メモの表示 -->
+      <% if @memo.present? %>
+        <button id="toggle-memo" class="mt-4 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl">メモを見る</button>
+        <div id="content" style="display:none;">
+          <div id="editable-memo"
+              contenteditable="true"
+              class="memo mt-2"
+              style="white-space: pre-wrap; cursor: text;"
+              data-question-id="<%= @question.id %>" 
+              data-memo-id="<%= @memo.id %>">
+            <%= @memo.content %>
+          </div>
         </div>
-      </div>
-    <% else %>
-      <%= form_with(model: [ @question, @question.build_memo ], local: true) do |form| %>
-        <div class="field mt-4">
-          <%= form.label :content, "メモ" %>
-          <%= form.text_area :content, rows: 3 %>
-        </div>
-        <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+      <% else %>
+        <%= form_with(model: [ @question, @question.memos.build ], local: true) do |form| %>
+          <div class="field mt-4">
+            <%= form.label :content, "メモ" %>
+            <%= form.text_area :content, rows: 3 %>
+          </div>
+          <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+        <% end %>
       <% end %>
       <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+
+    <!-- 画像がない場合のコンテナ -->
+    <div class="flex flex-col justify-center items-start text-xl font-yuji-syuku mt-8 text-left w-full md:w-1/2 lg:w-1/3">
+      <h2 class="mb-6"><%= @question.question_text %></h2>
+      <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
+        <% @question.options.order(:position).each do |option| %>
+          <div class="field">
+            <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>
+            <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
+          </div>
+        <% end %>
+        <%= form.submit "Answer!", class: "mt-16 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+      <% end %>
+
+      <!-- メモの表示 -->
+      <% if @memo.present? %>
+        <button id="toggle-memo" class="mt-4 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl">メモを見る</button>
+        <div id="content" style="display:none;">
+          <div id="editable-memo"
+              contenteditable="true"
+              class="memo mt-2"
+              style="white-space: pre-wrap; cursor: text;"
+              data-question-id="<%= @question.id %>" 
+              data-memo-id="<%= @memo.id %>">
+            <%= @memo.content %>
+          </div>
+        </div>
+      <% else %>
+        <%= form_with(model: [ @question, @question.memos.build ], local: true) do |form| %>
+          <div class="field mt-4">
+            <%= form.label :content, "メモ" %>
+            <%= form.text_area :content, rows: 3 %>
+          </div>
+          <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+        <% end %>
+      <% end %>
+      <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+    </div>
+  <% end %>
 </div>
