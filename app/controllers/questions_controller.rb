@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
     @question = Question.includes(:options).find(params[:id])
     @image_questions = ImageQuestion.where(question_id: @question.id)
     @answer = Answer.new
-    @memo = @question.memo
+    @memo = Memo.where(user_id: current_user.id, question_id: @question.id).first
   end
 
   def subject
@@ -53,12 +53,8 @@ class QuestionsController < ApplicationController
   end
 
   def random
-    if session[:last_random_question_id]
-      @question = Question.find(session[:last_random_question_id])
-    else
-      @question = Question.order(Arel.sql('RANDOM()')).first
-      session[:last_random_question_id] = @question.id
-    end
+    @question = Question.order(Arel.sql('RANDOM()')).first
+    session[:last_random_question_id] = @question.id
     @image_questions = ImageQuestion.where(question_id: @question.id)
   end
 
