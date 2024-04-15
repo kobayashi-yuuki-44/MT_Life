@@ -1,7 +1,7 @@
 class WordsController < ApplicationController
   before_action :set_wordbook
   before_action :set_word, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_login
 
   def index
     @wordbook = Wordbook.find(params[:wordbook_id])
@@ -43,7 +43,10 @@ class WordsController < ApplicationController
   private
 
   def set_wordbook
-    @wordbook = Wordbook.find(params[:wordbook_id])
+    @wordbook = current_user.wordbooks.find(params[:wordbook_id])
+    if @wordbook.nil?
+      redirect_to wordbooks_path, alert: '指定された単語帳が見つかりません。'
+    end
   end
 
   def set_word
@@ -56,5 +59,4 @@ class WordsController < ApplicationController
   def word_params
     params.require(:word).permit(:term, :definition)
   end
-
 end

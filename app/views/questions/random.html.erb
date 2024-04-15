@@ -36,7 +36,7 @@
         <div id="content" style="display:none;">
           <div id="editable-memo"
               contenteditable="true"
-              class="memo mt-2"
+              class="memo mt-2 p-4 border-2 border-blue-400 bg-white rounded-lg shadow-lg cursor-text hover:border-blue-500 text-gray-700"
               style="white-space: pre-wrap; cursor: text;"
               data-question-id="<%= @question.id %>" 
               data-memo-id="<%= @memo.id %>">
@@ -46,10 +46,10 @@
       <% else %>
         <%= form_with(model: [ @question, @question.memos.build ], local: true) do |form| %>
           <div class="field mt-4">
-            <%= form.label :content, "メモ" %>
-            <%= form.text_area :content, rows: 3 %>
+            <%= form.label :content, "メモ", class: "label" %>
+            <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered" %>
           </div>
-          <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+          <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl mt-2" %>
         <% end %>
       <% end %>
       <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
@@ -75,7 +75,7 @@
         <div id="content" style="display:none;">
           <div id="editable-memo"
               contenteditable="true"
-              class="memo mt-2"
+              class="memo mt-2 p-4 border-2 border-blue-400 bg-white rounded-lg shadow-lg cursor-text hover:border-blue-500 text-gray-700"
               style="white-space: pre-wrap; cursor: text;"
               data-question-id="<%= @question.id %>" 
               data-memo-id="<%= @memo.id %>">
@@ -85,10 +85,10 @@
       <% else %>
         <%= form_with(model: [ @question, @question.memos.build ], local: true) do |form| %>
           <div class="field mt-4">
-            <%= form.label :content, "メモ" %>
-            <%= form.text_area :content, rows: 3 %>
+            <%= form.label :content, "メモ", class: "label" %>
+            <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered" %>
           </div>
-          <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+          <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl mt-2" %>
         <% end %>
       <% end %>
       <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
