@@ -1,8 +1,9 @@
 class WordbooksController < ApplicationController
   before_action :set_wordbook, only: [:show, :edit, :update, :destroy, :card]
+  before_action :require_login
 
   def index
-    @wordbooks = Wordbook.all.order(created_at: :asc)
+    @wordbooks = current_user.wordbooks.order(created_at: :asc)
   end
 
   def new
@@ -42,7 +43,7 @@ class WordbooksController < ApplicationController
   private
 
   def set_wordbook
-    @wordbook = Wordbook.find_by(id: params[:id])
+    @wordbook = current_user.wordbooks.find_by(id: params[:id])
     if @wordbook.nil?
       redirect_to wordbooks_path, alert: '指定された単語帳が見つかりません。'
     end
