@@ -1,0 +1,6 @@
+<%= turbo_stream.update "flash-messages" do %>
+  <%= render partial: "shared/flash_message", locals: { flash: flash } %>
+<% end %>
+<%= turbo_stream.replace "next-question-button" do %>
+  <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" if show_next_button %>
+<% end %>

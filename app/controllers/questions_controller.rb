@@ -7,6 +7,10 @@ class QuestionsController < ApplicationController
     @image_questions = ImageQuestion.where(question_id: @question.id)
     @answer = Answer.new
     @memo = Memo.where(user_id: current_user.id, question_id: @question.id).first
+
+    @selected_option_ids = session[:selected_option_ids] || []
+
+    session[:last_random_question_id] = @question.id if params[:from] == 'random'
   end
 
   def subject
@@ -37,7 +41,14 @@ class QuestionsController < ApplicationController
     else
       flash[:alert] = "不正解です。"
     end
-    redirect_to question_path(@question)
+
+    session[:selected_option_ids] = selected_option_ids
+    
+    if session[:last_random_question_id] == @question.id
+      redirect_to question_path(@question, from: 'random')
+    else
+      redirect_to question_path(@question)
+    end
   end
 
   def year

@@ -23,7 +23,7 @@
       <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
         <% @question.options.order(:position).each do |option| %>
           <div class="field">
-            <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>
+            <%= check_box_tag 'answer[selected_option_ids][]', option.id, @selected_option_ids.include?(option.id.to_s), id: "selected_option_ids_#{option.position}" %>
             <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
           </div>
         <% end %>
@@ -61,7 +61,7 @@
       <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
         <% @question.options.order(:position).each do |option| %>
           <div class="field">
-            <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>
+            <%= check_box_tag 'answer[selected_option_ids][]', option.id, @selected_option_ids.include?(option.id.to_s), id: "selected_option_ids_#{option.position}" %>
             <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
           </div>
         <% end %>
@@ -88,6 +88,9 @@
             <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered" %>
           </div>
           <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl mt-2" %>
+        <% end %>
+        <% if session[:last_random_question_id] == @question.id %>
+          <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
         <% end %>
       <% end %>
     </div>
