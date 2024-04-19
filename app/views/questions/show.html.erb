@@ -1,5 +1,5 @@
 <% content_for(:title, t('.title')) %>
-<div class="<%= @image_questions.any? { |iq| iq.image_url.present? } ? 'flex items-center justify-center min-h-screen font-yuji-syuku' : 'flex justify-center items-center min-h-screen mx-auto px-4' %>">
+<div class="<%= @image_questions&.any? { |iq| iq.image_url.present? } ? 'flex items-center justify-center min-h-screen font-yuji-syuku' : 'flex justify-center items-center min-h-screen mx-auto px-4' %>">
   <% content_for :head do %>
     <meta name="turbo-visit-control" content="reload">
     <%= javascript_import_module_tag "toggle_memo" %>
@@ -23,11 +23,11 @@
       <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
         <% @question.options.order(:position).each do |option| %>
           <div class="field">
-            <%= check_box_tag 'answer[selected_option_ids][]', option.id, @selected_option_ids.include?(option.id.to_s), id: "selected_option_ids_#{option.position}" %>
+            <%= check_box_tag 'answer[selected_option_ids][]', option.id, @selected_option_ids&.include?(option.id.to_s), id: "selected_option_ids_#{option.position}" %>
             <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
           </div>
         <% end %>
-        <%= form.submit "Answer!", class: "mt-16 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+        <%= form.submit "Answer!", class: "mt-8 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
       <% end %>
 
       <!-- メモの表示 -->
@@ -44,13 +44,21 @@
           </div>
         </div>
       <% else %>
-        <%= form_with(model: [ @question, @question.memos.build ], local: true) do |form| %>
+        <%= form_with(model: [ @question, @question.memos.build ], local: true, data: { turbo: false }) do |form| %>
           <div class="field mt-4">
-            <%= form.label :content, "メモ", class: "label" %>
-            <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered" %>
+            <%= form.label :content, "解説メモ", class: "label" %>
+            <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered", required: true %>
           </div>
           <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl mt-2" %>
         <% end %>
+      <% end %>
+      <% if session[:last_random_question_id] == @question.id %>
+        <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+      <% end %>
+      <% if @next_question_id.present? %>
+        <%= link_to '次の問題', question_path(@next_question_id), data: { turbo: false }, class: "btn btn-next" %>
+      <% else %>
+        <p>これが最後の問題です。</p>
       <% end %>
     </div>
   <% else %>
@@ -61,11 +69,11 @@
       <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
         <% @question.options.order(:position).each do |option| %>
           <div class="field">
-            <%= check_box_tag 'answer[selected_option_ids][]', option.id, @selected_option_ids.include?(option.id.to_s), id: "selected_option_ids_#{option.position}" %>
+            <%= check_box_tag 'answer[selected_option_ids][]', option.id, @selected_option_ids&.include?(option.id.to_s), id: "selected_option_ids_#{option.position}" %>
             <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
           </div>
         <% end %>
-        <%= form.submit "Answer!", class: "mt-16 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+        <%= form.submit "Answer!", class: "mt-8 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
       <% end %>
 
       <!-- メモの表示 -->
@@ -82,16 +90,20 @@
           </div>
         </div>
       <% else %>
-        <%= form_with(model: [ @question, @question.memos.build ], local: true) do |form| %>
+        <%= form_with(model: [ @question, @question.memos.build ], local: true, data: { turbo: false }) do |form| %>
           <div class="field mt-4">
-            <%= form.label :content, "メモ", class: "label" %>
-            <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered" %>
+            <%= form.label :content, "解説メモ", class: "label" %>
+            <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered", required: true %>
           </div>
           <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl mt-2" %>
         <% end %>
-        <% if session[:last_random_question_id] == @question.id %>
-          <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-        <% end %>
+      <% end %>
+      <% if @is_random_question %>
+        <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
+      <% elsif @next_question_id.present? %>
+        <%= link_to '次の問題', question_path(@next_question_id), data: { turbo: false }, class: "btn btn-next" %>
+      <% else %>
+        <p>これが最後の問題です。</p>
       <% end %>
     </div>
   <% end %>
