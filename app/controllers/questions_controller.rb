@@ -7,8 +7,23 @@ class QuestionsController < ApplicationController
     @image_questions = ImageQuestion.where(question_id: @question.id)
     @answer = Answer.new
     @memo = Memo.where(user_id: current_user.id, question_id: @question.id).first
+    @is_random_question = session[:last_random_question_id] == @question.id
+    
+    if params[:retain_selection] == "true"
+      @selected_option_ids = session[:selected_option_ids] || []
+    else
+      session.delete(:selected_option_ids)
+      @selected_option_ids = []
+    end
 
-    @selected_option_ids = session[:selected_option_ids] || []
+    questions_list = session[:questions_list] || []
+    current_index = questions_list.find_index(@question.id)
+  
+    if current_index && current_index + 1 < questions_list.size
+      @next_question_id = questions_list[current_index + 1]
+    else
+      @next_question_id = nil
+    end
 
     session[:last_random_question_id] = @question.id if params[:from] == 'random'
   end
@@ -23,6 +38,7 @@ class QuestionsController < ApplicationController
       redirect_to(root_path, alert: '無効な分野が指定されました。') and return
     end
     @questions = Question.where(subject: @subject)
+    session[:questions_list] = @questions.map(&:id)
   end
 
   def answer
@@ -36,19 +52,12 @@ class QuestionsController < ApplicationController
     end
 
     is_correct = @question.correct_answer?(selected_options)
-    if is_correct
-      flash[:notice] = "正解です！"
-    else
-      flash[:alert] = "不正解です。"
-    end
-
+    flash[is_correct ? :notice : :alert] = is_correct ? "正解です！" : "不正解です。"
     session[:selected_option_ids] = selected_option_ids
     
-    if session[:last_random_question_id] == @question.id
-      redirect_to question_path(@question, from: 'random')
-    else
-      redirect_to question_path(@question)
-    end
+    redirect_params = { retain_selection: "true" }
+    redirect_params[:from] = 'random' if session[:last_random_question_id] == @question.id
+    redirect_to question_path(@question, redirect_params)
   end
 
   def year
@@ -61,6 +70,7 @@ class QuestionsController < ApplicationController
       redirect_to(root_path, alert: '無効な分野が指定されました。') and return
     end
     @questions = Question.where(year: @year)
+    session[:questions_list] = @questions.map(&:id)
   end
 
   def random
@@ -71,6 +81,7 @@ class QuestionsController < ApplicationController
 
   def next_random
     session[:last_random_question_id] = nil
+    session.delete(:selected_option_ids) 
     redirect_to action: :random
   end
 end
