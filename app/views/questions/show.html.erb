@@ -52,7 +52,7 @@
           <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl mt-2" %>
         <% end %>
       <% end %>
-      <% if session[:last_random_question_id] == @question.id %>
+      <% if @is_random_question %>
         <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
       <% end %>
       <% if @next_question_id.present? %>
