@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  
   root 'static_pages#top'
 
   resources :users, only: %i[new create]
@@ -47,7 +47,8 @@ Rails.application.routes.draw do
     resources :words
   end
   
-  get 'messages', to: 'messages#index'
+  resources :posts, only: [:index, :new, :create]
+
   get 'diaries', to: 'diaries#index'
 
   get 'terms', to: 'static_pages#terms'

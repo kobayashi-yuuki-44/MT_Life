@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_08_032204) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_21_090256) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,6 +78,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_08_032204) do
     t.index ["notebook_id"], name: "index_pages_on_notebook_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "post_content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "question_correct_answers", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.integer "correct_answer"
@@ -135,6 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_08_032204) do
   add_foreign_key "notebooks", "users"
   add_foreign_key "options", "questions"
   add_foreign_key "pages", "notebooks"
+  add_foreign_key "posts", "users"
   add_foreign_key "question_correct_answers", "questions"
   add_foreign_key "wordbooks", "users"
   add_foreign_key "words", "wordbooks"

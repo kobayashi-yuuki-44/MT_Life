@@ -72,6 +72,11 @@ ja:
       title: "単語一覧"
     new:
       title: "単語作成"
+  posts:
+    index:
+      title: "投稿一覧"
+    new:
+      title: "新規投稿"
 
 
 
