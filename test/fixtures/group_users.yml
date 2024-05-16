@@ -1,11 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  conversation: one
-  message_content: MyText
+  group: one
   user: one
 
 two:
-  conversation: two
-  message_content: MyText
+  group: two
   user: two
