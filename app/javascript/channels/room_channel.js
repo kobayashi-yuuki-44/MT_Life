@@ -64,6 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
+
+    // index.html.erb
+    document.querySelectorAll('[id^="room_"]').forEach(element => {
+      let roomId = element.id.split('_')[1];
+
+      consumer.subscriptions.create({ channel: "RoomChannel", room_id: roomId }, {
+        received(data) {
+          let roomElement = document.querySelector(`#room_${roomId} .latest-message`);
+          if (roomElement && data.latest_message) {
+            roomElement.textContent = data.latest_message.message_content;
+          }
+        }
+      });
+    });
   });
 
   document.addEventListener('turbo:before-cache', () => {
