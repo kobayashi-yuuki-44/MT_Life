@@ -1,0 +1,12 @@
+<div class="direct_message" data-message-id="<%= direct_message.id %>" data-user-id="<%= direct_message.user.id %>">
+  <p class="message_<%= direct_message.id %>" style="color: white; margin-top: 0;">
+  <%= image_tag(direct_message.user.avatar.url, class: "profile-img-circle", size: "40x40") if direct_message.user.avatar? %>
+  <p class="user_name"><%= direct_message.user.name %></p>
+  </p>
+  <p class="message_<%= direct_message.id %>">
+    <span class="balloon1-top">
+      <h7 class="dm_content"><%= direct_message.message_content %></h7><br>
+      <h7 style="color: #C0C0C0;"><%= direct_message.created_at.strftime("%Y/%m/%d %H:%M") %></h7>
+    </span>
+  </p><br>
+</div>

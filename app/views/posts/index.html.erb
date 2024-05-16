@@ -9,12 +9,14 @@
       <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
         <div class="p-6">
           <div class="flex items-center mb-4">
-            <% if post.user.avatar? %>
-              <img src="<%= post.user.avatar.url %>" alt="<%= post.user.name %>のアバター" class="w-16 h-16 rounded-full mr-4">
-            <% else %>
-              <img src="<%= asset_path('avatar.png') %>" alt="デフォルトアバター" class="w-16 h-16 rounded-full mr-4">
+            <%= link_to user_profile_path(post.user) do %>  
+              <% if post.user.avatar? %>
+                <img src="<%= post.user.avatar.url %>" alt="<%= post.user.name %>のアバター" class="w-16 h-16 rounded-full mr-4">
+              <% else %>
+                <img src="<%= asset_path('avatar.png') %>" alt="デフォルトアバター" class="w-16 h-16 rounded-full mr-4">
+              <% end %>
+              <strong class="font-semibold text-lg"><%= post.user.name %></strong>
             <% end %>
-            <strong class="font-semibold text-lg"><%= post.user.name %></strong>
           </div>
           <div class="border-t border-gray-300 my-5"></div>
           <p class="text-gray-800 text-base mb-6"><%= post.post_content %></p>

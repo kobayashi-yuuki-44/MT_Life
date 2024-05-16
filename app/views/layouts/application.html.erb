@@ -8,6 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&family=Potta+One&family=Yuji+Boku&family=Kaisei+Opti&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -26,7 +27,7 @@
     </script>
   </head>
 
-  <body class="flex flex-col min-h-screen bg-custom-main">
+  <body class="flex flex-col min-h-screen bg-custom-main" data-current-user-id="<%= current_user&.id %>">
     <%= render 'shared/header' %>
     <%= render 'shared/flash_message' %>
     <div class="flex-grow">

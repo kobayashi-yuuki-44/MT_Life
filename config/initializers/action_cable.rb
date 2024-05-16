@@ -1,0 +1,1 @@
+Rails.application.config.action_cable.allow_same_origin_as_host = true

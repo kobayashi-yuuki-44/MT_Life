@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :wordbooks, dependent: :destroy
   has_many :notebooks, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :entries
+  has_many :direct_messages
+  has_many :rooms, through: :entries
   accepts_nested_attributes_for :authentications
 
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }

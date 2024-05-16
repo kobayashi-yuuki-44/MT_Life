@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
-  
+
   root 'static_pages#top'
 
-  resources :users, only: %i[new create]
+  resources :users  do
+    resource :profile, only: [:show], controller: 'profiles'
+  end
+
+  resource :profile, only: %i[show edit update], controller: 'profiles'
+
+  mount ActionCable.server => '/cable'
+  
+  resources :rooms do
+    resources :direct_messages, only: [:create]
+  end
+  
   resources :password_resets, only: %i[new create edit update]
-  resource :profile, only: %i[show edit update]
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
@@ -48,7 +58,7 @@ Rails.application.routes.draw do
   end
   
   resources :posts, only: [:index, :new, :create]
-
+  
   get 'diaries', to: 'diaries#index'
 
   get 'terms', to: 'static_pages#terms'

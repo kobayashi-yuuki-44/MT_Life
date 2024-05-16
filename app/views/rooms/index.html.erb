@@ -1,0 +1,28 @@
+<h2>メッセージ一覧</h2>
+<% @anotherEntries.each do |e| %>
+	<table class="table table-striped">
+		<tr id="room_<%= e.room.id %>">
+			<td>
+				<!-- 名前からroomの詳細に飛べるようにリンク化 -->
+				<%= link_to room_path(e.room.id) do %>
+					<%= image_tag(e.user.avatar? ? e.user.avatar.url : 'avatar.png', size: "30x30", class: "rounded-circle", alt: "Profile Image") %>
+					<%= e.user.name %>
+				<% end %>
+			</td>
+			<td>
+				<!-- 最新メッセージ内容の最初の7文字を表示する -->
+				<% dm = DirectMessage.find_by(id: e.room.direct_message_ids.last) %>
+        <%= truncate(dm ? dm.message_content : "", length: 10) %>
+      </td>
+      <td>
+        <h6 style="color: #C0C0C0;"><%= e.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
+      </td>
+			<td>
+				<!-- ゴミ箱アイコンクリックでroomを消せるようにする -->
+				<%= link_to room_path(e.room.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, title: "削除" do %>
+					<i class="fas fa-trash" style="color: black;"></i>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+<% end %>

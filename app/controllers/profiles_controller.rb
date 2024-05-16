@@ -1,7 +1,28 @@
 class ProfilesController < ApplicationController
-  before_action :set_user, only: %i[edit update]
+  before_action :set_user, only: %i[show edit update]
   
-  def show; end
+  def show
+    if logged_in?
+      @currentUserEntry = Entry.where(user_id: current_user.id)
+      @userEntry = Entry.where(user_id: @user.id)
+
+      unless @user.id == current_user.id
+        @currentUserEntry.each do |cu|
+          @userEntry.each do |u|
+            if cu.room_id == u.room_id
+              @isRoom = true
+              @roomId = cu.room_id
+            end
+          end
+        end
+
+        unless @isRoom
+          @room = Room.new
+          @entry = Entry.new
+        end
+      end
+    end
+  end
 
   def edit; end
 
@@ -21,7 +42,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_user
-    @user = User.find(current_user.id)
+    @user = User.find(params[:user_id] || current_user.id)
   end
 
 end
