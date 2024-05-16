@@ -5,13 +5,13 @@
 			<td>
 				<!-- 名前からroomの詳細に飛べるようにリンク化 -->
 				<%= link_to room_path(e.room.id) do %>
-					<%= image_tag(e.user.avatar? ? e.user.avatar.url : 'avatar.png', size: "30x30", class: "rounded-circle", alt: "Profile Image") %>
+					<%= image_tag(e.user.avatar? ? e.user.avatar.url : 'avatar.png', class: "rounded-full w-8 h-8 object-cover", alt: "Profile Image") %>
 					<%= e.user.name %>
 				<% end %>
 			</td>
-			<td>
-				<!-- 最新メッセージ内容の最初の7文字を表示する -->
-				<% dm = DirectMessage.find_by(id: e.room.direct_message_ids.last) %>
+			<td class="latest-message">
+        <!-- 最新メッセージ内容の最初の10文字を表示する -->
+        <% dm = DirectMessage.find_by(id: e.room.direct_message_ids.last) %>
         <%= truncate(dm ? dm.message_content : "", length: 10) %>
       </td>
       <td>

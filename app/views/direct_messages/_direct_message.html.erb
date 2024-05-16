@@ -1,6 +1,6 @@
 <div class="direct_message" data-message-id="<%= direct_message.id %>" data-user-id="<%= direct_message.user.id %>">
   <p class="message_<%= direct_message.id %>" style="color: white; margin-top: 0;">
-  <%= image_tag(direct_message.user.avatar.url, class: "profile-img-circle", size: "40x40") if direct_message.user.avatar? %>
+  <%= image_tag(direct_message.user.avatar.url, class: "profile-img-circle rounded-full w-10 h-10 object-cover") %>
   <p class="user_name"><%= direct_message.user.name %></p>
   </p>
   <p class="message_<%= direct_message.id %>">

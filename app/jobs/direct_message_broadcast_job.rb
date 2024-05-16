@@ -6,7 +6,10 @@ class DirectMessageBroadcastJob < ApplicationJob
       "room_channel_#{direct_message.room_id}",
       {
         direct_message: render_direct_message(direct_message),
-        user_image_url: direct_message.user.avatar.url
+        user_image_url: direct_message.user.avatar.url,
+        latest_message: {
+          message_content: direct_message.message_content
+        }
       }
     )
   end
