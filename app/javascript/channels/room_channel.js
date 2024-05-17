@@ -23,6 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('turbo:load', () => {
     applyMessageStyles();
 
+    // チャットルームへの遷移で通知をクリア
+    if (window.location.pathname.includes('/rooms/') && window.location.pathname.length > '/rooms/'.length) {
+      const roomId = window.location.pathname.split('/rooms/')[1];
+      const notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
+      if (notifyIcon) {
+        notifyIcon.style.display = 'none';
+      }
+    }
+
     const roomElement = document.getElementById('room_id');
     if (roomElement) {
       const roomId = roomElement.dataset.room_id;
@@ -65,6 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    document.querySelectorAll('a[data-room-link="true"]').forEach(link => {
+      link.addEventListener('click', () => {
+        const roomId = link.dataset.roomId;
+        const notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
+        if (notifyIcon) {
+          notifyIcon.style.display = 'none';
+        }
+      });
+    });
+
     // index.html.erb
     document.querySelectorAll('[id^="room_"]').forEach(element => {
       let roomId = element.id.split('_')[1];
@@ -74,6 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
           let roomElement = document.querySelector(`#room_${roomId} .latest-message`);
           if (roomElement && data.latest_message) {
             roomElement.textContent = data.latest_message.message_content;
+            
+            // 通知アイコン
+            let notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
+            if (notifyIcon) {
+              notifyIcon.style.display = 'inline';
+            }
           }
         }
       });
