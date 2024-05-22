@@ -54,20 +54,47 @@ document.addEventListener('DOMContentLoaded', () => {
           const messageId = parsedHtml.querySelector('.direct_message').dataset.messageId;
         
           if (!document.querySelector(`[data-message-id="${messageId}"]`)) {
-            const userName = parsedHtml.querySelector('.user_name').textContent;
-            const messageContent = parsedHtml.querySelector('.dm_content').textContent;
-            const messageTime = parsedHtml.querySelector('h7[style]').textContent;
+            const userNameElement = parsedHtml.querySelector('.user_name');
+            const messageContentElement = parsedHtml.querySelector('.dm_content');
+            const messageTimeElement = parsedHtml.querySelector('.message_time'); // クラス名を修正
+            const userImage = data.user_image_url;
         
-            const messages = document.getElementById('messages');
-            if (messages) {
-              const messageElement = `
-                <div data-message-id="${messageId}" class="direct_message" style="text-align: ${userName === "自分のユーザー名" ? 'right' : 'left'}">
-                  <p class="user_name">${userName}</p>
-                  <p class="dm_content">${messageContent}</p>
-                  <p class="message_time" style="color: #C0C0C0;">${messageTime}</p>
+            if (userNameElement && messageContentElement && messageTimeElement) {
+              const userName = userNameElement.textContent;
+              const messageContent = messageContentElement.textContent;
+              const messageTime = messageTimeElement.textContent;
+              const currentUserId = document.body.getAttribute('data-current-user-id');
+              const userId = parsedHtml.querySelector('.direct_message').dataset.userId;
+              const isCurrentUser = userId === currentUserId;
+        
+              const messages = document.getElementById('messages');
+              if (messages) {
+                const messageElement = `
+                <div data-message-id="${messageId}" class="direct_message flex ${isCurrentUser ? 'justify-end' : 'justify-start'} items-start my-2">
+                  <div class="${isCurrentUser ? 'bubble-right bg-blue-300' : 'bubble-left bg-green-200'} flex items-center max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl px-4 py-2 rounded-lg">
+                    ${isCurrentUser ? 
+                      `<div class="flex flex-col mr-4">
+                          <p class="whitespace-pre-line break-words dm_content mt-6">${messageContent}</p>
+                          <p class="text-xs text-right text-gray-500 message_time mt-2">${messageTime}</p>
+                      </div>
+                      <div class="flex flex-col items-end">
+                          <p class="text-sm text-gray-500 user_name">${userName}</p>
+                          <img src="${userImage}" class="rounded-full w-10 h-10 object-cover mt-1">
+                      </div>` :
+                      `<div class="flex flex-col items-start">
+                          <p class="text-sm text-gray-500 user_name">${userName}</p>
+                          <img src="${userImage}" class="rounded-full w-10 h-10 object-cover mt-1">
+                      </div>
+                      <div class="flex flex-col ml-4">
+                          <p class="whitespace-pre-line break-words dm_content mt-6">${messageContent}</p>
+                          <p class="text-xs text-right text-gray-500 message_time mt-2">${messageTime}</p>
+                      </div>`
+                    }
+                  </div>
                 </div>`;
-              messages.insertAdjacentHTML('beforeend', messageElement);
-              applyMessageStyles();
+                messages.insertAdjacentHTML('beforeend', messageElement);
+                applyMessageStyles();
+              }
             }
           }
         }
