@@ -8,7 +8,8 @@ class DirectMessageBroadcastJob < ApplicationJob
         direct_message: render_direct_message(direct_message),
         user_image_url: direct_message.user.avatar.url,
         latest_message: {
-          message_content: direct_message.message_content
+          message_content: direct_message.message_content,
+          user_image_url: direct_message.user.avatar.url
         }
       }
     )
