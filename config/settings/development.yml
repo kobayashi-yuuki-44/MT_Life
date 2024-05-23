@@ -3,3 +3,4 @@ default_url_options:
 
 sorcery:
   google_callback_url: 'http://localhost:3000/oauth/callback?provider=google'
+  #line_callback_url: 'https://localhost:3000/oauth/callback?provider=line'

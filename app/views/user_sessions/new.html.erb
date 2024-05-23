@@ -16,5 +16,6 @@
     </div>
   <% end %>
   <%= link_to 'Googleログイン', auth_at_provider_path(provider: :google), method: :get, data: { turbo: false }, class: 'bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
+  <%= link_to 'LINEログイン', auth_at_provider_path(provider: :line), class: 'font-yuji-syuku bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
   <%= link_to t('.password_forget'), new_password_reset_path, class: 'bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
 </div>

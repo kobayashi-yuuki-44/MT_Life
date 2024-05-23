@@ -80,7 +80,7 @@ Rails.application.config.sorcery.configure do |config|
   # i.e. [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid, :salesforce, :slack, :line].
   # Default: `[]`
   #
-  config.external_providers = %i[google]
+  config.external_providers = %i[google line]
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
@@ -161,8 +161,8 @@ Rails.application.config.sorcery.configure do |config|
   config.google.key = Rails.application.credentials.dig(:google, :google_client_id)
   config.google.secret = Rails.application.credentials.dig(:google, :google_client_secret)
   config.google.callback_url = Settings.sorcery[:google_callback_url]
-  config.google.user_info_mapping = {email: "email", name: "name"}
-  # config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+  config.google.user_info_mapping = {email: "email", name: "name", avatar: "picture"}
+  config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
   #
   # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
   # The callback URL "can't contain a query string or invalid special characters"
@@ -219,12 +219,12 @@ Rails.application.config.sorcery.configure do |config|
   # config.salesforce.scope = "full"
   # config.salesforce.user_info_mapping = {:email => "email"}
 
-  # config.line.key = ""
-  # config.line.secret = ""
-  # config.line.callback_url = "http://mydomain.com:3000/oauth/callback?provider=line"
-  # config.line.scope = "profile"
+  config.line.key = Rails.application.credentials.dig(:line, :channel_id)
+  config.line.secret = Rails.application.credentials.dig(:line, :channel_secret)
+  config.line.callback_url = Settings.sorcery[:line_callback_url]
+  config.line.scope = "profile openid email"
   # config.line.bot_prompt = "normal"
-  # config.line.user_info_mapping = {name: 'displayName'}
+  config.line.user_info_mapping = {name: 'displayName', email: 'userId', avatar: 'pictureUrl'}
 
   
   # For information about Discord API

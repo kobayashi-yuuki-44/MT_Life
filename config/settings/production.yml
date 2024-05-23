@@ -1,2 +1,3 @@
 sorcery:
   google_callback_url: 'https://mt-life.fly.dev/oauth/callback?provider=google'
+  line_callback_url: 'https://mt-life.fly.dev/oauth/callback?provider=line'
