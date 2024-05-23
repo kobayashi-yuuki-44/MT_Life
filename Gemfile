@@ -53,6 +53,10 @@ gem "aws-sdk-s3", require: false
 
 gem "redis"
 
+gem "omniauth-line"
+
+gem "omniauth-rails_csrf_protection"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
