@@ -1,0 +1,6 @@
+message_job:
+  cron: "15 9 * * *"
+  class: "MessageJob"
+  queue: default
+  description: "毎日15:40にメッセージを送信"
+  tz: "Asia/Tokyo"

@@ -30,6 +30,25 @@
           <th scope="row">アバター</th>
           <td><%= image_tag @user.avatar.url, class: "rounded-full w-10 h-10 object-cover" %></td>
         </tr>
+        <!-- LINE通知設定表示部分をテーブルに組み込む -->
+        <% if @user == current_user %>
+          <tr>
+            <th scope="row">LINE通知設定</th>
+            <td>
+              <% if @user.authentications.exists?(provider: 'line') %>
+                <div class="alert alert-info">
+                  LINE通知は設定済みです。
+                  <!-- 通知設定管理のリンクやフォームをここに配置 -->
+                </div>
+              <% else %>
+                <div class="alert alert-warning">
+                  LINE通知を受け取るには、先にLINEでログインする必要があります。
+                  <%= link_to 'LINEでログイン', auth_at_provider_path(provider: :line), class: 'btn btn-primary' %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       </table>
     </div>
   </div>

@@ -26,6 +26,9 @@ Rails.application.routes.draw do
 
   get 'home', to: 'action_selection#index', as: :home
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   resources :questions, only: [:index, :show] do
     collection do
       get 'subject'

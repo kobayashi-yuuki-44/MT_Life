@@ -53,9 +53,19 @@ gem "aws-sdk-s3", require: false
 
 gem "redis"
 
+gem "omniauth"
+
 gem "omniauth-line"
 
 gem "omniauth-rails_csrf_protection"
+
+gem "line-bot-api"
+
+gem 'sidekiq'
+
+gem 'sidekiq-cron'
+
+gem 'sinatra', require: false
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

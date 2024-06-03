@@ -219,12 +219,12 @@ Rails.application.config.sorcery.configure do |config|
   # config.salesforce.scope = "full"
   # config.salesforce.user_info_mapping = {:email => "email"}
 
-  config.line.key = Rails.application.credentials.dig(:line, :channel_id)
-  config.line.secret = Rails.application.credentials.dig(:line, :channel_secret)
+  config.line.key = Rails.application.credentials.dig(:line, :login_channel_id)
+  config.line.secret = Rails.application.credentials.dig(:line, :login_channel_secret)
   config.line.callback_url = Settings.sorcery[:line_callback_url]
   config.line.scope = "profile openid email"
-  # config.line.bot_prompt = "normal"
-  config.line.user_info_mapping = {name: 'displayName', email: 'userId', avatar: 'pictureUrl'}
+  config.line.bot_prompt = "aggressive"
+  config.line.user_info_mapping = {name: 'displayName', email: 'userId'}
 
   
   # For information about Discord API
