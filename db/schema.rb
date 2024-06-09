@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_03_000925) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_04_065234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_03_000925) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
+  end
+
+  create_table "diaries", force: :cascade do |t|
+    t.string "diaries_title"
+    t.text "diaries_content"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "start_time"
+    t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
   create_table "direct_messages", force: :cascade do |t|
@@ -162,6 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_03_000925) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "diaries", "users"
   add_foreign_key "direct_messages", "rooms"
   add_foreign_key "direct_messages", "users"
   add_foreign_key "entries", "rooms"

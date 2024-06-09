@@ -6,3 +6,4 @@ import "card";
 import "notebook";
 import "add_page";
 import "channels";
+import "diary";
