@@ -1,0 +1,39 @@
+<%= turbo_frame_tag "calendar_frame", data: { turbo: false } do %>
+  <div class="container mx-auto flex flex-col h-screen font-yuji-syuku">
+
+    <div class="calendar-heading">
+      <time datetime="<%= @date.strftime('%Y-%m') %>" class="calendar-title"><%= @date.strftime('%B %Y') %></time>
+      <nav>
+        <%= link_to '⬅️', calendar_diaries_path(start_date: @date.prev_month.beginning_of_month) %>
+        <%= link_to 'Today', calendar_diaries_path(start_date: Date.today.beginning_of_month) %>
+        <%= link_to '➡️', calendar_diaries_path(start_date: @date.next_month.beginning_of_month) %>
+      </nav>
+    </div>
+
+    <div class="calendar-container flex-grow overflow-y-auto">
+      <%= month_calendar(events: @diaries) do |date, diaries| %>
+        <% if date.month == Date.current.month %>
+          <div class="calendar-date">
+            <span><%= date.strftime('%-d') %></span>
+            <% if diaries.count < 3 %>
+              <button class="btn btn-sm bg-custom-calendar text-white hover:bg-custom-calendar-hover" data-modal-target="#newDiaryModal" data-modal-toggle="newDiaryModal">
+                +
+              </button>
+            <% end %>
+          </div>
+          <div class="calendar-content">
+            <% if diaries.any? %>
+              <%= link_to icon_for_diaries(diaries.count), titles_diaries_path(date: date), class: 'calendar-button' %>
+            <% end %>
+          </div>
+        <% else %>
+          <span><%= date.strftime('%-d') %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  
+  <%= turbo_frame_tag "new_diary_modal_frame", data: { turbo: false } do %>
+    <%= render 'new_diary_modal' %>
+  <% end %>
+<% end %>

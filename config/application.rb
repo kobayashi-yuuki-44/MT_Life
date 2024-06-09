@@ -22,6 +22,7 @@ module MTLife
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
     config.active_job.queue_adapter = :sidekiq
+    config.beginning_of_week = :sunday
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

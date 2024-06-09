@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "calendar_frame" do %>
+  <div class="container mx-auto p-6 font-yuji-syuku text-custom-text2">
+    <h1 class="text-3xl font-bold mb-6">日記を編集</h1>
+    <%= form_with(model: @diary, local: true, class: 'space-y-6', data: { turbo: false }) do |form| %>
+      <div class="form-control">
+        <%= form.label :diaries_title, "タイトル", class: 'label' %>
+        <%= form.text_field :diaries_title, class: 'input input-bordered w-full' %>
+      </div>
+      <div class="form-control">
+        <%= form.label :diaries_content, "内容", class: 'label' %>
+        <%= form.text_area :diaries_content, class: 'textarea textarea-bordered w-full', rows: 10 %>
+      </div>
+      <%= form.submit '更新', class: 'btn bg-custom-edit text-custom-text2 hover:bg-custom-edit-hover', data: { turbo: false } %>
+    <% end %>
+  </div>
+<% end %>

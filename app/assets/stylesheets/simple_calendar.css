@@ -1,0 +1,133 @@
+.simple-calendar {
+  table {
+    -webkit-border-horizontal-spacing: 0px;
+    -webkit-border-vertical-spacing: 0px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgb(221, 221, 221);
+    border-collapse: collapse;
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  tr {
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 6px;
+    border-bottom: 2px solid rgb(221, 221, 221);
+    border-collapse: collapse;
+    border-left: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+    border-top: 0px none rgb(51, 51, 51);
+    box-sizing: border-box;
+    text-align: left;
+    color: #26323d;
+    background: #e9d4cf;
+  }
+
+  td {
+    padding: 6px;
+    vertical-align: top;
+    width: 14%;
+    border: 1px solid #ddd;
+    border-top-color: rgb(221, 221, 221);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(221, 221, 221);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(221, 221, 221);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(221, 221, 221);
+    border-left-style: solid;
+    border-left-width: 1px;
+  }
+
+  .day {
+    height: 80px;
+    position: relative;
+    vertical-align: top;
+  }
+
+  .wday-0 {
+    color: #fd607f;
+  }
+
+  .wday-6 {
+    color: #2fa1e3;
+  }
+
+  .today {
+    background: #ffe0c0 !important;
+  }
+
+  .prev-month {
+    background: #DDD;
+  }
+  .next-month {
+    background: #DDD;
+  }
+  .current-month {
+    background-color: #f9f9f9;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.calendar-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 30px; /* ボタン・日付の高さを固定 */
+}
+
+.calendar-date span {
+  display: block;
+  width: 100%;
+  text-align: left; /* 日付を左揃え */
+  padding: 0.25rem;
+}
+
+.calendar-content {
+  overflow-y: auto;
+  margin-top: 0.25rem;
+}
+
+.calendar-button {
+  display: block;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.calendar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.calendar-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  color: #b55677;
+}
+
+.calendar-heading nav a {
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: #ef707f;
+}
+
+.calendar-heading nav a:hover {
+  text-decoration: underline;
+}
+
+.simple-calendar .calendar-heading {
+  display: none;
+}

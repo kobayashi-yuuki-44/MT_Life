@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :direct_messages
   has_many :rooms, through: :entries
+  has_many :diaries, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }

@@ -62,7 +62,12 @@ Rails.application.routes.draw do
   
   resources :posts, only: [:index, :new, :create]
   
-  get 'diaries', to: 'diaries#index'
+  resources :diaries do
+    collection do
+      get 'calendar'
+      get 'titles', to: 'diaries#index', as: 'titles'
+    end
+  end
 
   get 'terms', to: 'static_pages#terms'
   get 'privacy', to: 'static_pages#privacy'

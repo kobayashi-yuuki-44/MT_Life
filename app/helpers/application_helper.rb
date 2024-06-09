@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def flash_class(type)
-    base_classes = "font-yuji-syuku p-4 mb-6 text-white text-lg"
+    base_classes = "font-yuji-syuku p-4 text-white text-lg"
     color_class = case type
                   when 'notice' then 'bg-blue-500'
                   when 'success' then 'bg-green-500'

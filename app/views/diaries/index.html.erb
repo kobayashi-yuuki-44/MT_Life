@@ -1,2 +1,28 @@
-<h1>Diaries#index</h1>
-<p>Find me in app/views/diaries/index.html.erb</p>
+<%= turbo_frame_tag "calendar_frame" do %>
+  <div class="container mx-auto p-6 font-yuji-syuku text-custom-text2">
+    <div class="flex justify-between items-center mb-6 relative z-10">
+      <h1 class="text-xl font-bold"><%= @date.present? ? @date.strftime('%Y年 %m月 %d日') : '日記タイトル一覧' %></h1>
+      <%= link_to '📅', calendar_diaries_path, data: { turbo: false }, class: 'bg-custom-calendar text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-custom-calendar-hover transition duration-300' %>
+    </div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="w-full max-w-2xl">
+        <% if @diaries.any? %>
+          <ul class="space-y-4">
+            <% @diaries.each_with_index do |diary, index| %>
+              <li id="<%= dom_id(diary) %>" class="bg-gray-100 border p-4 rounded-lg shadow-sm flex justify-between items-center">
+                <%= link_to "#{icon_for_diary(index, @diaries.count)} #{diary.diaries_title}", diary_path(diary), data: { turbo: false }, class: 'text-lg font-semibold text-custom-diary-title hover:underline' %>
+                
+                <%= form_with url: diary_path(diary), method: :delete, data: { turbo: false, confirm: 'この日記を削除してもよろしいですか？' }, class: 'inline' do %>
+                  <%= submit_tag '削除', class: 'btn bg-custom-delete hover:bg-custom-delete-hover text-custom-text2' %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-lg text-gray-600 text-center">日記はありません</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+<%= turbo_frame_tag "calendar_frame" do %>
+  <div class="container mx-auto p-6 font-yuji-syuku text-custom-text2">
+    <div class="flex justify-between items-center mb-6">
+      <p class="text-xl font-bold"><%= @diary.start_time.strftime("%Y年%m月%d日") %></p>
+      <%= link_to '📅', calendar_diaries_path, data: { turbo: false }, class: 'bg-custom-calendar text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-custom-calendar-hover transition duration-300' %>
+    </div>
+
+    <div class="text-center mb-6">
+      <h1 class="text-2xl text-custom-diary-content2 font-bold mb-2">&lt; <%= @diary.diaries_title %> &gt;</h1>
+    </div>
+
+    <hr class="border-t-2 border-gray-300 my-6">
+    
+    <div class="bg-custom-diary-content p-6 rounded-lg max-h-96 overflow-y-auto h-96">
+      <p class="text-lg text-custom-diary-content2 whitespace-pre-line"><%= @diary.diaries_content %></p>
+    </div>
+    <div class="flex justify-center space-x-4 mt-6">
+      <%= link_to '編集', edit_diary_path(@diary), data: { turbo: false }, class: 'bg-custom-edit py-2 px-4 rounded-lg shadow hover:bg-custom-edit-hover transition duration-300' %>
+      <%= link_to '一覧', diaries_path(date: @diary.start_time.to_date), data: { turbo: false }, class: 'bg-custom-index font-semibold py-2 px-4 rounded-lg shadow hover:bg-custom-index-hover transition duration-300' %>
+      
+      
+      <%= form_with(url: diary_path(@diary), method: :delete, data: { turbo: false, confirm: 'この日記を削除してもよろしいですか？' }, class: 'inline', local: true) do %>
+        <%= submit_tag '削除', class: 'bg-custom-delete font-semibold py-2 px-4 rounded-lg shadow hover:bg-custom-delete-hover transition duration-300' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
