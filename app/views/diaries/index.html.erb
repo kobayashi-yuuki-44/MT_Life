@@ -14,7 +14,7 @@
                 <%= link_to "#{icon_for_diary(index, @diaries.count)} #{diary.diaries_title}", diary_path(diary), data: { turbo: false }, class: 'text-lg font-semibold text-custom-diary-title hover:underline' %>
                 
                 <%= form_with url: diary_path(diary), method: :delete, data: { turbo: false, confirm: 'この日記を削除してもよろしいですか？' }, class: 'inline' do %>
-                  <%= submit_tag '削除', class: 'btn bg-custom-delete hover:bg-custom-delete-hover text-custom-text2' %>
+                  <%= submit_tag '削除', class: 'btn bg-custom-delete1 hover:bg-custom-delete-hover1 text-custom-text2' %>
                 <% end %>
               </li>
             <% end %>

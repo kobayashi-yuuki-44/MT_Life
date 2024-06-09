@@ -1,11 +1,8 @@
-<%= content_for :title, t('.title') %>
+<%= content_for :title, "投稿履歴" %>
 <div class="container mx-auto p-3 font-yuji-syuku">
-  <h1 class="text-3xl font-bold text-center my-8">投稿一覧</h1>
+  <h1 class="text-3xl font-bold text-center my-8">投稿履歴</h1>
   <div class="flex justify-start mb-10 gap-10">
     <%= link_to '📝', new_post_path, class: "bg-custom-post-edit hover:bg-custom-post-edit-hover text-custom-text3 rounded-lg py-2 px-6 flex items-center justify-center text-3xl" %>
-    <% if @has_post_history %>
-      <%= link_to '履歴', history_posts_path, class: "bg-custom-button-purple px-4 flex items-center justify-center rounded-lg hover:bg-custom-hover-lightblue text-custom-text-darkreddishpurple text-lg" %>
-    <% end %>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
     <% @posts.each do |post| %>
@@ -26,6 +23,10 @@
             <p class="text-gray-800 text-base mb-2  whitespace-pre-line"><%= post.post_content %></p>
           </div>
           <span class="text-gray-600 text-sm block">投稿日: <%= post.created_at.strftime("%Y/%m/%d") %></span>
+          <div class="mt-4 flex justify-end space-x-2">
+            <%= link_to '編集', edit_post_path(post), class: "bg-custom-post-edit hover:bg-custom-post-edit-hover text-custom-text3 rounded-lg py-2 px-4" %>
+            <%= link_to '削除', post_path(post), method: :delete, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: "bg-custom-post-delete hover:bg-custom-post-delete-hover text-custom-text4 rounded-lg py-2 px-4 rounded" %>
+          </div>
         </div>
       </div>
     <% end %>
