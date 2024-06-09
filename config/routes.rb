@@ -60,8 +60,12 @@ Rails.application.routes.draw do
     resources :words
   end
   
-  resources :posts, only: [:index, :new, :create]
-  
+  resources :posts, only: [:index, :new, :create, :edit, :update, :destroy] do
+    collection do
+      get 'history', to: 'posts#history', as: 'history'
+    end
+  end
+
   resources :diaries do
     collection do
       get 'calendar'

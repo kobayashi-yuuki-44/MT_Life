@@ -1,15 +1,17 @@
 <%= content_for :title, t('.title') %>
-<div class="container mx-auto mt-8 font-yuji-syuku">
-  <h1 class="text-2xl font-bold text-center mb-6">新しい投稿</h1>
-  <%= form_with model: @post, local: true do |form| %>
-    <div class="max-w-xl mx-auto shadow-lg rounded-lg p-6 bg-white">
-      <div class="mb-4">
-        <%= form.label :post_content, "内容", class: "block text-sm font-medium text-gray-700 mb-2" %>
-        <%= form.text_area :post_content, required: true, class: "textarea textarea-bordered h-24 w-full" %>
+<div class="absolute inset-0 flex items-center justify-center">
+  <div class="container mx-auto mt-8 font-yuji-syuku">
+    <h1 class="text-2xl font-bold text-center mb-6">新規投稿</h1>
+    <%= form_with model: @post, local: true do |form| %>
+      <div class="max-w-xl mx-auto shadow-lg rounded-lg p-6 bg-white">
+        <div class="mb-4">
+          <%= form.label :post_content, "内容", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= form.text_area :post_content, required: true, class: "bg-custom-post form-textarea mt-1 block textarea textarea-bordered h-48 w-full" %>
+        </div>
+        <div class="flex justify-end mt-4">
+          <%= form.submit "📝投稿", class: "bg-custom-post-edit hover:bg-custom-post-edit-hover text-custom-text3 flex items-center justify-center btn text-base" %>
+        </div>
       </div>
-      <div class="flex justify-end mt-4">
-        <%= form.submit "投稿", class: "bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

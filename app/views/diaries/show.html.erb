@@ -15,12 +15,12 @@
       <p class="text-lg text-custom-diary-content2 whitespace-pre-line"><%= @diary.diaries_content %></p>
     </div>
     <div class="flex justify-center space-x-4 mt-6">
-      <%= link_to '編集', edit_diary_path(@diary), data: { turbo: false }, class: 'bg-custom-edit py-2 px-4 rounded-lg shadow hover:bg-custom-edit-hover transition duration-300' %>
+      <%= link_to '編集', edit_diary_path(@diary), data: { turbo: false }, class: 'bg-custom-button-purple py-2 px-4 rounded-lg shadow hover:bg-custom-hover-lightblue transition duration-300' %>
       <%= link_to '一覧', diaries_path(date: @diary.start_time.to_date), data: { turbo: false }, class: 'bg-custom-index font-semibold py-2 px-4 rounded-lg shadow hover:bg-custom-index-hover transition duration-300' %>
       
       
       <%= form_with(url: diary_path(@diary), method: :delete, data: { turbo: false, confirm: 'この日記を削除してもよろしいですか？' }, class: 'inline', local: true) do %>
-        <%= submit_tag '削除', class: 'bg-custom-delete font-semibold py-2 px-4 rounded-lg shadow hover:bg-custom-delete-hover transition duration-300' %>
+        <%= submit_tag '削除', class: 'bg-custom-delete1 font-semibold py-2 px-4 rounded-lg shadow hover:bg-custom-delete-hover1 transition duration-300' %>
       <% end %>
     </div>
   </div>
