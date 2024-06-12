@@ -4,6 +4,6 @@ import "controllers";
 import "toggle_memo";
 import "card";
 import "notebook";
-import "add_page";
 import "channels";
 import "diary";
+import "interactjs";

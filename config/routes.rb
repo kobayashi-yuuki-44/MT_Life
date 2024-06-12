@@ -46,9 +46,10 @@ Rails.application.routes.draw do
   get 'show_year/:year', to: 'questions#show_year', as: :show_year_questions
 
   resources :notebooks do
-    resources :pages, param: :page_number do
+    resources :pages do
       member do
         patch 'save_content'
+        post 'upload_image'
       end
     end
   end

@@ -1,4 +1,9 @@
 <% content_for(:title, t('.title')) %>
-<div class="notebook-wrapper p-20 min-h-screen shadow font-yuji-syuku">
-  <%= render 'pages/page_content', page: @first_page %>
+<div class="notebook-wrapper p-20 font-yuji-syuku">
+  <div class="text-center mb-6">
+    <h1 class="text-2xl text-custom-notebook-text font-bold mb-2">&lt; <%= @notebook.title %> &gt;</h1>
+  </div>
+  <hr class="border-t-2 border-gray-300 my-6">
+  <%= render 'pages/page_content', page: @page %>
 </div>
+

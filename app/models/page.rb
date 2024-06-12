@@ -1,17 +1,12 @@
 class Page < ApplicationRecord
+  belongs_to :notebook
+  has_many_attached :images
+
   before_save :sanitize_content
   
-  belongs_to :notebook
-
-  validates :page_number, presence: true
-
-  def next_page
-    notebook.pages.where("page_number > ?", page_number).order(:page_number).first
-  end
-
   private
   
   def sanitize_content
-    self.page_content = ActionController::Base.helpers.sanitize(self.page_content)
+    self.page_content = ActionController::Base.helpers.sanitize(self.page_content, tags: %w(p br strong em a img div), attributes: %w(src alt href style))
   end
 end

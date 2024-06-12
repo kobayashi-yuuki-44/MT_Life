@@ -1,54 +1,38 @@
 class PagesController < ApplicationController
-  before_action :set_notebook, only: [:create, :save_content]
+  before_action :set_notebook, only: [:new, :create, :show, :save_content, :upload_image]
 
   def new
     @page = @notebook.pages.new
   end
 
   def create
-    page = @notebook.pages.find_by(page_number: page_params[:page_number])
-
-    if page.present?
-      render json: { id: page.id, notebook_id: @notebook.id, page_number: page.page_number }, status: :ok
+    @page = @notebook.pages.new(page_params)
+    if @page.save
+      redirect_to notebook_path(@notebook), notice: 'ページが作成されました。'
     else
-      last_page_number = @notebook.pages.maximum(:page_number) || 0
-      return render json: { error: 'ページの上限に達しました。' }, status: :forbidden if last_page_number >= 10
-
-      @page = @notebook.pages.new(page_params)
-
-      if @page.save
-        render json: { id: @page.id, notebook_id: @notebook.id, page_number: @page.page_number }, status: :created
-      else
-        render json: @page.errors, status: :unprocessable_entity
-      end
+      render :new
     end
   end
 
   def show
-    @notebook = current_user.notebooks.find(params[:notebook_id])
-    @page = @notebook.pages.find_by(page_number: params[:page_number])
-
-    unless @page
-      flash[:alert] = "ページが見つかりません。"
-      respond_to do |format|
-        format.html { redirect_to notebook_path(@notebook) }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            "page_content",
-            partial: "path/to/an_error_partial",
-            locals: { notebook: @notebook }
-          )
-        end
-      end
-    end
+    @page = @notebook.pages.first
   end
 
   def save_content
-    @page = @notebook.pages.find_by(id: params[:id])
-    if @page && @page.update(page_content: params[:page][:content])
+    @page = @notebook.pages.first
+    if @page.update(page_content: params[:page][:content])
       render json: { status: 'success' }, status: :ok
     else
       render json: { errors: @page.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def upload_image
+    @page = @notebook.pages.find(params[:page_id])
+    if @page.images.attach(params[:image])
+      render json: { url: url_for(@page.images.last) }, status: :ok
+    else
+      render json: { error: '画像のアップロードに失敗しました。' }, status: :unprocessable_entity
     end
   end
 
@@ -59,6 +43,6 @@ class PagesController < ApplicationController
   end
 
   def page_params
-    params.require(:page).permit(:page_content, :page_number)
+    params.require(:page).permit(:page_content)
   end
 end
