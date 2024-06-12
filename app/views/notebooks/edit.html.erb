@@ -1,16 +1,15 @@
-<% content_for(:title, t('.title')) %>
+<% content_for(:title, "ノート編集") %>
 <div class="absolute inset-0 flex items-center justify-center">
   <div class="container mx-auto mt-8 font-yuji-syuku">
-    <h1 class="text-2xl text-center mb-6">ノート作成</h1>
+    <h1 class="text-2xl text-center mb-6">ノート編集</h1>
     <%= form_with(model: [@notebook], local: true) do |form| %>
       <div class="max-w-xl mx-auto shadow-lg rounded-lg p-6 bg-white"> 
-        <%= form.label :title, "タイトル", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.label :title, "タイトル", class: "block text-sm font-medium text-gray-800" %>
         <%= form.text_field :title, required: true, class: "bg-custom-notebook-gradient text-custom-notebook-text input input-bordered w-full h-12 px-4 mt-6 block w-full shadow-sm text-lg border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
         <div class="flex justify-end mt-4">
-          <%= form.submit "作成", class: "bg-custom-notebook-green hover:bg-hover-button3 text-custom-notebook-text flex items-center justify-center btn text-base" %>
+          <%= form.submit "更新", class: "bg-custom-notebook-edit hover:bg-custom-notebook-edit-hover text-custom-notebook-text flex items-center justify-center btn text-base" %>
         </div>
       </div>
     <% end %>
-    </div>
   </div>
 </div>

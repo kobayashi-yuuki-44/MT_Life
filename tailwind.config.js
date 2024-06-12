@@ -41,6 +41,21 @@ module.exports = {
         'custom-post-delete-hover': '#ca2a20',
         'custom-text-darkreddishpurple': '#492230',
         'custom-post-history': '#784a68',
+        'custom-notebook-green': '#8cae87',
+        
+        'custom-notebook-text': '#2b4719',
+        
+        'custom-page-green': '#fbfcf9',
+        'custom-notebook-orange': '#fcf3ee',
+        'custom-notebook-edit': '#a8b64d',
+        'custom-notebook-delete': '#c6045e',
+        'hover-button3': '#65c5bf',
+        'custom-notebook-edit-hover': '#52dad1',
+        'custom-notebook-delete-hover': '#fc05f6',
+        'custom-notebook-text-hover': '#78c780',
+      },
+      backgroundImage: {
+        'custom-notebook-gradient': 'linear-gradient(to right, #fce1d2, #fcf3ee)', // グラデーションの色を指定
       },
       fontFamily: {
         caveat: ['Caveat', 'cursive'],

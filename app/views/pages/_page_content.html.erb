@@ -1,6 +1,9 @@
-<div class="note-page bg-white p-20 min-h-[80vh] mx-auto w-[60%] overflow-y-auto shadow-inner focus:shadow-outline" 
+<div class="note-page bg-custom-page-green text-custom-notebook-text p-6 mx-auto max-h-[5000px] overflow-y-auto shadow-inner focus:shadow-outline" 
      data-notebook-id="<%= @notebook.id %>" 
      data-page-id="<%= page.id %>" 
      contenteditable="true">
-  <%= simple_format(page.page_content) %>
+  <%= sanitize(page.page_content, tags: %w(p br strong em a img div), attributes: %w(src alt href style)) %>
+</div>
+<div class="mt-6">
+  <input type="file" id="imageUpload" name="image" accept="image/*">
 </div>
