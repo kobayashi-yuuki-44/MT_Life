@@ -2,7 +2,7 @@ class NotebooksController < ApplicationController
   before_action :set_notebook, only: [:show, :edit, :update, :destroy]
 
   def index
-    @notebooks = current_user.notebooks.order(:created_at)
+    @notebooks = current_user.notebooks.order(created_at: :desc)
   end
 
   def new

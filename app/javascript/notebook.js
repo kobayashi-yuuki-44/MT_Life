@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   setupPageContentSave();
+  setupImageUpload();
   initializeImages();
 });
 
@@ -9,6 +10,8 @@ document.addEventListener('turbo:load', function() {
   initializeImages();
 });
 
+let lastCaretPosition = null;
+
 function setupPageContentSave() {
   const editablePage = document.querySelector('.note-page');
   if (editablePage) {
@@ -17,6 +20,20 @@ function setupPageContentSave() {
       const notebookId = e.target.dataset.notebookId;
       const content = editablePage.innerHTML;
       savePageContent(pageId, notebookId, content);
+    });
+
+    editablePage.addEventListener('click', function(e) {
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        lastCaretPosition = selection.getRangeAt(0);
+      }
+    });
+
+    editablePage.addEventListener('keyup', function(e) {
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        lastCaretPosition = selection.getRangeAt(0);
+      }
     });
   }
 }
@@ -57,7 +74,7 @@ function setupImageUpload() {
   if (imageUpload && editablePage) {
     imageUpload.addEventListener('change', async (event) => {
       const file = event.target.files[0];
-      if (file) {
+      if (file && lastCaretPosition) {
         const formData = new FormData();
         formData.append('image', file);
         formData.append('page_id', editablePage.dataset.pageId);
@@ -83,7 +100,13 @@ function setupImageUpload() {
             img.style.width = '300px';
             img.style.float = 'left';
             img.style.marginRight = '10px';
-            editablePage.appendChild(img);
+
+            if (lastCaretPosition) {
+              lastCaretPosition.insertNode(img);
+              lastCaretPosition.collapse(false); // カーソルを画像の後に移動
+            } else {
+              editablePage.appendChild(img);
+            }
 
             imageUpload.value = '';
 
