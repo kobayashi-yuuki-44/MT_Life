@@ -30,7 +30,7 @@ class PagesController < ApplicationController
   def upload_image
     @page = @notebook.pages.find(params[:page_id])
     if @page.images.attach(params[:image])
-      render json: { url: url_for(@page.images.last) }, status: :ok
+      render json: { url: url_for(@page.images.last), insert_at: params[:insert_at] }, status: :ok
     else
       render json: { error: '画像のアップロードに失敗しました。' }, status: :unprocessable_entity
     end
