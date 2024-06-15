@@ -1,9 +1,104 @@
 <% content_for(:title, t('.title')) %>
-<div class="flex flex-col items-center justify-center h-screen space-y-4 font-yuji-syuku">
-  <%= link_to '過去問を解く', questions_path, class: 'bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
-  <%= link_to 'ノート作成', notebooks_path, class: 'bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
-  <%= link_to '単語帳', wordbooks_path, class: 'bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
-  <%= link_to '投稿', posts_path, class: 'bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
-  <%= link_to 'チャット', rooms_path, class: 'bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
-  <%= link_to '日記', calendar_diaries_path, class: 'bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
+<div class="flex items-center justify-center min-h-screen font-yuji-syuku p-4">
+  <div class="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 w-full max-w-7xl">
+    <!-- 左 -->
+    <div class="flex flex-col space-y-10 p-6 md:p-12 bg-white border border-gray-300 rounded-lg shadow-lg flex-1">
+      <div class="flex items-center justify-center space-x-4">
+        <div class="border-t border-gray-400 w-16"></div>
+        <div class="text-gray-700 font-bold">試験対策</div>
+        <div class="border-t border-gray-400 w-16"></div>
+      </div>
+      <p class="text-center text-gray-700">
+        過去問を解きながらオリジナル解説を作成して<br>
+        理解を深めよう！
+      </p>
+      <div class="flex flex-col space-y-14">
+        <div class="flex items-center space-x-10">
+          <%= link_to '過去問', questions_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+          <div class="relative max-w-xs">
+            <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+              1問に対して、どこまで知識の枝を伸ばしていけるかが重要です。<br>
+              メモを使って情報量を増やそう！
+            </p>
+            <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+            <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-10">
+          <%= link_to 'ノート', notebooks_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+          <div class="relative max-w-xs">
+            <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+              ノートで知識の整理を。<br>
+              試験直前や隙間時間にサッと確認ができる専用ノートも作っておくと時間を有効活用できます。<br>
+              画像挿入も可能なので、画像問題対策にも！
+            </p>
+            <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+            <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-10">
+          <%= link_to '単語帳', wordbooks_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+          <div class="relative max-w-xs">
+            <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+              科目別に分けて、専門用語を学習できます。<br>
+              専門用語以外にも、理解したい内容を記録しておくと頭に入りやすいです。<br>
+              移動中の隙間時間にも便利！
+            </p>
+            <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+            <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 右 -->
+    <div class="flex flex-col space-y-10 p-6 md:p-12 bg-white border border-gray-300 rounded-lg shadow-lg flex-1">
+      <div class="flex items-center justify-center space-x-4">
+        <div class="border-t border-gray-400 w-16"></div>
+        <div class="text-gray-700 font-bold">休憩</div>
+        <div class="border-t border-gray-400 w-16"></div>
+      </div>
+      <p class="text-center text-gray-700">
+        不安・焦り・プレッシャーなどは溜め込まない方が<br>
+        学習効率もup!<br>
+      </p>
+      <div class="flex flex-col space-y-14">
+        <div class="flex items-center space-x-10">
+          <%= link_to '投稿', posts_path, class: 'btn bg-custom-home-button-pink text-custom-home-text-brown hover:bg-custom-home-button-hover-pink' %>
+          <div class="relative max-w-xs">
+            <p class="text-gray-700 text-sm bg-custom-home-pink border border-gray-300 rounded-lg p-4 shadow-lg">
+              ここだけ共有スペースです。<br>
+              呟きたくなったらここに！<br>
+              マナーは守りましょう。
+            </p>
+            <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+            <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-pink"></div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-10">
+          <%= link_to '連絡', rooms_path, class: 'btn bg-custom-home-button-pink text-custom-home-text-brown hover:bg-custom-home-button-hover-pink' %>
+          <div class="relative max-w-xs">
+            <p class="text-gray-700 text-sm bg-custom-home-pink border border-gray-300 rounded-lg p-4 shadow-lg">
+              個人でお話ができます。<br>
+              励まし合いながら、試験に向けて切磋琢磨していきましょう。
+            </p>
+            <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+            <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-pink"></div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-10">
+          <%= link_to '日記', calendar_diaries_path, class: 'btn bg-custom-home-button-pink text-custom-home-text-brown hover:bg-custom-home-button-hover-pink' %>
+          <div class="relative max-w-xs">
+            <p class="text-gray-700 text-sm bg-custom-home-pink border border-gray-300 rounded-lg p-4 shadow-lg">
+              自分だけの秘密日記。<br>
+              1日3つまで日記を作成できます。<br>
+              文章の長さは気にせず、自由に書いてみてください。
+            </p>
+            <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+            <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-pink"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
