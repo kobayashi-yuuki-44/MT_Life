@@ -1,7 +1,7 @@
 <% content_for(:title, t('.title')) %>
 <div class="container mx-auto px-4 font-yuji-syuku">
-  <div class="text-center my-6">
-    <%= image_tag('title.png', alt: 'MT*Life Logo', class: 'h-auto w-50 mx-auto') %>
+  <div class="text-center">
+    <%= image_tag('ogp.png', alt: 'MT*Life Logo', class: 'h-auto mx-auto', style: 'width: 450px;') %>
   </div>
   <div class="flex flex-wrap justify-center -mx-2">
     <div class="w-full px-2 mb-4 relative"
@@ -33,8 +33,8 @@
   </div>
   <div class="text-center mt-32">
     <div class="inline-flex justify-center gap-28 mb-20">
-      <%= link_to 'START!', new_user_path, class: 'font-caveat bg-custom-button-1 hover:bg-hover-button-1 text-custom-text btn text-xl' %>
-      <%= link_to 'Log in', login_path, class: 'font-caveat bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl' %>
+      <%= link_to 'Start !', new_user_path, class: 'font-caveat bg-custom-top-button-orange text-custom-top-text-brown hover:bg-custom-top-button-hover-orange text-2xl py-4 px-8 rounded-lg shadow' %>
+      <%= link_to 'Log in', login_path, class: 'font-caveat bg-custom-top-button-yellowgreen text-custom-top-text-green hover:bg-custom-top-button-hover-yellowgreen text-2xl py-4 px-8 rounded-lg shadow' %>
     </div>
   </div>
 </div>

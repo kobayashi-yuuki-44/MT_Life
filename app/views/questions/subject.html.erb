@@ -1,7 +1,42 @@
 <% content_for(:title, t('.title')) %>
-<div class="flex flex-col items-center justify-center h-screen space-y-4 font-yuji-syuku">
-  <h1 class="text-2xl font-bold">分野選択</h1>
-  <% @subjects.each do |subject| %>
-    <%= link_to subject, show_subject_questions_path(subject: subject), class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-  <% end %>
+<div class="flex flex-col items-center justify-center min-h-screen space-y-4 font-yuji-syuku p-4">
+  <h1 class="text-3xl font-bold mb-4">分野選択</h1>
+  <div class="w-full max-w-3xl bg-white rounded-lg shadow-lg p-6">
+    <p class="text-center text-gray-600 text-lg font-semibold mb-4">
+      臨床化学・生理学・病理学は<br>
+      特に出題数が多いので早めに学習を始めておくと良いです。
+    </p>
+    <div class="border-t border-gray-300 my-4"></div>
+
+    <div class="flex justify-around mt-8">
+      <!-- 左 -->
+      <div class="flex flex-col space-y-4 w-1/3">
+        <% @subjects[0..2].each do |subject| %>
+          <div class="flex justify-center">
+            <%= link_to subject, show_subject_questions_path(subject: subject), class: "btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue text-base" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- 中央 -->
+      <div class="flex flex-col space-y-4 w-1/3">
+        <% @subjects[3..7].each do |subject| %>
+          <div class="flex justify-center">
+            <%= link_to subject, show_subject_questions_path(subject: subject), class: "btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue text-base" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- 右 -->
+      <div class="flex flex-col space-y-4 w-1/3">
+        <% @subjects[8..9].each do |subject| %>
+          <div class="flex justify-center">
+            <%= link_to subject, show_subject_questions_path(subject: subject), class: "btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue text-base" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+

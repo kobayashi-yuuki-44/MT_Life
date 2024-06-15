@@ -11,8 +11,8 @@ module.exports = {
         'custom-main': '#F4E8E8',
         'custom-header-footer' : '#998391',
         'custom-color' : '#131F1F',
-        'custom-button-1' : '#E49F6C',
-        'custom-button-2' : '#749387',
+        
+        
         'custom-button-3' : '#7CB69D',
         'custom-button-4' : '#839dbd',
         'hover-button-1': '#C58B60',
@@ -42,27 +42,40 @@ module.exports = {
         'custom-text-darkreddishpurple': '#492230',
         'custom-post-history': '#784a68',
         'custom-notebook-green': '#8cae87',
-        
         'custom-notebook-text': '#2b4719',
-        
         'custom-page-green': '#fbfcf9',
-        'custom-notebook-orange': '#fcf3ee',
         'custom-notebook-edit': '#a8b64d',
         'custom-notebook-delete': '#c6045e',
         'hover-button3': '#65c5bf',
         'custom-notebook-edit-hover': '#52dad1',
         'custom-notebook-delete-hover': '#fc05f6',
         'custom-notebook-text-hover': '#78c780',
+
+        'custom-top-button-orange' : '#fba96d',
+        'custom-top-button-hover-orange' : '#fe7c70',
+        'custom-top-text-brown': '#3f1b01',
+        'custom-top-text-green': '#2a4101',
+        'custom-top-button-yellowgreen' : '#c0d83b',
+        'custom-top-button-hover-yellowgreen' : '#45c36e',
+
+        'custom-home-button-green' : '#83ccc0',
+        'custom-home-button-hover-blue' : '#3ea1ba',
+        'custom-home-text-green' : '#02342c',
+        'custom-home-green' : '#c8e0bf',
+
+        'custom-home-button-pink' : '#a65380',
+        'custom-home-text-brown' : '#251001',
+        'custom-home-button-hover-pink' : '#d164a1',
+        'custom-home-pink' : '#f4d2de',
+
+        'custom-question-button-blue' : '#9693cd',
       },
       backgroundImage: {
         'custom-notebook-gradient': 'linear-gradient(to right, #fce1d2, #fcf3ee)', // グラデーションの色を指定
       },
       fontFamily: {
-        caveat: ['Caveat', 'cursive'],
+        'caveat': ['Caveat', 'cursive'],
         'yuji-syuku': ['"Yuji Syuku"', 'serif'],
-        'potta-one': ['"Potta One"', 'system-ui'],
-        'yuji-boku': ['"Yuji Boku"', 'serif'],
-        'kaisei-opti': ['"Kaisei Opti"', 'serif'],
       },
       fontSize: {
         '2.5xl': '1.6875rem',
