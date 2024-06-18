@@ -1,0 +1,18 @@
+:concurrency: 2
+:queues:
+  - default
+
+:schedule:
+  message_job:
+    cron: "0 8 * * *"
+    class: "MessageJob"
+    queue: default
+    description: "毎日8:00にメッセージを送信"
+    tz: "Asia/Tokyo"
+
+  cleanup_job:
+    cron: "0 3 * * *"
+    class: "CleanupJob"
+    queue: default
+    description: "毎日3:00に古いファイルを削除"
+    tz: "Asia/Tokyo"

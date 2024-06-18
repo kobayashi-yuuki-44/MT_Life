@@ -23,6 +23,7 @@ module MTLife
 
     config.active_job.queue_adapter = :sidekiq
     config.beginning_of_week = :sunday
+    config.active_storage.variant_processor = :mini_magick
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

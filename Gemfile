@@ -39,6 +39,8 @@ gem "carrierwave"
 
 gem "mini_magick"
 
+gem "image_processing"
+
 gem "fog-aws"
 
 gem "httparty"
@@ -61,13 +63,13 @@ gem "omniauth-rails_csrf_protection"
 
 gem "line-bot-api"
 
-gem 'sidekiq'
+gem "sidekiq"
 
-gem 'sidekiq-cron'
+gem "sidekiq-cron"
 
-gem 'sinatra', require: false
+gem "sinatra", require: false
 
-gem 'simple_calendar'
+gem "simple_calendar"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

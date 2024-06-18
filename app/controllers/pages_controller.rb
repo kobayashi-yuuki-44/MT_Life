@@ -20,19 +20,18 @@ class PagesController < ApplicationController
 
   def save_content
     @page = @notebook.pages.first
-    if @page.update(page_content: params[:page][:content])
-      render json: { status: 'success' }, status: :ok
-    else
-      render json: { errors: @page.errors.full_messages }, status: :unprocessable_entity
-    end
+    SavePageContentJob.perform_later(@page.id, params[:page][:content])
+    render json: { status: 'success' }, status: :ok
   end
 
   def upload_image
     @page = @notebook.pages.find(params[:page_id])
-    if @page.images.attach(params[:image])
-      render json: { url: url_for(@page.images.last), insert_at: params[:insert_at] }, status: :ok
+    if params[:image].present?
+      @page.images.attach(params[:image])
+      image_url = url_for(@page.images.last)
+      render json: { url: image_url, insert_at: params[:insert_at] }, status: :ok
     else
-      render json: { error: '画像のアップロードに失敗しました。' }, status: :unprocessable_entity
+      render json: { error: '画像が選択されていません。' }, status: :unprocessable_entity
     end
   end
 
