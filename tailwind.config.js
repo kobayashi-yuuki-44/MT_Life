@@ -69,6 +69,23 @@ module.exports = {
         'custom-home-pink' : '#f4d2de',
 
         'custom-question-button-blue' : '#9693cd',
+        'custom-question-button-blue-hover' : '#83a2ea',
+        'custom-memo-button' : '#e9a29f',
+        'custom-memo' : '#f8e4e3',
+        'custom-question' : '#eff4ee',
+        'custom-memo-button-hover' : '#f8b079',
+        'custom-memo-text' : '#48010d',
+        'custom-memo-content' : '#dfd1d6',
+        'custom-memo-content-box' : '#d09dac',
+        'custom-memo-content-box-hover' : '#e3ac88',
+        'custom-question-next-button' : '#c990b9',
+        'custom-question-next-button-hover' : '#f293d7',
+
+        'custom-wordbook-edit-button' : '#9c3f57',
+        'custom-wordbook-edit-button-hover' : '#9c3f57',
+        'custom-wordbook-delete-button' : '#9c3f57',
+        'custom-wordbook-delete-button-hover' : '#9c3f57',
+        
       },
       backgroundImage: {
         'custom-notebook-gradient': 'linear-gradient(to right, #fce1d2, #fcf3ee)', // グラデーションの色を指定

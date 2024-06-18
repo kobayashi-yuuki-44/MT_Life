@@ -1,5 +1,16 @@
 <% content_for(:title, t('.title')) %>
-<div class="<%= @image_questions.any? { |iq| iq.image_url.present? } ? 'flex items-center justify-center min-h-screen font-yuji-syuku' : 'flex justify-center items-center min-h-screen mx-auto px-4' %>">
+<div class="flex justify-end p-4 space-x-2 font-yuji-syuku">
+  <% if params[:from] == 'subject' %>
+    <%= link_to '問題一覧', show_subject_questions_path(subject: @question.subject), class: "btn bg-custom-question-button-blue text-custom-home-text-green hover:bg-custom-question-button-blue-hover" %>
+  <% elsif params[:from] == 'year' %>
+    <%= link_to '問題一覧', show_year_questions_path(year: @question.year), class: "btn bg-custom-question-button-blue text-custom-home-text-green hover:bg-custom-question-button-blue-hover" %>
+  <% else %>
+    <%= link_to '問題一覧', questions_path, class: "btn bg-custom-question-button-blue text-custom-home-text-green hover:bg-custom-question-button-blue-hover" %>
+  <% end %>
+  <%= link_to '解き方選択', questions_path, class: "btn bg-custom-question-button-blue text-custom-home-text-green hover:bg-custom-question-button-blue-hover" %>
+</div>
+
+<div class="<%= @image_questions&.any? { |iq| iq.image_url.present? } ? 'flex flex-col justify-center items-center min-h-screen font-yuji-syuku space-y-4 w-full' : 'flex justify-center items-start min-h-screen mx-auto px-4 font-yuji-syuku w-full pt-8' %>">
   <% content_for :head do %>
     <meta name="turbo-visit-control" content="reload">
     <%= javascript_import_module_tag "toggle_memo" %>
@@ -7,91 +18,139 @@
 
   <!-- 画像を含むコンテナ -->
   <% if @image_questions.any? { |iq| iq.image_url.present? } %>
-    <div class="image-container flex justify-center items-center" style="<%= 'width: 50%; margin-top: 100px;' if @image_questions.any? { |iq| iq.image_url.present? } %>">
-      <% @image_questions.each do |image_question| %>
-        <% if image_question.image_url.present? %>
-          <div class="bg-contain bg-center" style="background-image: url('<%= image_question.image_url %>'); background-repeat: no-repeat; width: 400px; height: 400px;">
-              <!-- 背景画像がここに表示 -->
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-
-    <!-- 質問の詳細とメモを含むコンテナ -->
-    <div class="question-detail flex flex-col justify-center items-start text-xl mt-32 text-left" style="width: 50%;">
-      <h2 class="mb-6"><%= @question.question_text %></h2>
-      <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
-        <% @question.options.order(:position).each do |option| %>
-          <div class="field">
-            <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>
-            <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
-          </div>
-        <% end %>
-        <%= form.submit "Answer!", class: "mt-8 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-      <% end %>
-
-      <!-- メモの表示 -->
-      <% if @memo.present? %>
-        <button id="toggle-memo" class="mt-4 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl">メモを見る</button>
-        <div id="content" style="display:none;">
-          <div id="editable-memo"
-              contenteditable="true"
-              class="memo mt-2 p-4 border-2 border-blue-400 bg-white rounded-lg shadow-lg cursor-text hover:border-blue-500 text-gray-700"
-              style="white-space: pre-wrap; cursor: text;"
-              data-question-id="<%= @question.id %>" 
-              data-memo-id="<%= @memo.id %>">
-            <%= @memo.content %>
-          </div>
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4" style="width:90%; margin: auto;">
+      <!-- 画像と質問の詳細を囲む枠 -->
+      <div class="w-full md:w-1/2 border-2 border-gray-300 p-4 rounded-lg shadow-lg bg-custom-question">
+        <!-- 画像 -->
+        <div class="w-full flex justify-center items-center mb-4">
+          <% @image_questions.each do |image_question| %>
+            <% if image_question.image_url.present? %>
+              <div class="bg-contain bg-center" style="background-image: url('<%= image_question.image_url %>'); background-repeat: no-repeat; width: 100%; height: 400px;">
+                  <!-- 背景画像が表示 -->
+              </div>
+            <% end %>
+          <% end %>
         </div>
-      <% else %>
-        <%= form_with(model: [ @question, @question.memos.build ], local: true) do |form| %>
-          <div class="field mt-4">
-            <%= form.label :content, "解説メモ", class: "label" %>
-            <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered", required: true %>
+
+        <!-- 問題画面 -->
+        <div class="w-full flex flex-col justify-center items-start text-xl text-left">
+          <h2 class="mb-6 text-lg"><%= @question.question_text %></h2>
+          <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
+            <% @question.options.order(:position).each do |option| %>
+              <div class="field">
+                <%= check_box_tag 'answer[selected_option_ids][]', option.id, @selected_option_ids&.include?(option.id.to_s), id: "selected_option_ids_#{option.position}" %>
+                <%= label_tag "selected_option_ids_#{option.position}", option.option_text, class: "text-lg" %>
+              </div>
+            <% end %>
+            <%= form.submit "Answer!", class: "btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue mt-8" %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- メモ -->
+      <div class="w-full md:w-1/2 border-2 border-gray-300 p-4 rounded-lg shadow-lg bg-custom-memo">
+        <% if @memo.present? %>
+          <div class="flex items-center space-x-4">
+            <button id="toggle-memo" class="btn bg-custom-memo-button hover:bg-custom-memo-button-hover text-custom-memo-text">メモを見る</button>
+            <div class="relative max-w-xs">
+              <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+                メモを隠すボタンをクリックすると<br>
+                編集内容が保存されます
+              </p>
+              <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+              <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+            </div>
+            <% if @is_random_question %>
+              <%= link_to '次の問題', next_random_questions_path, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text" %>
+            <% elsif @next_question_id.present? %>
+              <%= link_to '次の問題', question_path(@next_question_id), data: { turbo: false }, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text" %>
+            <% else %>
+              <p class="text-lg">これが最後の問題です。</p>
+            <% end %>
           </div>
-          <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl mt-2" %>
+          <div id="content" style="display:none;">
+            <div id="editable-memo"
+                contenteditable="true"
+                class="memo mt-2 p-4 border-2 border-custom-memo-content-box bg-white rounded-lg shadow-lg cursor-text hover:border-custom-memo-content-box-hover text-gray-700 text-lg"
+                style="cursor: text;"
+                data-question-id="<%= @question.id %>" 
+                data-memo-id="<%= @memo.id %>">
+              <%= raw @memo.content %>
+            </div>
+          </div>
+        <% else %>
+          <%= form_with(model: [ @question, @question.memos.build ], local: true, data: { turbo: false }) do |form| %>
+            <div class="field">
+              <%= form.label :content, "解説メモ", class: "label text-lg text-custom-memo-text" %>
+              <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered border-custom-memo-content-box hover:border-custom-memo-content-box-hover text-lg bg-white", required: true %>
+            </div>
+            <%= form.submit "メモを保存", class: "btn bg-custom-memo-button hover:bg-custom-memo-button-hover text-custom-memo-text" %>
+          <% end %>
+          <%= link_to '次の問題', next_random_questions_path, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text mt-4" %>
         <% end %>
-        <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-      <% end %>
+      </div>
     </div>
   <% else %>
 
     <!-- 画像がない場合のコンテナ -->
-    <div class="flex flex-col justify-center items-start text-xl font-yuji-syuku text-left w-full md:w-1/2 lg:w-1/3">
-      <h2 class="mb-6"><%= @question.question_text %></h2>
-      <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
-        <% @question.options.order(:position).each do |option| %>
-          <div class="field">
-            <%= check_box_tag 'answer[selected_option_ids][]', option.id, false, id: "selected_option_ids_#{option.position}" %>
-            <%= label_tag "selected_option_ids_#{option.position}", option.option_text %>
-          </div>
+    <div class="flex flex-col md:flex-row w-full space-y-4 md:space-y-0 md:space-x-4 pt-4">
+      <!-- 質問の詳細の枠 -->
+      <div class="w-full md:w-1/2 border-2 border-gray-300 p-4 rounded-lg shadow-lg bg-custom-question">
+        <h2 class="mb-6 text-lg"><%= @question.question_text %></h2>
+        <%= form_with model: @answer, url: answer_question_path(@question), local: true, data: { turbo: false } do |form| %>
+          <% @question.options.order(:position).each do |option| %>
+            <div class="field">
+              <%= check_box_tag 'answer[selected_option_ids][]', option.id, @selected_option_ids&.include?(option.id.to_s), id: "selected_option_ids_#{option.position}" %>
+              <%= label_tag "selected_option_ids_#{option.position}", option.option_text, class: "text-lg" %>
+            </div>
+          <% end %>
+          <%= form.submit "Answer!", class: "btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue mt-8" %>
         <% end %>
-        <%= form.submit "Answer!", class: "mt-8 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-      <% end %>
+      </div>
 
-      <!-- メモの表示 -->
-      <% if @memo.present? %>
-        <button id="toggle-memo" class="mt-4 bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl">メモを見る</button>
-        <div id="content" style="display:none;">
-          <div id="editable-memo"
-              contenteditable="true"
-              class="memo mt-2 p-4 border-2 border-blue-400 bg-white rounded-lg shadow-lg cursor-text hover:border-blue-500 text-gray-700"
-              style="white-space: pre-wrap; cursor: text;"
-              data-question-id="<%= @question.id %>" 
-              data-memo-id="<%= @memo.id %>">
-            <%= @memo.content %>
+      <!-- メモz -->
+      <div class="w-full md:w-1/2 border-2 border-gray-300 p-4 rounded-lg shadow-lg bg-custom-memo">
+        <% if @memo.present? %>
+          <div class="flex items-center space-x-4 mt-4">
+            <button id="toggle-memo" class="btn bg-custom-memo-button hover:bg-custom-memo-button-hover text-custom-memo-text">メモを見る</button>
+            <div class="relative max-w-xs">
+              <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+                メモを隠すボタンをクリックすると<br>
+                編集内容が保存されます
+              </p>
+              <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+              <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+            </div>
+
+            <% if @is_random_question %>
+              <%= link_to '次の問題', next_random_questions_path, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text" %>
+            <% elsif @next_question_id.present? %>
+              <%= link_to '次の問題', question_path(@next_question_id), data: { turbo: false }, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text" %>
+            <% else %>
+              <p class="text-lg">これが最後の問題です。</p>
+            <% end %>
           </div>
-        </div>
-      <% else %>
-        <%= form_with(model: [ @question, @question.memos.build ], local: true) do |form| %>
-          <div class="field mt-4">
-            <%= form.label :content, "解説メモ", class: "label" %>
-            <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered", required: true %>
+          <div id="content" style="display:none;">
+            <div id="editable-memo"
+                contenteditable="true"
+                class="memo mt-2 p-4 border-2 border-custom-memo-content-box bg-white rounded-lg shadow-lg cursor-text hover:border-custom-memo-content-box-hover text-gray-700 text-lg"
+                style="cursor: text;"
+                data-question-id="<%= @question.id %>" 
+                data-memo-id="<%= @memo.id %>">
+              <%= raw @memo.content %>
+            </div>
           </div>
-          <%= form.submit "メモを保存", class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl mt-2" %>
+        <% else %>
+          <%= form_with(model: [ @question, @question.memos.build ], local: true, data: { turbo: false }) do |form| %>
+            <div class="field">
+              <%= form.label :content, "< 解説メモ >", class: "label text-lg text-custom-memo-text" %>
+              <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered border-custom-memo-content-box hover:border-custom-memo-content-box-hover text-lg bg-white", required: true %>
+            </div>
+            <%= form.submit "メモを保存", class: "btn bg-custom-memo-button hover:bg-custom-memo-button-hover text-custom-memo-text" %>
+          <% end %>
+          <%= link_to '次の問題', next_random_questions_path, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text mt-4" %>
         <% end %>
-        <%= link_to '次の問題', next_random_questions_path, class: "font-yuji-syuku bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-      <% end %>
+      </div>
     </div>
   <% end %>
 </div>

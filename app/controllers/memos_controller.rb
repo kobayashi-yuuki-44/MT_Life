@@ -18,7 +18,7 @@ class MemosController < ApplicationController
   
   def update
     @question = Question.find(params[:question_id])
-    @memo = @question.memo
+    @memo = @question.memos.find(params[:id])
     
     if @memo.update(memo_params)
       render json: { status: 'success', content: @memo.content }
@@ -36,7 +36,7 @@ class MemosController < ApplicationController
   end
 
   def sanitize_content(content)
-    content.gsub(/\s+/, ' ').strip
+    content.strip.gsub("\n", "<br>")
   end
 
   def calculate_next_question_id(current_question)
@@ -48,8 +48,6 @@ class MemosController < ApplicationController
   end
 
   def setup_session_for_next_question(current_question)
-    # ここで`questions_list`を適切に設定するロジックを追加します。
-    # 例えば、次のように設定できます:
-    session[:questions_list] ||= Question.pluck(:id) # これは一例です
+    session[:questions_list] ||= Question.pluck(:id)
   end
 end

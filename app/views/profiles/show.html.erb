@@ -1,57 +1,59 @@
 <% content_for(:title, t('defaults.profile')) %>
 <div class="container font-yuji-syuku pt-3 min-h-screen flex justify-center items-center">
-  <div class="row w-full">
-    <div class="col-md-10 offset-md-1">
-      <h1 class="float-left mb-5">プロフィール</h1>
+  <div class="max-w-2xl w-full bg-white shadow-md rounded-lg p-8">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">プロフィール</h1>
       <% if @user == current_user %>
-        <%= link_to 'プロフィール編集', edit_profile_path, class: 'btn btn-success float-right' %>
+        <%= link_to 'プロフィール編集', edit_profile_path, class: 'bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue font-bold py-2 px-4 rounded-md' %>
       <% else %>
-      <!-- チャットルームへのリンクまたは新規作成フォーム -->
         <% if @isRoom %>
-          <%= link_to room_path(@roomId), class: 'btn btn-primary' do %>
-            <i class="fas fa-envelope"></i> メッセージを送る
+          <%= link_to room_path(@roomId), class: 'bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md flex items-center' do %>
+            <i class="fas fa-envelope mr-2"></i> メッセージを送る
           <% end %>
         <% else %>
-          <%= form_with model: @room, url: rooms_path, local: true, data: { turbo: false } do |f| %>
+          <%= form_with model: @room, url: rooms_path, local: true, data: { turbo: false }, class: 'flex items-center space-x-2' do |f| %>
             <%= f.hidden_field :user_id, value: @user.id %>
             <%= fields_for :entry, @entry do |e| %>
               <%= e.hidden_field :user_id, value: current_user.id %>
             <% end %>
-            <%= f.submit "新規チャットを開始", class: 'btn btn-primary' %>
+            <%= f.submit "新規チャットを開始", class: 'bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md' %>
           <% end %>
         <% end %>
       <% end %>
-      <table class="table">
+    </div>
+    <table class="min-w-full divide-y divide-gray-200">
+      <tbody class="bg-white divide-y divide-gray-200">
         <tr>
-          <th scope="row">氏名</th>
-          <td><%= @user.name %></td>
+          <th class="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">氏名</th>
+          <td class="py-4 px-6 text-sm text-gray-900"><%= @user.name %></td>
         </tr>
         <tr>
-          <th scope="row">アバター</th>
-          <td><%= image_tag @user.avatar.url, class: "rounded-full w-10 h-10 object-cover" %></td>
+          <th class="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">アバター</th>
+          <td class="py-4 px-6 text-sm text-gray-900">
+            <%= image_tag @user.avatar.url, class: "rounded-full w-20 h-20 object-cover" %>
+          </td>
         </tr>
-        <!-- LINE通知設定表示部分をテーブルに組み込む -->
         <% if @user == current_user %>
           <tr>
-            <th scope="row">LINE通知設定</th>
-            <td>
+            <th class="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">LINE通知設定</th>
+            <td class="py-4 px-6 text-sm text-gray-900">
               <% if @user.authentications.exists?(provider: 'line') %>
-                <div class="alert alert-info">
+                <div class="bg-blue-100 text-blue-700 p-3 rounded-md">
                   LINE通知は設定済みです。
                   <!-- 通知設定管理のリンクやフォームをここに配置 -->
                 </div>
               <% else %>
-                <div class="alert alert-warning">
-                  LINE通知を受け取るには、先にLINEでログインする必要があります。
-                  <%= link_to 'LINEでログイン', auth_at_provider_path(provider: :line), class: 'btn btn-primary' %>
+                <div class="bg-yellow-100 text-yellow-700 p-3 rounded-md">
+                  <p>LINE通知を受け取るには、先にLINEでログインする必要があります。</p>
+                  <div class="mt-4">
+                    <%= link_to 'LINEでログイン', auth_at_provider_path(provider: :line), class: 'bg-custom-question-button-blue text-custom-home-text-green hover:bg-custom-question-button-blue-hover font-bold py-2 px-4 rounded-md' %>
+                  </div>
                 </div>
               <% end %>
             </td>
           </tr>
         <% end %>
-      </table>
-    </div>
+      </tbody>
+    </table>
   </div>
 </div>
-
-

@@ -1,26 +1,26 @@
 <% content_for(:title, t('defaults.edit')) %>
-<div class="container font-yuji-syuku">
-  <div class="row">
-    <div class="col-md-10 offset-md-1">
-      <h1>プロフィール編集</h1>
-      <%= form_with model: @user, url: profile_path, local: true do |f| %>
-        <%= render "shared/error_messages", object: f.object %>
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.email_field :email, class: "form-control mb-3" %>
-        </div>
-        <div class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, class: "form-control mb-3" %>
-        </div>
-        <div class="form-group" data-controller="avatar-preview">
-          <%= f.label :avatar %>
-          <%= f.file_field :avatar, data: { controller: "avatar-preview", action: "change->avatar-preview#preview", avatar_preview_target: "image" }, class: "form-control", accept: 'image/*' %>
-          <%= f.hidden_field :avatar_cache %>
-          <img id="preview" src="<%= asset_path('avatar.png') %>" class="rounded-circle" style="width: 100px; height: 100px;">
-        </div>
-        <%= f.submit  class: "bg-custom-button-3 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-      <% end %>
-    </div>
+<div class="container mx-auto py-10 font-yuji-syuku">
+  <div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">プロフィール編集</h1>
+    <%= form_with model: @user, url: profile_path, local: true, class: "space-y-6" do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+      <div class="form-group">
+        <%= f.label :email, class: "block text-lg font-medium text-gray-700" %>
+        <%= f.email_field :email, class: "form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mb-3" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :name, class: "block text-lg font-medium text-gray-700" %>
+        <%= f.text_field :name, class: "form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mb-3" %>
+      </div>
+      <div class="form-group" data-controller="avatar-preview">
+        <%= f.label :avatar, class: "block text-lg font-medium text-gray-700" %>
+        <%= f.file_field :avatar, data: { controller: "avatar-preview", action: "change->avatar-preview#preview", avatar_preview_target: "image" }, class: "form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mb-3", accept: 'image/*' %>
+        <%= f.hidden_field :avatar_cache %>
+        <img id="preview" src="<%= asset_path('avatar.png') %>" class="rounded-full mt-3" style="width: 100px; height: 100px;">
+      </div>
+      <div class="flex justify-center mt-6">
+        <%= f.submit "更新", class: "bg-custom-question-button-blue hover:bg-custom-question-button-blue-hover text-custom-home-text-green btn text-xl py-2 px-4 rounded-full" %>
+      </div>
+    <% end %>
   </div>
 </div>
