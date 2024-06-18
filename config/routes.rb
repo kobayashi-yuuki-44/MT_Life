@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount ActionCable.server => '/cable'
+  
   root 'static_pages#top'
 
   resources :users  do
@@ -8,8 +10,6 @@ Rails.application.routes.draw do
 
   resource :profile, only: %i[show edit update], controller: 'profiles'
 
-  mount ActionCable.server => '/cable'
-  
   resources :rooms do
     resources :direct_messages, only: [:create]
   end
@@ -25,9 +25,6 @@ Rails.application.routes.draw do
   get 'oauth/:provider', to: 'oauths#oauth', as: :auth_at_provider
 
   get 'home', to: 'action_selection#index', as: :home
-
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
 
   resources :questions, only: [:index, :show] do
     collection do

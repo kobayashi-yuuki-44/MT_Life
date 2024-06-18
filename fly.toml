@@ -12,18 +12,21 @@ console_command = "/rails/bin/rails console"
 [deploy]
   release_command = "./bin/rails db:prepare"
 
+[env]
+  MALLOC_ARENA_MAX = "2"  # メモリ管理の環境変数設定sidekiq用
+
 [http_service]
   internal_port = 3000
   force_https = true
-  auto_stop_machines = true
+  auto_stop_machines = false  # スリープなし
   auto_start_machines = true
-  min_machines_running = 0
+  min_machines_running = 1  # 常に1台のインスタンスを稼働
   processes = ["app"]
 
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
-  memory_mb = 256
+  memory_mb = 1024
 
 [[statics]]
   guest_path = "/rails/public"
@@ -32,3 +35,9 @@ console_command = "/rails/bin/rails console"
 [processes]
   app = "bin/rails server"
   worker = "bundle exec sidekiq"
+
+[[services]]
+  processes = ["app", "worker"]
+  internal_port = 3000
+  protocol = "tcp"
+  force_https = true

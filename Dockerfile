@@ -13,7 +13,8 @@ WORKDIR /rails
 ENV BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test" \
-    RAILS_ENV="production"
+    RAILS_ENV="production" \
+    MALLOC_ARENA_MAX="2"
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
@@ -25,7 +26,7 @@ FROM base as build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3 imagemagick
+    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3 imagemagick redis-tools
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=20.0.0
@@ -62,7 +63,7 @@ FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl imagemagick postgresql-client imagemagick && \
+    apt-get install --no-install-recommends -y curl imagemagick postgresql-client imagemagick redis-tools && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application

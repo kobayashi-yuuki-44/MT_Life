@@ -1,13 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
-  setupPageContentSave();
-  setupImageUpload();
-  initializeImages();
-});
-
 document.addEventListener('turbo:load', function() {
   setupPageContentSave();
   setupImageUpload();
-  initializeImages();
 });
 
 let lastCaretPosition = null;
@@ -22,19 +15,15 @@ function setupPageContentSave() {
       savePageContent(pageId, notebookId, content);
     });
 
-    editablePage.addEventListener('click', function(e) {
-      const selection = window.getSelection();
-      if (selection.rangeCount > 0) {
-        lastCaretPosition = selection.getRangeAt(0);
-      }
-    });
+    editablePage.addEventListener('click', saveCaretPosition);
+    editablePage.addEventListener('keyup', saveCaretPosition);
+  }
+}
 
-    editablePage.addEventListener('keyup', function(e) {
-      const selection = window.getSelection();
-      if (selection.rangeCount > 0) {
-        lastCaretPosition = selection.getRangeAt(0);
-      }
-    });
+function saveCaretPosition() {
+  const selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+    lastCaretPosition = selection.getRangeAt(0);
   }
 }
 
@@ -47,24 +36,13 @@ function savePageContent(pageId, notebookId, content) {
     },
     body: JSON.stringify({ page: { content: content }, id: pageId })
   })
-  .then(response => {
-    if (!response.ok) {
-      return response.json().then(errorData => {
-        throw new Error(`保存に失敗しました: ${response.status} - ${errorData.errors}`);
-      });
-    }
-    return response.json();
-  })
+  .then(response => response.json())
   .then(data => {
-    if (data && data.status === 'success') {
-      console.log('保存成功！');
-    } else {
-      throw new Error('保存に失敗しました。');
+    if (data.status !== 'success') {
+      console.error('保存に失敗しました');
     }
   })
-  .catch(error => {
-    console.error('保存エラー', error);
-  });
+  .catch(error => console.error('保存エラー', error));
 }
 
 function setupImageUpload() {
@@ -97,13 +75,13 @@ function setupImageUpload() {
             img.classList.add('uploaded-image');
             img.style.maxWidth = '100%';
             img.style.height = 'auto';
-            img.style.width = '300px';
+            img.style.width = '600px';
             img.style.float = 'left';
             img.style.marginRight = '10px';
 
             if (lastCaretPosition) {
               lastCaretPosition.insertNode(img);
-              lastCaretPosition.collapse(false); // カーソルを画像の後に移動
+              lastCaretPosition.collapse(false);
             } else {
               editablePage.appendChild(img);
             }
@@ -112,24 +90,12 @@ function setupImageUpload() {
 
             savePageContent(editablePage.dataset.pageId, editablePage.dataset.notebookId, editablePage.innerHTML);
           } else {
-            console.error('Image upload failed:', response.statusText);
+            console.error('画像のアップロードに失敗しました:', response.statusText);
           }
         } catch (error) {
-          console.error('Fetch error:', error);
+          console.error('フェッチエラー:', error);
         }
       }
     });
   }
-}
-
-function initializeImages() {
-  document.querySelectorAll('.uploaded-image').forEach((img) => {
-    const width = img.getAttribute('width');
-    const height = img.getAttribute('height');
-
-    if (width && height) {
-      img.style.width = `${width}px`;
-      img.style.height = `${height}px`;
-    }
-  });
 }

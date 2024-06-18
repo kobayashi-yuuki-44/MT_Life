@@ -2,8 +2,11 @@
      data-notebook-id="<%= @notebook.id %>" 
      data-page-id="<%= page.id %>" 
      contenteditable="true">
-  <%= sanitize(page.page_content, tags: %w(p br strong em a img div), attributes: %w(src alt href style)) %>
+  <%= sanitize(page.page_content, tags: %w(p br strong em a img div), attributes: %w(src alt href style class)) %>
 </div>
 <div class="mt-6">
-  <input type="file" id="imageUpload" name="image" accept="image/*">
+  <label for="imageUpload" class="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+    画像を選択
+  </label>
+  <input type="file" id="imageUpload" name="image" accept="image/*" class="hidden">
 </div>
