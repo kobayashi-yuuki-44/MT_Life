@@ -21,7 +21,7 @@ document.addEventListener("turbo:load", function() {
     const memoId = editableMemo.getAttribute('data-memo-id');
   
     editableMemo.addEventListener('blur', function() {
-      const content = editableMemo.textContent.replace(/\s+/g, ' ').trim();
+      const content = getSanitizedContent(editableMemo);
       console.log("Edited content:", content);
       
       const memoUpdateUrl = `/questions/${questionId}/memos/${memoId}`;
@@ -41,15 +41,23 @@ document.addEventListener("turbo:load", function() {
         console.error('Error:', error);
       });
     });
-
-  editableMemo.textContent = sanitizeContent(editableMemo.textContent);
   }
 });
 
 document.addEventListener('turbo:submit-end', formSubmitHandler);
 
+function getSanitizedContent(element) {
+  let content = element.innerHTML
+    .replace(/<div><br><\/div>/g, "\n")
+    .replace(/<div>/g, "\n")
+    .replace(/<\/div>/g, "")
+    .replace(/<br>/g, "\n");
+  console.log("Sanitized Content:", content);
+  return content.trim();
+}
+
 function sanitizeContent(content) {
-  return content.replace(/\s+/g, ' ').trim();
+  return content.trim();
 }
 
 function formSubmitHandler(event) {

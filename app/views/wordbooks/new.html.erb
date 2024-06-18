@@ -1,20 +1,21 @@
 <%= content_for :title, t('.title') %>
-<%= form_with(model: @wordbook, local: true, data: { turbo: false }) do |form| %>
+<div class="absolute inset-0 flex items-center justify-center">
   <div class="container mx-auto mt-8 font-yuji-syuku">
-    <h1 class="text-2xl font-bold text-center mb-6">新しい単語帳の作成</h1>
-    
-    <div class="mb-4">
-      <%= form.label :collection, "単語帳のタイトル・科目", class: "label" %>
-      <div class="control">
-        <%= form.text_field :collection, class: "input input-bordered w-full" %>
-      </div>
-      <% if @wordbook.errors[:collection].any? %>
-        <p class="text-red-500 text-xs italic"><%= @wordbook.errors[:collection].first %></p>
-      <% end %>
-    </div>
+    <h1 class="text-2xl font-bold text-center mb-6">単語帳作成</h1>
+    <%= form_with(model: @wordbook, local: true, data: { turbo: false }) do |form| %>
+      <div class="max-w-xl mx-auto shadow-lg rounded-lg p-6 bg-white">
+        <div class="mb-4">
+          <%= form.label :collection, "単語帳のタイトル・科目", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= form.text_field :collection, class: "input input-bordered w-full" %>
+        </div>
+          <% if @wordbook.errors[:collection].any? %>
+            <p class="text-red-500 text-xs italic"><%= @wordbook.errors[:collection].first %></p>
+          <% end %>
 
-    <div class="flex justify-center">
-      <%= form.submit "作成", class: "bg-custom-button-2 hover:bg-hover-button-2 text-custom-text btn text-xl" %>
-    </div>
+        <div class="flex justify-end mt-4">
+          <%= form.submit "作成", class: "bg-custom-post-edit hover:bg-custom-post-edit-hover text-custom-text3 flex items-center justify-center btn text-base" %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

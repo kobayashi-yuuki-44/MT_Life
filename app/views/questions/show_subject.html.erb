@@ -4,7 +4,7 @@
   <div class="mx-auto max-w-4xl px-4">
     <% @questions.each do |question| %>
       <div class="mb-4">
-        <%= link_to question.question_text, question_path(question), class: "block p-4 bg-white rounded shadow-lg hover:shadow-xl" %>
+        <%= link_to question.question_text, question_path(question, from: 'subject'), class: "block p-4 bg-white rounded shadow-lg hover:shadow-xl" %>
       </div>
     <% end %>
   </div>
