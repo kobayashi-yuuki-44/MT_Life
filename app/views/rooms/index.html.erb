@@ -1,34 +1,39 @@
-<h2>メッセージ一覧</h2>
-<% @anotherEntries.each do |e| %>
-	<table class="table table-striped">
-		<tr id="room_<%= e.room.id %>">
-			<td>
-				<!-- 名前からroomの詳細に飛べるようにリンク化 -->
-				<%= link_to room_path(e.room.id), data: { room_link: true, room_id: e.room.id } do %>
-					<%= image_tag(e.user.avatar? ? e.user.avatar.url : 'avatar.png', class: "rounded-full w-8 h-8 object-cover", alt: "Profile Image") %>
-					<%= e.user.name %>
-				<% end %>
-			</td>
-			<td>
-			<!-- 通知アイコン -->
-			<span class="notify-icon" style="display: none;">
-				<i class="fas fa-bell" style="color: red;"></i>
-			</span>
-			</td>
-			<td class="latest-message">
-        <!-- 最新メッセージ内容の最初の10文字を表示する -->
-        <% dm = DirectMessage.find_by(id: e.room.direct_message_ids.last) %>
-        <%= truncate(dm ? dm.message_content : "", length: 10) %>
-      </td>
-      <td>
-        <h6 style="color: #C0C0C0;"><%= e.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
-      </td>
-			<td>
-				<!-- ゴミ箱アイコンクリックでroomを消せるようにする -->
-				<%= link_to room_path(e.room.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, title: "削除" do %>
-					<i class="fas fa-trash" style="color: black;"></i>
-				<% end %>
-			</td>
-		</tr>
-	</table>
-<% end %>
+<%= content_for :title, t('.title') %>
+<div class="container mx-auto p-3 font-yuji-syuku">
+  <h1 class="text-3xl font-bold text-center my-8">メッセージ一覧</h1>
+	<% @anotherEntries.each do |e| %>
+		<table class="table table-striped">
+			<tr id="room_<%= e.room.id %>">
+				<td>
+					<!-- 名前からroomの詳細に飛べるようにリンク化 -->
+					<%= link_to room_path(e.room.id), data: { room_link: true, room_id: e.room.id } do %>
+						<%= image_tag(e.user.avatar? ? e.user.avatar.url : 'avatar.png', class: "rounded-full w-8 h-8 object-cover", alt: "Profile Image") %>
+						<%= e.user.name %>
+					<% end %>
+				</td>
+				<td>
+				<!-- 通知アイコン -->
+				<span class="notify-icon" style="display: none;">
+					<i class="fas fa-bell" style="color: red;"></i>
+				</span>
+				</td>
+				<td class="latest-message">
+					<!-- 最新メッセージ内容の最初の10文字を表示する -->
+					<% dm = DirectMessage.find_by(id: e.room.direct_message_ids.last) %>
+					<%= truncate(dm ? dm.message_content : "", length: 10) %>
+				</td>
+				<td>
+					<h6 style="color: #C0C0C0;"><%= e.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
+				</td>
+				<td>
+					<!-- ゴミ箱アイコンクリックでroomを消せるようにする -->
+					<%= link_to room_path(e.room.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, title: "削除" do %>
+						<i class="fas fa-trash" style="color: black;"></i>
+					<% end %>
+				</td>
+			</tr>
+		</table>
+	<% end %>
+	</div>
+</div>
+

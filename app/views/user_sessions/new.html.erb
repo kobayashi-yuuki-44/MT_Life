@@ -13,7 +13,7 @@
       <%= f.password_field :password, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
     </div>
     <div class="flex justify-center mt-6">
-      <%= f.submit t('defaults.user_login'), class: 'bg-custom-question-button-blue hover:bg-custom-question-button-blue-hover text-custom-home-text-green btn text-xl py-2 px-4 rounded-full' %>
+      <%= f.submit t('defaults.user_login'), class: 'bg-custom-memo-button hover:bg-custom-top-button-hover-orange text-custom-top-text-brown btn text-xl py-2 px-4 rounded-full' %>
     </div>
   <% end %>
 
@@ -21,7 +21,7 @@
 
   <div class="flex justify-around mt-6 space-x-4 font-yuji-syuku">
     <%= link_to 'Googleログイン', auth_at_provider_path(provider: :google), method: :get, data: { turbo: false }, class: 'bg-custom-question-button-blue hover:bg-custom-question-button-blue-hover text-custom-home-text-green btn text-xl py-2 px-4 rounded-full text-center' %>
-    <%= link_to 'LINEログイン', auth_at_provider_path(provider: :line), class: 'bg-custom-question-button-blue hover:bg-custom-question-button-blue-hover text-custom-home-text-green btn text-xl py-2 px-4 rounded-full text-center' %>
+    <%= link_to 'LINEログイン', auth_at_provider_path(provider: :line), class: 'bg-custom-wordbook-card-hide-button hover:bg-custom-wordbook-card-hide-button-hover text-custom-home-text-green btn text-xl py-2 px-4 rounded-full text-center' %>
   </div>
   
   <div class="flex justify-center mt-6 font-yuji-syuku">

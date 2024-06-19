@@ -4,9 +4,22 @@
      contenteditable="true">
   <%= sanitize(page.page_content, tags: %w(p br strong em a img div), attributes: %w(src alt href style class)) %>
 </div>
-<div class="mt-6">
-  <label for="imageUpload" class="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-    画像を選択
-  </label>
-  <input type="file" id="imageUpload" name="image" accept="image/*" class="hidden">
+
+<div class="flex items-center space-x-10">
+  <div class="mt-6">
+    <label for="imageUpload" class="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm bg-custom-question-button-blue hover:bg-custom-question-button-blue-hover text-text-custom-home-text-green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+      画像を選択
+    </label>
+    <input type="file" id="imageUpload" name="image" accept="image/*" class="hidden">
+  </div>
+  <div class="relative max-w-xs mt-6">
+    <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+      ノートに入力した内容や画像は<br>
+      自動で保存されます。<br>
+      記述が終わったら<br>
+      そのまま次へ進んでokです。
+    </p>
+    <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+    <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+  </div>
 </div>

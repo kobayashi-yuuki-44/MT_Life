@@ -1,14 +1,14 @@
 module ApplicationHelper
 
   def flash_class(type)
-    base_classes = "font-yuji-syuku p-4 text-white text-lg"
+    base_classes = "font-yuji-syuku p-4 text-lg"
     color_class = case type
-                  when 'notice' then 'bg-blue-500'
-                  when 'success' then 'bg-green-500'
-                  when 'error' then 'bg-red-500'
+                  when 'notice' then 'bg-flash-yellowgreen text-custom-wordbook-edit-text'
+                  when 'success' then 'bg-flash-yellowgreen text-custom-wordbook-edit-text'
+                  when 'error' then 'bg-flash-darkred'
                   when 'warning' then 'bg-yellow-500'
-                  when 'danger' then 'bg-red-700'
-                  else 'bg-gray-500'
+                  when 'danger' then 'bg-flash-darkred'
+                  else 'bg-flash-purple text-custom-memo-text'
                   end
     "#{base_classes} #{color_class}"
   end
