@@ -80,12 +80,31 @@ module.exports = {
         'custom-memo-content-box-hover' : '#e3ac88',
         'custom-question-next-button' : '#c990b9',
         'custom-question-next-button-hover' : '#f293d7',
+        'custom-question-answer-button' : '#82acbc',
 
-        'custom-wordbook-edit-button' : '#9c3f57',
-        'custom-wordbook-edit-button-hover' : '#9c3f57',
-        'custom-wordbook-delete-button' : '#9c3f57',
-        'custom-wordbook-delete-button-hover' : '#9c3f57',
-        
+        'custom-wordbook-edit-button' : '#92a7c1',
+        'custom-wordbook-edit-button-hover' : '#478689',
+        'custom-wordbook-edit-text' : '#0c4958',
+        'custom-wordbook-delete-button' : '#a05467',
+        'custom-wordbook-delete-button-hover' : '#9a072d',
+        'custom-wordbook-delete-text' : '#fcc1b9',
+        'custom-wordbook-text' : '#df7676',
+        'custom-wordbook-create-button' : '#df8787',
+        'custom-wordbook-create-button-hover' : '#e4b970',
+        'custom-wordbook-card-button' : '#b65284',
+        'custom-wordbook-card-button-hover' : '#bf76d1',
+        'custom-wordbook-card-display-button' : '#94d5eb',
+        'custom-wordbook-card-display-button-hover' : '#5a97d7',
+        'custom-wordbook-card-hide-button' : '#1d8580',
+        'custom-wordbook-card-hide-button-hover' : '#98aa4a',
+        'custom-word-text' : '#ee037e',
+
+        'custom-image-button' : '#63425f',
+
+        'flash-yellowgreen' : '#85b9cc',
+        'flash-purple' : '#ae89cd',
+        'flash-darkred' : '#8e264d',
+
       },
       backgroundImage: {
         'custom-notebook-gradient': 'linear-gradient(to right, #fce1d2, #fcf3ee)', // グラデーションの色を指定

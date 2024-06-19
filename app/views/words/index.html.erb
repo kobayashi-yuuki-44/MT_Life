@@ -3,8 +3,8 @@
   <h1 class="text-3xl font-bold text-center mb-6 p-3"><%= @wordbook.collection %>の単語一覧</h1>
 
   <div class="flex justify-end mb-10 gap-10">
-    <%= link_to '新しい単語を作成する', new_wordbook_word_path(@wordbook), class: 'bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text' %>
-    <%= link_to '単語演習スタート', card_wordbook_path(@wordbook), class: 'bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text' %>
+    <%= link_to '新しい単語を作成する', new_wordbook_word_path(@wordbook), class: 'bg-custom-wordbook-card-hide-button btn hover:bg-custom-wordbook-card-hide-button-hover text-custom-memo-text' %>
+    <%= link_to '単語演習スタート', card_wordbook_path(@wordbook), class: 'bg-custom-wordbook-card-button btn hover:bg-custom-wordbook-card-button-hover text-custom-memo-text' %>
   </div>
 
   <% if @words.empty? %>
@@ -16,10 +16,10 @@
       <% @words.each do |word| %>
         <div class="bg-base-100 shadow-xl rounded-lg p-6">
           <h2 class="text-xl font-semibold mb-2"><%= word.term %></h2>
-          <p class="text-custom-post-delete mb-4"><%= word.definition %></p>
+          <p class="text-custom-word-text mb-4"><%= word.definition %></p>
           <div class="flex justify-end gap-2">
-            <%= link_to '編集', edit_wordbook_word_path(@wordbook, word), class: "btn bg-custom-post-edit hover:bg-custom-post-edit-hover text-custom-text" %>
-            <%= link_to '削除', wordbook_word_path(@wordbook, word), method: :delete, data: { turbo_method: :delete, turbo_confirm: "この単語を削除してもよろしいですか？" }, class: "btn bg-custom-post-delete hover:bg-custom-post-delete-hover text-custom-text" %>
+            <%= link_to '編集', edit_wordbook_word_path(@wordbook, word), class: "btn bg-custom-wordbook-edit-button hover:bg-custom-wordbook-edit-button-hover text-custom-wordbook-edit-text mt-4" %>
+            <%= link_to '削除', wordbook_word_path(@wordbook, word), method: :delete, data: { turbo_method: :delete, turbo_confirm: "この単語を削除してもよろしいですか？" }, class: "btn bg-custom-wordbook-delete-button hover:bg-custom-wordbook-delete-button-hover text-custom-wordbook-delete-text mt-4" %>
           </div>
         </div>
       <% end %>

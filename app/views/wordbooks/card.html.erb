@@ -6,13 +6,13 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 bg-base-100 rounded-lg shadow p-4">
       <div class="flex-grow">
         <div class="font-semibold text-lg mb-2"><%= word.term %></div>
-        <div class="word-definition text-custom-post-delete font-bold hidden">
+        <div class="word-definition text-custom-word-text font-bold hidden">
           <%= word.definition %>
         </div>
       </div>
       <div class="flex flex-col md:flex-row gap-2 mt-4 md:mt-0">
-        <button class="show-definition bg-custom-question-next-button hover:bg-custom-question-next-button-hover text-custom-memo-text btn">意味を表示</button>
-        <button class="hide-definition bg-custom-question-button-blue hover:bg-custom-question-button-blue-hover text-custom-home-text-green btn hidden">隠す</button>
+        <button class="show-definition bg-custom-wordbook-card-display-button hover:bg-custom-wordbook-card-display-button-hover text-custom-memo-text btn">意味を表示</button>
+        <button class="hide-definition bg-custom-wordbook-card-hide-button hover:bg-custom-wordbook-card-hide-button-hover text-custom-home-text-green btn hidden">隠す</button>
       </div>
     </div>
   <% end %>

@@ -42,7 +42,7 @@
                 <%= label_tag "selected_option_ids_#{option.position}", option.option_text, class: "text-lg" %>
               </div>
             <% end %>
-            <%= form.submit "Answer!", class: "btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue mt-8" %>
+            <%= form.submit "Answer!", class: "btn bg-custom-question-answer-button text-custom-home-text-green hover:bg-custom-home-button-hover-blue mt-8" %>
           <% end %>
         </div>
       </div>
@@ -65,7 +65,18 @@
             <% elsif @next_question_id.present? %>
               <%= link_to '次の問題', question_path(@next_question_id), data: { turbo: false }, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text" %>
             <% else %>
-              <p class="text-lg">これが最後の問題です。</p>
+              <div class="flex items-center space-x-10">
+                <%= link_to 'ノート', notebooks_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+                <div class="relative max-w-xs">
+                  <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+                    これが最後の問題です。<br>
+                    次は<br>
+                    ノートにまとめてみましょう！<br>
+                  </p>
+                  <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+                  <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+                </div>
+              </div>
             <% end %>
           </div>
           <div id="content" style="display:none;">
@@ -91,7 +102,18 @@
           <% elsif @next_question_id.present? %>
             <%= link_to '次の問題', question_path(@next_question_id), data: { turbo: false }, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text mt-4" %>
           <% else %>
-            <p class="mt-4 text-lg">これが最後の問題です。</p>
+            <div class="flex items-center space-x-10">
+              <%= link_to 'ノート', notebooks_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+              <div class="relative max-w-xs">
+                <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+                  これが最後の問題です。<br>
+                  次は<br>
+                  ノートにまとめてみましょう！<br>
+                </p>
+                <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+                <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+              </div>
+            </div>
           <% end %>
         <% end %>
       </div>
@@ -110,7 +132,7 @@
               <%= label_tag "selected_option_ids_#{option.position}", option.option_text, class: "text-lg" %>
             </div>
           <% end %>
-          <%= form.submit "Answer!", class: "btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue mt-8" %>
+          <%= form.submit "Answer!", class: "btn bg-custom-question-answer-button text-custom-home-text-green hover:bg-custom-home-button-hover-blue mt-8" %>
         <% end %>
       </div>
 
@@ -133,7 +155,18 @@
             <% elsif @next_question_id.present? %>
               <%= link_to '次の問題', question_path(@next_question_id), data: { turbo: false }, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text" %>
             <% else %>
-              <p class="text-lg">これが最後の問題です。</p>
+              <div class="flex items-center space-x-10">
+                <%= link_to 'ノート', notebooks_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+                <div class="relative max-w-xs">
+                  <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+                    これが最後の問題です。<br>
+                    次は<br>
+                    ノートにまとめてみましょう！<br>
+                  </p>
+                  <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+                  <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+                </div>
+              </div>
             <% end %>
           </div>
           <div id="content" style="display:none;">
@@ -159,7 +192,18 @@
           <% elsif @next_question_id.present? %>
             <%= link_to '次の問題', question_path(@next_question_id), data: { turbo: false }, class: "bg-custom-question-next-button btn hover:bg-custom-question-next-button-hover text-custom-memo-text mt-4" %>
           <% else %>
-            <p class="mt-4 text-lg">これが最後の問題です。</p>
+            <div class="flex items-center space-x-10">
+              <%= link_to 'ノート', notebooks_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+              <div class="relative max-w-xs">
+                <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+                  これが最後の問題です。<br>
+                  次は<br>
+                  ノートにまとめてみましょう！<br>
+                </p>
+                <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-gray-300"></div>
+                <div class="absolute -left-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-custom-home-green"></div>
+              </div>
+            </div>
           <% end %>
         <% end %>
       </div>
