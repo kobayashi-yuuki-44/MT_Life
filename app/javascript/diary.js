@@ -12,11 +12,11 @@ document.addEventListener('turbo:frame-load', () => {
 
 function setupModalEvents() {
   const modal = document.getElementById('newDiaryModal');
-  if (!modal) return; // モーダルが存在しない場合は何もしない
+  if (!modal) return;
 
   const toggleButtons = document.querySelectorAll('[data-modal-toggle="newDiaryModal"]');
   const closeButton = document.querySelectorAll('[data-modal-toggle="newDiaryModal"] + .btn');
-  const cancelButton = modal.querySelector('.modal-action .btn:last-child'); // キャンセルボタンを取得
+  const cancelButton = modal.querySelector('.modal-action .btn:last-child');
 
   toggleButtons.forEach(button => {
     button.addEventListener('click', () => {

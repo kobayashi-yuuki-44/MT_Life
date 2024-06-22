@@ -13,6 +13,7 @@ document.addEventListener("turbo:load", function() {
       console.log("Toggle button clicked");
       memoContent.style.display = memoContent.style.display === "none" ? "block" : "none";
       toggleButton.textContent = memoContent.style.display === "block" ? "メモを隠す" : "メモを見る";
+      adjustMemoContentHeight();
     });
   }
   
@@ -42,7 +43,44 @@ document.addEventListener("turbo:load", function() {
       });
     });
   }
+
+  const MAX_HEIGHT = 400;
+  const textareas = document.querySelectorAll("textarea.auto-resize");
+  
+  textareas.forEach(textarea => {
+    textarea.style.height = "auto";
+    textarea.style.overflowY = "hidden";
+    adjustTextareaHeight(textarea);
+
+    textarea.addEventListener("input", event => {
+      adjustTextareaHeight(event.target);
+    });
+  });
+
+  function adjustTextareaHeight(textarea) {
+    textarea.style.height = "auto";
+    if (textarea.scrollHeight > MAX_HEIGHT) {
+      textarea.style.height = `${MAX_HEIGHT}px`;
+      textarea.style.overflowY = "scroll";
+    } else {
+      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.overflowY = "hidden";
+    }
+  }
+
+  function adjustMemoContentHeight() {
+    if (memoContent) {
+      if (memoContent.scrollHeight > MAX_HEIGHT) {
+        memoContent.style.height = `${MAX_HEIGHT}px`;
+        memoContent.style.overflowY = "scroll";
+      } else {
+        memoContent.style.height = "auto";
+        memoContent.style.overflowY = "hidden";
+      }
+    }
+  }
 });
+
 
 document.addEventListener('turbo:submit-end', formSubmitHandler);
 

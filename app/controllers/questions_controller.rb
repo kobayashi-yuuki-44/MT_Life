@@ -37,7 +37,7 @@ class QuestionsController < ApplicationController
     unless SUBJECTS.include?(@subject)
       redirect_to(root_path, alert: '無効な分野が指定されました。') and return
     end
-    @questions = Question.where(subject: @subject)
+    @questions = Question.where(subject: @subject).order(year: :desc, id: :asc)
     session[:questions_list] = @questions.map(&:id)
   end
 
@@ -69,7 +69,7 @@ class QuestionsController < ApplicationController
     unless YEARS.include?(@year)
       redirect_to(root_path, alert: '無効な分野が指定されました。') and return
     end
-    @questions = Question.where(year: @year)
+    @questions = Question.where(year: @year).order(:id)
     session[:questions_list] = @questions.map(&:id)
   end
 
