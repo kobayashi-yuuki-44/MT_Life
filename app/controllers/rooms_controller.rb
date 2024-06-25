@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
 
   def index
     if logged_in?
-      @currentEntries = current_user.entries
+      @currentEntries = current_user.entries.includes(room: :direct_messages)
       myRoomIds = @currentEntries.map(&:room_id)
       @anotherEntries = Entry.where(room_id: myRoomIds).where.not(user_id: current_user.id).order(created_at: :desc)
     end
@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     if Entry.where(user_id: current_user.id, room_id: @room.id).exists?
-      @direct_messages = @room.direct_messages
+      @direct_messages = @room.direct_messages.order(created_at: :asc)
       @entries = @room.entries
     else
       redirect_back(fallback_location: root_path)

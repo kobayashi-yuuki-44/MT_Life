@@ -20,13 +20,12 @@ ENV BUNDLE_DEPLOYMENT="1" \
 RUN gem update --system --no-document && \
     gem install -N bundler
 
-
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3 imagemagick redis-tools
+    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3 imagemagick redis-server
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=20.0.0
@@ -57,13 +56,12 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
 
-
 # Final stage for app image
 FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl imagemagick postgresql-client imagemagick redis-tools && \
+    apt-get install --no-install-recommends -y curl imagemagick postgresql-client redis-server && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
@@ -85,4 +83,6 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+
+# Command to start Redis, Sidekiq, and Rails server
+CMD ["sh", "-c", "sysctl vm.overcommit_memory=1 && redis-server /etc/redis/redis.conf --daemonize yes && bundle exec sidekiq -C config/sidekiq.yml && ./bin/rails server"]
