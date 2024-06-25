@@ -1,15 +1,18 @@
 <div class="font-yuji-syuku">
   <% @entries.each do |e| %>
-    <% current_user == e.user ? @class = "current_user" : @class = ""  %>
-      <% if e.user != current_user %>
-        <h5 class="text-left <%= @class %> text-2xl" id="<%= @class %>" data-id="<%= e.user.id %>">
-          <%= link_to "@#{e.user.name}", user_profile_path(e.user_id), class: "text-blue-500 hover:text-blue-600" %>
-        </h5>
-      <% else %>
-        <h5 class="text-left <%= @class %> text-2xl" id="<%= @class %>" data-id="<%= e.user.id %>"></h5>
-      <% end %>
+    <% user_class = current_user == e.user ? "current_user" : "" %>
+    <% if e.user != current_user %>
+      <h5 class="text-left <%= user_class %> text-2xl flex items-center ml-6" id="<%= user_class %>" data-id="<%= e.user.id %>">
+        <%= link_to user_profile_path(e.user.id), class: "text-custom-message hover:text-custom-message-hover font-bold flex items-center" do %>
+          <%= image_tag(e.user.avatar_url, alt: e.user.name, class: "w-10 h-10 rounded-full object-cover mr-2 ml-2 mt-2") %>
+          <%= e.user.name %>
+        <% end %>
+      </h5>
+    <% else %>
+      <h5 class="text-left <%= user_class %> text-2xl" id="<%= user_class %>" data-id="<%= e.user.id %>"></h5>
+    <% end %>
   <% end %>
-
+    
   <div id="room_id" data-room_id="<%= @room.id %>" data-current-user-id="<%= current_user.id %>">
     <div id="messages">
       <% @direct_messages.each do |message| %>
@@ -17,18 +20,17 @@
       <% end %>
     </div>
   </div>
-
-  <%= form_with model: [ @room, DirectMessage.new ], local: true, id: "target" do |form| %>
-    <%= form.label :message_content, "新しいメッセージを作成", class: "block text-glay-700" %>
-    <%= form.text_area :message_content, id: "message_content", class: "block w-full px-3 py-2 mt-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" %>
-    <%= form.submit "送信", class: "mt-4 px-4 py-2 bg-custom-question-button-blue hover:bg-custom-question-button-blue-hover text-text-custom-home-text-green
+  
+  <%= form_with model: [@room, DirectMessage.new], local: true, id: "target", class: "m-4" do |form| %>
+    <%= form.label :message_content, "新しいメッセージを作成", class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_area :message_content, id: "message_content", class: "block w-full px-3 py-2 mt-4 h-60 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" %>
+    <%= form.submit "送信", class: "mt-4 px-4 py-2 bg-custom-wordbook-card-button hover:bg-custom-message-button-hover text-text-custom-home-text-green
     font-bold rounded-lg shadow" %>
   <% end %>
 
   <script>
-    // トークルーム遷移時に入力フォーム記載場所にスクロールする (最新トークは下にあるため)
     document.addEventListener("turbo:load", function() {
-      var element = document.getElementById('target'); // targetが適切な要素を指すように確認してください
+      var element = document.getElementById('target');
       if (element) {
         var position = element.getBoundingClientRect().top + window.pageYOffset;
         setTimeout(function() {

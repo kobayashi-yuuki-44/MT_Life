@@ -7,7 +7,7 @@
         <%= link_to 'プロフィール編集', edit_profile_path, class: 'bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue font-bold py-2 px-4 rounded-md' %>
       <% else %>
         <% if @isRoom %>
-          <%= link_to room_path(@roomId), class: 'bg-custom-wordbook-card-button hover:bg-custom-wordbook-card-button-hover text-custom-memo-text font-bold py-2 px-4 rounded-md flex items-center' do %>
+          <%= link_to room_path(@roomId), class: 'bg-custom-wordbook-card-button hover:bg-custom-message-button-hover text-custom-memo-text font-bold py-2 px-4 rounded-md flex items-center' do %>
             <i class="fas fa-envelope mr-2"></i> メッセージを送る
           <% end %>
         <% else %>
@@ -16,7 +16,9 @@
             <%= fields_for :entry, @entry do |e| %>
               <%= e.hidden_field :user_id, value: current_user.id %>
             <% end %>
-            <%= f.submit "新規チャットを開始", class: 'bg-custom-wordbook-card-button hover:bg-custom-wordbook-card-button-hover text-custom-memo-text font-bold py-2 px-4 rounded-md' %>
+            <button type="submit" class="bg-custom-wordbook-card-button hover:bg-custom-message-button-hover text-custom-memo-text font-bold py-2 px-4 rounded-md flex items-center">
+              <i class="fas fa-envelope mr-2"></i> 新規メッセージ画面へ
+            </button>
           <% end %>
         <% end %>
       <% end %>

@@ -101,6 +101,12 @@ module.exports = {
 
         'custom-image-button' : '#63425f',
 
+        'custom-message' : '#95605a',
+        'custom-message-hover' : '#540f08',
+        'custom-message1' : '#afdbf8',
+        'custom-message2' : '#fcbea2',
+        'custom-message-button-hover' : '#863970',
+
         'flash-yellowgreen' : '#85b9cc',
         'flash-purple' : '#ae89cd',
         'flash-darkred' : '#8e264d',

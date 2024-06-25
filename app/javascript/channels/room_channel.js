@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
               if (messages) {
                 const messageElement = `
                 <div data-message-id="${messageId}" class="direct_message flex ${isCurrentUser ? 'justify-end' : 'justify-start'} items-start my-2">
-                  <div class="${isCurrentUser ? 'bubble-right bg-blue-300' : 'bubble-left bg-green-200'} flex items-center max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl px-4 py-2 rounded-lg">
+                  <div class="${isCurrentUser ? 'bubble-right bg-custom-message1 mr-4' : 'bubble-left bg-custom-message2 ml-4'} flex items-center max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl px-4 py-2 rounded-lg">
                     ${isCurrentUser ? 
                       `<div class="flex flex-col mr-4">
-                          <p class="whitespace-pre-line break-words dm_content mt-6">${messageContent}</p>
+                          <p class="whitespace-pre-line break-words dm_content">${messageContent}</p>
                           <p class="text-xs text-right text-gray-500 message_time mt-2">${messageTime}</p>
                       </div>
                       <div class="flex flex-col items-end">
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                           <img src="${userImage}" class="rounded-full w-10 h-10 object-cover mt-1">
                       </div>
                       <div class="flex flex-col ml-4">
-                          <p class="whitespace-pre-line break-words dm_content mt-6">${messageContent}</p>
+                          <p class="whitespace-pre-line break-words dm_content">${messageContent}</p>
                           <p class="text-xs text-right text-gray-500 message_time mt-2">${messageTime}</p>
                       </div>`
                     }
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         received(data) {
           let roomElement = document.querySelector(`#room_${roomId} .latest-message`);
           if (roomElement && data.latest_message) {
-            roomElement.textContent = data.latest_message.message_content;
+            roomElement.textContent = truncate(data.latest_message.message_content, { length: 10 });
             
             // 通知アイコン
             let notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
@@ -131,6 +131,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
+  function truncate(str, options = {}) {
+    const { length = 10, omission = '...' } = options;
+    if (str.length > length) {
+      return str.substring(0, length) + omission;
+    } else {
+      return str;
+    }
+  }
 
   document.addEventListener('turbo:before-cache', () => {
     if (roomSubscription) {
