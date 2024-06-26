@@ -18,6 +18,8 @@ ja:
     index:
       title: "マイページ"
   notebooks:
+    edit:
+      title: "ノート編集"
     index:
       title: "ノート一覧"
     new:
@@ -63,8 +65,6 @@ ja:
       title: "単語帳一覧"
     new:
       title: "単語帳作成"
-    show:
-      title: "単語帳"
   words:
     edit:
       title: "単語編集"
@@ -77,6 +77,24 @@ ja:
       title: "投稿一覧"
     new:
       title: "新規投稿"
+    edit:
+      title: "投稿編集"
+    history:
+      title: "投稿履歴"
+  rooms:
+    index:
+      title: "メッセージ一覧"
+    show:
+      title: "トーク部屋"
+  diaries:
+    calendar:
+      title: "日記カレンダー"
+    index:
+      title: "日記タイトル一覧"
+    show:
+      title: "日記内容"
+    edit:
+      title: "日記編集"
 
 
 

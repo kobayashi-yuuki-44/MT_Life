@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
       @currentEntries = current_user.entries.includes(room: :direct_messages)
       myRoomIds = @currentEntries.map(&:room_id)
       @anotherEntries = Entry.where(room_id: myRoomIds).where.not(user_id: current_user.id).order(created_at: :desc)
+      @notifications = current_user.entries.where(notification: true).pluck(:room_id)
     end
   end
 
@@ -14,6 +15,7 @@ class RoomsController < ApplicationController
     if Entry.where(user_id: current_user.id, room_id: @room.id).exists?
       @direct_messages = @room.direct_messages.order(created_at: :asc)
       @entries = @room.entries
+      clear_notification_for_current_user(@room)
     else
       redirect_back(fallback_location: root_path)
     end
@@ -47,6 +49,17 @@ class RoomsController < ApplicationController
       end
     end
   end
+
+  def clear_notification
+    @room = Room.find(params[:id])
+    entry = @room.entries.find_by(user_id: current_user.id)
+    if entry
+      entry.clear_notification
+      head :ok
+    else
+      head :not_found
+    end
+  end
   
   private
 
@@ -57,4 +70,10 @@ class RoomsController < ApplicationController
   def room_params
     params.require(:room).permit(:name, entries_attributes: [:user_id])
   end
+
+  def clear_notification_for_current_user(room)
+    entry = room.entries.find_by(user_id: current_user.id)
+    entry.clear_notification if entry
+  end
+
 end

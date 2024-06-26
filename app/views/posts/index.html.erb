@@ -3,9 +3,9 @@
   <h1 class="text-3xl font-bold text-center my-8">投稿一覧</h1>
   <div class="flex justify-start mb-10 gap-10">
     <div class="flex items-center space-x-10">
-      <%= link_to '📝', new_post_path, class: "bg-custom-post-edit hover:bg-custom-post-edit-hover text-custom-text3 rounded-lg py-2 px-6 flex items-center justify-center text-3xl" %>
+      <%= link_to '📝', new_post_path, data: { turbo: false }, class: "bg-custom-post-edit hover:bg-custom-post-edit-hover text-custom-text3 rounded-lg py-2 px-6 flex items-center justify-center text-3xl" %>
       <% if @has_post_history %>
-        <%= link_to '履歴', history_posts_path, class: "bg-custom-button-purple px-4 py-3 flex items-center justify-center rounded-lg hover:bg-custom-hover-lightblue text-custom-text-darkreddishpurple text-lg" %>
+        <%= link_to '履歴', history_posts_path, data: { turbo: false }, class: "bg-custom-button-purple px-4 py-3 flex items-center justify-center rounded-lg hover:bg-custom-hover-lightblue text-custom-text-darkreddishpurple text-lg" %>
       <% end %>
       <div class="relative max-w-xs">
         <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">

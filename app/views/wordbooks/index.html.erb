@@ -1,11 +1,21 @@
 <%= content_for :title, t('.title') %>
 <div class="min-h-screen flex flex-col">
   <div class="container mx-auto mt-8 font-yuji-syuku flex-grow">
-    <h1 class="text-3xl font-bold text-center mb-6 p-3">単語帳一覧</h1>
-      <div class="flex justify-end">
-      <%= link_to '単語帳作成', new_wordbook_path, class: 'bg-custom-wordbook-create-button btn hover:bg-custom-wordbook-create-button-hover text-custom-memo-text' %>
+    <h1 class="text-3xl font-bold text-center mb-6 p-3">単語帳タイトル・科目</h1>
+
+    <div class="flex flex-wrap justify-end mb-4 gap-5 p-6">
+      <div class="relative w-full sm:w-auto max-w-xs mt-[-1.8rem]">
+        <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
+          まずは、科目名などを入力してタイトルを作成しましょう！<br>
+          🧚‍♂️語呂合わせ専用の単語帳を作成するのもオススメです。
+        </p>
+        <div class="absolute right-0 sm:-right-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-gray-300"></div>
+        <div class="absolute right-0 sm:-right-1.5 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-custom-home-green"></div>
       </div>
-    <div>
+      <div class="flex justify-end w-full sm:w-auto">
+        <%= link_to '単語帳作成', new_wordbook_path, data: { turbo: false }, class: 'bg-custom-wordbook-create-button btn hover:bg-custom-wordbook-create-button-hover text-custom-memo-text' %>
+      </div>
+    </div>
 
     <div class="flex flex-wrap justify-center gap-4 mt-4 p-2">
       <% @wordbooks.each do |wordbook| %>
@@ -15,7 +25,7 @@
               <%= link_to wordbook.collection, wordbook_words_path(wordbook) %>
             </h2>
             <div class="flex-none">
-              <%= link_to '編集', edit_wordbook_path(wordbook), class: 'btn bg-custom-wordbook-edit-button hover:bg-custom-wordbook-edit-button-hover text-custom-wordbook-edit-text mt-4' %>
+              <%= link_to '編集', edit_wordbook_path(wordbook), data: { turbo: false }, class: 'btn bg-custom-wordbook-edit-button hover:bg-custom-wordbook-edit-button-hover text-custom-wordbook-edit-text mt-4' %>
               <%= link_to '削除', wordbook_path(wordbook), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'この単語帳を削除してもよろしいですか？' }, class: 'btn bg-custom-wordbook-delete-button hover:bg-custom-wordbook-delete-button-hover text-custom-wordbook-delete-text mt-4' %>
             </div>
           </div>

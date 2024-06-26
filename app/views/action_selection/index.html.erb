@@ -14,7 +14,7 @@
       </p>
       <div class="flex flex-col space-y-14">
         <div class="flex items-center space-x-10">
-          <%= link_to '過去問', questions_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+          <%= link_to '過去問', questions_path, data: { turbo: false }, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
           <div class="relative max-w-xs">
             <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
               1問に対して、どこまで知識の枝を伸ばしていけるかが重要です。<br>
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="flex items-center space-x-10">
-          <%= link_to 'ノート', notebooks_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+          <%= link_to 'ノート', notebooks_path, data: { turbo: false }, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
           <div class="relative max-w-xs">
             <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
               ノートで知識の整理を。<br>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="flex items-center space-x-10">
-          <%= link_to '単語帳', wordbooks_path, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
+          <%= link_to '単語帳', wordbooks_path, data: { turbo: false }, class: 'btn bg-custom-home-button-green text-custom-home-text-green hover:bg-custom-home-button-hover-blue' %>
           <div class="relative max-w-xs">
             <p class="text-gray-700 text-sm bg-custom-home-green border border-gray-300 rounded-lg p-4 shadow-lg">
               科目別に分けて、専門用語を学習できます。<br>
@@ -64,7 +64,7 @@
       </p>
       <div class="flex flex-col space-y-14">
         <div class="flex items-center space-x-10">
-          <%= link_to '投稿', posts_path, class: 'btn bg-custom-home-button-pink text-custom-home-text-brown hover:bg-custom-home-button-hover-pink' %>
+          <%= link_to '投稿', posts_path, data: { turbo: false }, class: 'btn bg-custom-home-button-pink text-custom-home-text-brown hover:bg-custom-home-button-hover-pink' %>
           <div class="relative max-w-xs">
             <p class="text-gray-700 text-sm bg-custom-home-pink border border-gray-300 rounded-lg p-4 shadow-lg">
               ここだけ共有スペースです。<br>
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="flex items-center space-x-10">
-          <%= link_to '連絡', rooms_path, class: 'btn bg-custom-home-button-pink text-custom-home-text-brown hover:bg-custom-home-button-hover-pink' %>
+          <%= link_to '連絡', rooms_path, data: { turbo: false }, class: 'btn bg-custom-home-button-pink text-custom-home-text-brown hover:bg-custom-home-button-hover-pink' %>
           <div class="relative max-w-xs">
             <p class="text-gray-700 text-sm bg-custom-home-pink border border-gray-300 rounded-lg p-4 shadow-lg">
               個人でお話ができます。<br>
@@ -88,7 +88,7 @@
           </div>
         </div>
         <div class="flex items-center space-x-10">
-          <%= link_to '日記', calendar_diaries_path, class: 'btn bg-custom-home-button-pink text-custom-home-text-brown hover:bg-custom-home-button-hover-pink' %>
+          <%= link_to '日記', calendar_diaries_path, data: { turbo: false }, class: 'btn bg-custom-home-button-pink text-custom-home-text-brown hover:bg-custom-home-button-hover-pink' %>
           <div class="relative max-w-xs">
             <p class="text-gray-700 text-sm bg-custom-home-pink border border-gray-300 rounded-lg p-4 shadow-lg">
               自分だけの秘密日記。<br>

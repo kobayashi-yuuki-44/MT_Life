@@ -1,10 +1,11 @@
 import consumer from "consumer"
 
+let currentUserId = document.body.getAttribute('data-current-user-id');
+
 document.addEventListener('DOMContentLoaded', () => {
   let roomSubscription;
 
   function applyMessageStyles() {
-    const currentUserId = document.body.getAttribute('data-current-user-id');
     document.querySelectorAll('.direct_message').forEach(message => {
       const isCurrentUser = message.dataset.userId == currentUserId;
       message.style.textAlign = isCurrentUser ? 'right' : 'left';
@@ -20,21 +21,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function clearNotification(roomId) {
+    const notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
+    if (notifyIcon) {
+      notifyIcon.style.display = 'none';
+    }
+    
+    // 通知クリアをサーバーに反映
+    fetch(`/rooms/${roomId}/clear_notification`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ room_id: roomId })
+    }).then(response => {
+      if (!response.ok) {
+        console.error('Failed to clear notification on server.');
+      }
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
+  function showNotification(roomId) {
+    const notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
+    if (notifyIcon) {
+      notifyIcon.style.display = 'inline';
+    }
+  }
+
   document.addEventListener('turbo:load', () => {
     applyMessageStyles();
-
-    // チャットルームへの遷移で通知をクリア
-    if (window.location.pathname.includes('/rooms/') && window.location.pathname.length > '/rooms/'.length) {
-      const roomId = window.location.pathname.split('/rooms/')[1];
-      const notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
-      if (notifyIcon) {
-        notifyIcon.style.display = 'none';
-      }
-    }
 
     const roomElement = document.getElementById('room_id');
     if (roomElement) {
       const roomId = roomElement.dataset.room_id;
+      clearNotification(roomId);
 
       if (roomSubscription) {
         consumer.subscriptions.remove(roomSubscription);
@@ -52,21 +75,20 @@ document.addEventListener('DOMContentLoaded', () => {
           const parser = new DOMParser();
           const parsedHtml = parser.parseFromString(data.direct_message, 'text/html');
           const messageId = parsedHtml.querySelector('.direct_message').dataset.messageId;
-        
+
           if (!document.querySelector(`[data-message-id="${messageId}"]`)) {
             const userNameElement = parsedHtml.querySelector('.user_name');
             const messageContentElement = parsedHtml.querySelector('.dm_content');
             const messageTimeElement = parsedHtml.querySelector('.message_time'); // クラス名を修正
             const userImage = data.user_image_url;
-        
+
             if (userNameElement && messageContentElement && messageTimeElement) {
               const userName = userNameElement.textContent;
               const messageContent = messageContentElement.textContent;
               const messageTime = messageTimeElement.textContent;
-              const currentUserId = document.body.getAttribute('data-current-user-id');
               const userId = parsedHtml.querySelector('.direct_message').dataset.userId;
               const isCurrentUser = userId === currentUserId;
-        
+
               const messages = document.getElementById('messages');
               if (messages) {
                 const messageElement = `
@@ -94,8 +116,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
                 messages.insertAdjacentHTML('beforeend', messageElement);
                 applyMessageStyles();
+                clearNotification(roomId); // メッセージが届いたら通知をクリア
               }
             }
+          }
+
+          // 自分のメッセージ以外の新しいメッセージが届いたら通知アイコンを表示
+          if (data.user_id !== currentUserId) {
+            showNotification(roomId);
           }
         }
       });
@@ -104,10 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[data-room-link="true"]').forEach(link => {
       link.addEventListener('click', () => {
         const roomId = link.dataset.roomId;
-        const notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
-        if (notifyIcon) {
-          notifyIcon.style.display = 'none';
-        }
+        clearNotification(roomId);
       });
     });
 
@@ -120,11 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
           let roomElement = document.querySelector(`#room_${roomId} .latest-message`);
           if (roomElement && data.latest_message) {
             roomElement.textContent = truncate(data.latest_message.message_content, { length: 10 });
-            
+
             // 通知アイコン
-            let notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
-            if (notifyIcon) {
-              notifyIcon.style.display = 'inline';
+            if (data.user_id !== currentUserId) {
+              let notifyIcon = document.querySelector(`#room_${roomId} .notify-icon`);
+              if (notifyIcon) {
+                notifyIcon.style.display = 'inline';
+              }
             }
           }
         }

@@ -91,8 +91,8 @@
         <% else %>
           <%= form_with(model: [ @question, @question.memos.build ], local: true, data: { turbo: false }) do |form| %>
             <div class="field">
-              <%= form.label :content, "解説メモ", class: "label text-lg text-custom-memo-text" %>
-              <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered border-custom-memo-content-box hover:border-custom-memo-content-box-hover text-lg bg-white", required: true %>
+              <%= form.label :content, "< 解説メモ >", class: "label text-lg text-custom-memo-text" %>
+              <%= form.text_area :content, rows: 3, class: "textarea textarea-bordered border-custom-memo-content-box hover:border-custom-memo-content-box-hover text-lg bg-white w-full auto-resize", required: true %>
             </div>
             <%= form.submit "メモを保存", class: "btn bg-custom-memo-button hover:bg-custom-memo-button-hover text-custom-memo-text" %>
           <% end %>
