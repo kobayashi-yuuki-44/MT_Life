@@ -1,8 +1,8 @@
-<%= content_for :title, "投稿履歴" %>
+<%= content_for :title, t('.title') %>
 <div class="container mx-auto p-3 font-yuji-syuku">
   <h1 class="text-3xl font-bold text-center my-8">投稿履歴</h1>
   <div class="flex justify-start mb-10 gap-10">
-    <%= link_to '📝', new_post_path, class: "bg-custom-post-edit hover:bg-custom-post-edit-hover text-custom-text3 rounded-lg py-2 px-6 flex items-center justify-center text-3xl" %>
+    <%= link_to '📝', new_post_path, data: { turbo: false }, class: "bg-custom-post-edit hover:bg-custom-post-edit-hover text-custom-text3 rounded-lg py-2 px-6 flex items-center justify-center text-3xl" %>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
     <% @posts.each do |post| %>

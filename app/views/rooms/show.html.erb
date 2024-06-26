@@ -1,3 +1,4 @@
+<%= content_for :title, t('.title') %>
 <div class="font-yuji-syuku">
   <% @entries.each do |e| %>
     <% user_class = current_user == e.user ? "current_user" : "" %>

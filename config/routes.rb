@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   resources :rooms do
     resources :direct_messages, only: [:create]
+    member do
+      post 'clear_notification'
+    end
   end
   
   resources :password_resets, only: %i[new create edit update]
