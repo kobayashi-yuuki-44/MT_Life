@@ -4,10 +4,10 @@
 
 :schedule:
   message_job:
-    cron: "0 8 * * *"
+    cron: "0 9 * * 1"
     class: "MessageJob"
     queue: default
-    description: "毎日8:00にメッセージを送信"
+    description: "毎週月曜日の朝9:00にメッセージを送信"
     tz: "Asia/Tokyo"
 
   cleanup_job:

@@ -44,4 +44,3 @@ config/environments/*.local.yml
 /config/credentials/production.key
 /config/certs/localhost.pem
 /config/certs/localhost-key.pem
-/.env

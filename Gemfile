@@ -39,13 +39,7 @@ gem "carrierwave"
 
 gem "mini_magick"
 
-gem "image_processing"
-
 gem "fog-aws"
-
-gem "httparty"
-
-gem "dotenv-rails"
 
 gem "pry-rails"
 
