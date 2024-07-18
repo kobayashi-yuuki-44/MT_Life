@@ -29,7 +29,7 @@ MT*Lifeは、学習面とメンタル面の両方をサポートするサービ�
 |ホーム画面|問題一覧|
 |:-:|:-:|
 |[![Image from Gyazo](https://i.gyazo.com/89ebaae6d515e063f37241ae48020b92.png)](https://gyazo.com/89ebaae6d515e063f37241ae48020b92)|[![Image from Gyazo](https://i.gyazo.com/c2fa8a30a5e01011fd0813eb97eb7346.png)](https://gyazo.com/c2fa8a30a5e01011fd0813eb97eb7346)|
-|「学習対策」と「休憩」に分けて機能を整理。各機能の説明には、理由や意図を記載しています。|分野・年代・ランダムの形式から選べる問題一覧表示。解きたい問題をすぐに始められます。|
+|「学習対策」と「休憩」に分けて機能を整理。各機能の説明には、作成理由や意図も記載しています。|分野・年代・ランダムの形式から選べる問題一覧表示。解きたい問題をすぐに始められます。|
 
 |問題回答|メモ入力|
 |:-:|:-:|
@@ -39,22 +39,22 @@ MT*Lifeは、学習面とメンタル面の両方をサポートするサービ�
 |ノート|単語帳|
 |:-:|:-:|
 |[![Image from Gyazo](https://i.gyazo.com/7aac627d3a517f07a0d5744fd3a3d8f7.gif)](https://gyazo.com/7aac627d3a517f07a0d5744fd3a3d8f7)|[![Image from Gyazo](https://i.gyazo.com/10649aa145cffac44ce81551fb48d639.gif)](https://gyazo.com/10649aa145cffac44ce81551fb48d639)|
-|画像を挿入可能なノート機能。総合的な内容をまとめたり、画像問題対策用に活用できます。|専門分野別や語呂合わせ専用の単語帳を自由に作成。暗記カードのように使用でき、効率よく覚えられます。|
+|画像を挿入可能なノート機能。総合的な内容をまとめたり、画像問題対策に活用できます。|分野別や語呂合わせ専用の単語帳など自由に作成。暗記カードのように使用でき、効率よく覚えられます。|
 
-|投稿一覧|投稿履歴画面|
+|投稿一覧|投稿履歴|
 |:-:|:-:|
 |[![Image from Gyazo](https://i.gyazo.com/d60efdef6512ca66f6565378cc8577c6.gif)](https://gyazo.com/d60efdef6512ca66f6565378cc8577c6)|[![Image from Gyazo](https://i.gyazo.com/6a85053f9fde185e5af59fd177b435c6.gif)](https://gyazo.com/6a85053f9fde185e5af59fd177b435c6)|
 |気持ちを呟ける投稿機能。同じ境遇の人を見つけてメッセージを送れます。|投稿履歴があるユーザーには「履歴」ボタンが表示され、記事の編集や削除が可能です。|
 
-|チャット|メッセージ一覧画面|
+|トークルーム|メッセージ一覧|
 |:-:|:-:|
 |[![Image from Gyazo](https://i.gyazo.com/3ab688afff204e98ea7df01f78bf4cc8.gif)](https://gyazo.com/3ab688afff204e98ea7df01f78bf4cc8)|[![Image from Gyazo](https://i.gyazo.com/0eb9a8ec4087c5e41ba71e2edeed98a8.gif)](https://gyazo.com/0eb9a8ec4087c5e41ba71e2edeed98a8)|
-|リアルタイムでメッセージを表示。常に最新メッセージに自動スクロールします。|既読でないメッセージに通知マークが表示され、メッセージ履歴からいつでも連絡できます。|
+|メッセージがリアルタイムで表示され、常に最新のメッセージを表示するために自動スクロールされます。|既読でないメッセージには通知マークが表示されます。メッセージ履歴からいつでも連絡可能です。|
 
 |日記作成|日記一覧|
 |:-:|:-:|
 |[![Image from Gyazo](https://i.gyazo.com/bcecf02f38cadf5c0fa9e7642216d77b.gif)](https://gyazo.com/bcecf02f38cadf5c0fa9e7642216d77b)|[![Image from Gyazo](https://i.gyazo.com/8dffdaf9c8b2daa8c015ba42a411243b.gif)](https://gyazo.com/8dffdaf9c8b2daa8c015ba42a411243b)|
-|1日に3つまで日記を作成可能。日付を自由に選べるので後からの日記作成も可能です。|日記の内容を確認でき、プライバシーを気にせず気持ちをリセットできます。|
+|1日に3つまで日記を作成できます。日付を自由に選べるので後からの日記作成も可能です。|日記の内容を確認でき、プライバシーを気にせず気持ちをリセットできます。|
 
 ## 技術構成
 ### 使用技術
@@ -65,7 +65,7 @@ MT*Lifeは、学習面とメンタル面の両方をサポートするサービ�
 | CSSフレームワーク | TailwindCSS + daisyUI |
 | データベース | PostgreSQL |
 | キャッシュ | Redis (Redis Cloud) |
-| 認証・認可 | Sorcery / Cookie |
+| 認証 | Sorcery / Cookie |
 | バックグラウンドジョブ | ActiveJob / Sidekiq / Sidekiq Cron |
 | リアルタイム通信 | Action Cable |
 | Web API | Google API / LINE Messaging API |
