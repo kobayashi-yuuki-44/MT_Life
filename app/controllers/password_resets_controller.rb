@@ -1,5 +1,6 @@
 class PasswordResetsController < ApplicationController
   skip_before_action :require_login
+  before_action :ensure_not_guest, only: %i[create update]
   
   def new; end
 
@@ -30,6 +31,15 @@ class PasswordResetsController < ApplicationController
     else
       flash.now[:danger] = "パスワードを変更できませんでした"
       render :edit
+    end
+  end
+
+  private
+
+  def ensure_not_guest
+    if current_user&.email == "guest@example.com"
+      flash[:alert] = "ゲストユーザーではこの操作を行えません。"
+      redirect_to root_path
     end
   end
 end

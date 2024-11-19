@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_user, only: %i[show edit update]
+  before_action :ensure_not_guest, only: %i[edit update]
   
   def show
     if logged_in?
@@ -36,6 +37,13 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def ensure_not_guest
+    if current_user.email == "guest@example.com"
+      flash[:alert] = "ゲストユーザーではこの操作を行えません。"
+      redirect_to profile_path
+    end
+  end
 
   def user_params
     params.require(:user).permit(:email, :name, :avatar, :avatar_cache)
