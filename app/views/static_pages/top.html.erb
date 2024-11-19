@@ -35,6 +35,7 @@
     <div class="inline-flex justify-center gap-28 mb-20">
       <%= link_to 'Start !', new_user_path, class: 'font-caveat bg-custom-top-button-orange text-custom-top-text-brown hover:bg-custom-top-button-hover-orange text-2xl py-4 px-8 rounded-lg shadow' %>
       <%= link_to 'Log in', login_path, class: 'font-caveat bg-custom-top-button-yellowgreen text-custom-top-text-green hover:bg-custom-top-button-hover-yellowgreen text-2xl py-4 px-8 rounded-lg shadow' %>
+      <%= button_to "Guest Login", guest_login_path, method: :post, class: 'font-caveat bg-custom-post-delete text-custom-top-text-green hover:bg-custom-post-delete-hover text-2xl py-4 px-8 rounded-lg shadow' %>
     </div>
   </div>
 </div>
